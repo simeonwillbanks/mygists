@@ -1,4 +1,9 @@
 Mygists::Application.routes.draw do
+  match 'help', as: :help,
+                via: :get,
+                controller: :help,
+                action: :index
+
   match ':username', as: :profile,
                      via: :get,
                      controller: :profile,

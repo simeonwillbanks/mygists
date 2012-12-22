@@ -3,5 +3,7 @@
     %li.active
       = link_to 'Home', root_path
   - else
-    %li{class: "#{'active' if controller_name == 'profile'}"}
+    %li{class: "#{'active' if controller_name != 'help'}"}
       = link_to 'Profile', profile_path('simeonwillbanks')
+    %li{class: "#{'active' if controller_name == 'help'}"}
+      = link_to 'Help', help_path
