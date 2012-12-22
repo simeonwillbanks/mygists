@@ -1,1 +1,7 @@
-= link_to "Mygists", root_path, :class => 'brand'
+%ul.nav.nav-pills.pull-right
+  - if controller_name == 'home'
+    %li.active
+      = link_to 'Home', root_path
+  - else
+    %li{class: "#{'active' if controller_name == 'profile'}"}
+      = link_to 'Profile', profile_path('simeonwillbanks')

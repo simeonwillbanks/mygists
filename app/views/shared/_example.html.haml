@@ -1,0 +1,15 @@
+#div{class: "example#{' collapse out' if controller_name != 'home'}"}
+  %hr/
+  .row-fluid
+    %h3.lead
+      = succeed ':' do
+        %span.text-success Rails Template
+      Twitter Bootstrap, Devise, OmniAuth, Capybara
+    %p
+      Include a
+      %span.label.label-success tag
+      in each
+      %strong gist
+      title. A
+      %span.label.label-success tag
+      begins with the title and ends at a colon.

@@ -1,0 +1,16 @@
+.jumbotron
+  %h1 Organize Your Gists!
+  %p.lead
+    %strong Tag
+    the title of your
+    = succeed '.' do
+      %strong gists
+    Use
+    %em My Gists
+    for viewing
+    %strong gists
+    by
+    = succeed '.' do
+      %strong tag
+  = link_to 'Signin with GitHub', 'http://twitter.github.com/bootstrap/examples/marketing-narrow.html', class: 'btn btn-large btn-primary'
+= render 'shared/example'
