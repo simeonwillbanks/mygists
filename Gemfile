@@ -7,6 +7,9 @@ gem 'pg', '>= 0.14.1'
 gem 'haml', '>= 3.1.7'
 gem 'bootstrap-sass', '>= 2.1.1.0'
 gem 'figaro', '>= 0.5.0'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-github'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -26,10 +29,13 @@ end
 group :development, :test do
   gem 'rspec-rails', '>= 2.11.4'
   gem 'factory_girl_rails', '>= 4.1.0'
+  gem 'pry'
+  gem 'pry-nav'
 end
 
 group :test do
   gem 'database_cleaner', '>= 0.9.1'
   gem 'email_spec', '>= 1.4.0'
   gem 'capybara', '>= 2.0.1'
+  gem 'shoulda-matchers'
 end

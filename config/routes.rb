@@ -1,4 +1,8 @@
 Mygists::Application.routes.draw do
+  devise_scope :user do
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   match 'help', as: :help,
                 via: :get,
                 controller: :help,
@@ -13,6 +17,8 @@ Mygists::Application.routes.draw do
                      via: :get,
                      controller: :tags,
                      action: :show
+
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
 
   root :to => 'home#index'
 end

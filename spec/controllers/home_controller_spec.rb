@@ -5,7 +5,7 @@ describe HomeController do
   let(:page) { Capybara::Node::Simple.new(response.body) }
   let(:action) { 'index' }
 
-  describe "get action" do
+  describe "get 'index'" do
     context 'unauthenticated' do
       it 'returns http success' do
         get action
@@ -28,6 +28,16 @@ describe HomeController do
       end
 
       it_behaves_like 'help'
+    end
+
+    context 'authenticated' do
+      let(:user) { FactoryGirl.create(:user) }
+
+      it 'redirects to profile' do
+        sign_in user
+        get action
+        response.should redirect_to(profile_path(user.profile))
+      end
     end
   end
 end
