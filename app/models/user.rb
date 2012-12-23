@@ -1,21 +1,19 @@
 class User < ActiveRecord::Base
-  validates_presence_of :provider, :uid
+  validates_presence_of :provider, :uid, :profile
 
   devise :omniauthable
 
   has_one :profile
 
-  def self.find_for_github_oauth(auth, signed_in_resource=nil)
-    user = User.where(provider: auth.provider, uid: auth.uid).first
-    unless user
-      user = User.new do |u|
-        u.provider = auth.provider
-        u.uid      = auth.uid
-        u.profile  = Profile.new {|p| p.username = auth.info.nickname}
+  class << self
+    def find_for_github_oauth(auth, signed_in_resource=nil)
+      find_or_create_by_provider_and_uid(auth.provider, auth.uid).tap do |u|
+        u.profile = Profile.find_or_create_by_user_id(u.id).tap do |p|
+          p.username = auth.info.nickname
+          p.gravatar = auth.info.image
+        end
+        u.save
       end
-      user.save
     end
-    user.profile.gravatar = auth.info.image
-    user
   end
 end

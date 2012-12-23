@@ -24,7 +24,7 @@ describe HomeController do
 
       it 'GitHub signin button' do
         get action
-        page.find('.jumbotron a').should have_content('Signin with GitHub')
+        page.find('.jumbotron a').should have_content('Sign in with GitHub')
       end
 
       it_behaves_like 'help'

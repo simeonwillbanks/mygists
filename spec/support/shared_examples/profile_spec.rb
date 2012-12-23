@@ -7,8 +7,6 @@ shared_examples 'a profile' do
   end
 
   context 'authenticated' do
-    let(:user) { FactoryGirl.create(:user) }
-
     before(:each) { sign_in user }
 
     it 'returns http success' do
@@ -35,6 +33,11 @@ shared_examples 'a profile' do
     it 'help menu item' do
       get action, params
       page.should have_link('Help', count: 1)
+    end
+
+    it 'sign out menu item' do
+      get action, params
+      page.should have_link('Sign Out', count: 1)
     end
 
     it 'list items' do

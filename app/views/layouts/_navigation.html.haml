@@ -1,9 +1,4 @@
 %ul.nav.nav-pills.pull-right
-  - if controller_name == 'home'
-    %li.active
-      = link_to 'Home', root_path
-  - else
-    %li{class: "#{'active' if controller_name != 'help'}"}
-      = link_to 'Profile', profile_path('simeonwillbanks')
-    %li{class: "#{'active' if controller_name == 'help'}"}
-      = link_to 'Help', help_path
+  - navigation_items.each_pair do |key, path|
+    %li{class: "#{'active' if controller_name == key}"}
+      = link_to key.titleize, path
