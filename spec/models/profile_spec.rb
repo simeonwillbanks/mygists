@@ -5,6 +5,7 @@ describe Profile do
   it { should validate_presence_of(:user) }
   it { should respond_to(:gravatar, :gravatar=) }
   it { should belong_to(:user) }
+  it { should have_many(:gists) }
 
   context 'custom param key' do
     subject { FactoryGirl.build_stubbed(:profile) }

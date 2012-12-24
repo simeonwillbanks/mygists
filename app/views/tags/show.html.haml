@@ -1,1 +1,17 @@
-= render partial: 'profile/profile', locals: { list_items: 'gists/gist' }
+.row-fluid
+  .span2
+    = image_tag(profile.gravatar, alt: profile.username, class: 'img-polaroid')
+  .span10
+    %h3
+      = profile.username
+      %span.muted
+        = succeed ':' do
+          tags
+      %span.text-success
+        = current_tag
+    %ul.unstyled
+      - gists.each do |gist|
+        %li
+          = link_to gist.title, gist.url
+    .pagination.pagination-mini
+      = will_paginate gists

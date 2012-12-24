@@ -39,12 +39,5 @@ shared_examples 'a profile' do
       get action, params
       page.should have_link('Sign Out', count: 1)
     end
-
-    it 'list items' do
-      list_items.each do |li|
-        get action, params
-        page.should have_content(li)
-      end
-    end
   end
 end

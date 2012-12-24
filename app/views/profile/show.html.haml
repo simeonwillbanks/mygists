@@ -1,1 +1,11 @@
-= render partial: 'profile', locals: { list_items: 'tags/tag' }
+.row-fluid
+  .span2
+    = image_tag(profile.gravatar, alt: profile.username, class: 'img-polaroid')
+  .span10
+    %h3
+      = profile.username
+      %span.muted tags
+    %ul.inline
+      - profile.owned_tags.each do |owned_tag|
+        %li
+          = link_to owned_tag, tag_path(profile, owned_tag), class: 'btn btn-success'

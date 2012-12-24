@@ -7,9 +7,17 @@ gem 'pg', '>= 0.14.1'
 gem 'haml', '>= 3.1.7'
 gem 'bootstrap-sass', '>= 2.1.1.0'
 gem 'figaro', '>= 0.5.0'
-gem 'devise'
-gem 'omniauth'
-gem 'omniauth-github'
+gem 'devise', '~> 2.1.2'
+gem 'omniauth', '~> 1.1.1'
+gem 'omniauth-github', '~> 1.0.3'
+gem 'cancan', '~> 1.6.8'
+gem 'draper', '>= 0.18.0'
+gem 'decent_exposure', '>= 2.0.1'
+# TODO
+# undo pin to specific commit when `ActsAsTaggableOn.strict_case_match = true` is released
+gem 'acts-as-taggable-on', git: 'git://github.com/mbleigh/acts-as-taggable-on.git',
+                           ref: '62f5fea1e19e4520a7bc8b65e0207aea11d4927f'
+gem 'bootstrap-will_paginate', '~> 0.0.9'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -29,13 +37,14 @@ end
 group :development, :test do
   gem 'rspec-rails', '>= 2.11.4'
   gem 'factory_girl_rails', '>= 4.1.0'
-  gem 'pry'
-  gem 'pry-nav'
+  gem 'pry', '>= 0.9.10'
+  gem 'pry-rails', '>= 0.2.2'
+  gem 'pry-debugger', '>= 0.2.0'
 end
 
 group :test do
   gem 'database_cleaner', '>= 0.9.1'
   gem 'email_spec', '>= 1.4.0'
   gem 'capybara', '>= 2.0.1'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 1.4.2'
 end
