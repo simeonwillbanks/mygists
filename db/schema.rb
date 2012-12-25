@@ -11,15 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224064802) do
+ActiveRecord::Schema.define(:version => 20121227060257) do
 
   create_table "gists", :force => true do |t|
-    t.string   "title",      :null => false
-    t.integer  "profile_id", :null => false
-    t.string   "gid",        :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "description"
+    t.integer  "profile_id",  :null => false
+    t.string   "gid",         :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "gists", ["gid"], :name => "index_gists_on_gid", :unique => true
+  add_index "gists", ["profile_id"], :name => "index_gists_on_profile_id"
 
   create_table "profiles", :force => true do |t|
     t.string   "username",   :null => false
@@ -27,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20121224064802) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+  add_index "profiles", ["username"], :name => "index_profiles_on_username"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -51,5 +57,7 @@ ActiveRecord::Schema.define(:version => 20121224064802) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "users", ["provider", "uid"], :name => "index_users_on_provider_and_uid", :unique => true
 
 end

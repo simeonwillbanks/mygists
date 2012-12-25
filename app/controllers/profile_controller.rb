@@ -7,6 +7,14 @@ class ProfileController < ApplicationController
 
   expose(:profile) { @profile.decorate }
 
+  before_filter :refresh_gists
+
   def show
+  end
+
+  protected
+
+  def refresh_gists
+    MyGists::Refresh.for(profile)
   end
 end

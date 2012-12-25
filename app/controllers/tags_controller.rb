@@ -7,7 +7,7 @@ class TagsController < ApplicationController
 
   expose(:profile) { @profile.decorate }
   expose(:current_tag, model: ActsAsTaggableOn::Tag)
-  expose(:gists) { profile.gists.page(params[:page]).collect! {|g| g.decorate} }
+  expose(:gists) { profile.gists(current_tag) }
 
   def show
   end

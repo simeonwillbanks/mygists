@@ -2,9 +2,15 @@ class GistDecorator < Draper::Base
   decorates :gist
 
   PROTOCOL_AND_DOMAIN = 'https://gist.github.com'
+  DEFAULT_DESCRIPTION = 'Gist without a description'
+
 
   def url
     "#{PROTOCOL_AND_DOMAIN}/#{model.gid}"
+  end
+
+  def description
+    model.description? ? model.description : DEFAULT_DESCRIPTION
   end
 
   # Accessing Helpers

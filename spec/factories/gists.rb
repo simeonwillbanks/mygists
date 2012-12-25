@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :gist do
-    sequence(:title) {|n| "Tag#{n}: Gist Title" }
-    sequence(:gid) {|n| "68c29f86f75b343953ef#{n}" }
+    sequence(:description) {|n| "Tag#{n}: Gist Title" }
+    sequence(:gid) {|n| n.to_s}
     association :profile, strategy: :build
   end
 end

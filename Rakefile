@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Mygists::Application.load_tasks
+MyGists::Application.load_tasks

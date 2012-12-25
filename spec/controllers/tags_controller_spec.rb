@@ -9,7 +9,6 @@ describe TagsController do
   let(:profile) { user.profile.decorate }
   let(:username) { profile.username }
   let(:params) { {:username => username} }
-  let(:title) { "#{username} tags" }
   let(:tag) { FactoryGirl.create(:tag) }
   let(:action) { 'show' }
   let(:params) { {:username => username, :id => tag.id} }
@@ -22,8 +21,8 @@ describe TagsController do
       it 'list items' do
         sign_in user
         get action, params
-        profile.gists.each do |li|
-          page.should have_content(li.title)
+        profile.gists(tag).each do |li|
+          page.should have_content(li.description)
         end
       end
     end

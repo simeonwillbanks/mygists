@@ -9,6 +9,14 @@
       %span.label.label-success tag
       in each
       %strong gist
-      title. A
+      description. A
       %span.label.label-success tag
-      begins with the title and ends at a colon.
+      begins with the description and ends at a colon.
+    %p.muted
+      The 
+      = link_to 'GitHub API', 'http://developer.github.com/v3/gists/#list-gists'
+      only lists public
+      = succeed ';' do
+        %strong gists
+      private gists can not be
+      %span.label.label-success tagged

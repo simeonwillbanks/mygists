@@ -7,10 +7,15 @@ describe ProfileController do
   let(:user) { FactoryGirl.create(:user) }
   let(:profile) { user.profile.decorate }
   let(:username) { profile.username }
+  let(:token) { profile.token }
   let(:params) { {:username => username} }
   let(:title) { "#{username} tags" }
 
   describe "GET 'show'" do
+    before(:each) do
+      described_class.any_instance.stub(:refresh_gists).and_return(true)
+    end
+
     it_behaves_like 'a profile'
 
     context 'authenticated' do

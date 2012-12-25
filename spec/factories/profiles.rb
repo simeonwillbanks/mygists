@@ -3,9 +3,5 @@
 FactoryGirl.define do
   factory :profile do
     username "simeonwillbanks"
-
-    after(:build) do |profile|
-      profile.gists << build_list(:gist, 3, profile: profile)
-    end
   end
 end
