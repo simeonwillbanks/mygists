@@ -18,8 +18,15 @@
       = yield
       %hr/
       .footer
-        %p
-          %em My Gists
-          = link_to 'crafted', 'https://github.com/simeonwillbanks/mygists'
-          by
-          = link_to '@simeonwillbanks', 'https://github.com/simeonwillbanks'
+        .row-fluid
+          .span5
+            %em My Gists
+            = link_to 'crafted', 'https://github.com/simeonwillbanks/mygists'
+            by
+            = link_to '@simeonwillbanks', 'https://github.com/simeonwillbanks'
+          .span4.pull-right
+            Thank you
+            = link_to 'GitHub', 'https://github.com'
+            for
+            = succeed '!' do
+              %strong gists
