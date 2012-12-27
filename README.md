@@ -18,7 +18,7 @@ If you add functionality to this application, create an alternative implementati
 
 ## Credits
 
-@simeonwillbanks
+[@simeonwillbanks](https://github.com/simeonwillbanks)
 
 ## License
 
