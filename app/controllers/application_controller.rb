@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   helper_method :new_session_path
   def new_session_path(scope)
     # A new session is created by signing in with GitHub on home page
-    root_path alert: "YUNO route right Devise?"
+    root_path
   end
 end
