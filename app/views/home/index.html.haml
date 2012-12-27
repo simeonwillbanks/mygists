@@ -1,7 +1,7 @@
 .jumbotron
   %h1 Organize Your Gists!
   %p.lead
-    %strong Tag
+    %strong #Tag
     the description of your
     = succeed '.' do
       %strong= link_to 'gists', 'https://gist.github.com'
@@ -11,7 +11,7 @@
     %strong= link_to 'gists', 'https://gist.github.com'
     by
     = succeed '.' do
-      %strong tag
+      %strong #tag
   = link_to 'Sign in with GitHub', user_omniauth_authorize_path(:github), class: 'btn btn-large btn-primary'
 %hr
 = render 'help/example'

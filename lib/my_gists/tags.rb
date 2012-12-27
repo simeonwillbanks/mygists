@@ -1,5 +1,5 @@
 module MyGists
-  class Tag
+  class Tags
     DEFAULT = 'Uncategorized'
 
     class << self
@@ -7,7 +7,7 @@ module MyGists
 
       def for(gist)
         new(gist) do
-          return tag
+          return tags
         end
       end
     end
@@ -21,14 +21,15 @@ module MyGists
 
     attr_reader :description
 
-    def tag
-      tag = DEFAULT
+    def tags
+      tags = []
       unless description.blank?
-        description.match(/([^:]+):/) do |m|
-          tag = m[1]
+        description.scan(/#([^\s]+)/) do |m|
+          tags << m[0]
         end
       end
-      tag
+      tags << DEFAULT if tags.empty?
+      tags
     end
   end
 end

@@ -13,13 +13,13 @@ describe MyGists::Refresh do
 
   describe '.for' do
     let(:profile) { FactoryGirl.create(:user).profile.decorate }
-    let(:tag) { 'Pro Tip' }
+    let(:tag) { '#ProTip' }
 
     let(:new_gid) { rand(0..1000).to_s }
     let(:old_gid) { rand(0..1000).to_s }
 
-    let(:new_description) { "#{tag}: High Speed Rails Idioms" }
-    let(:old_description) { "#{tag}: Object#tap" }
+    let(:new_description) { "#{tag} High Speed Rails Idioms" }
+    let(:old_description) { "#{tag} Tap That Object" }
 
     let(:old_gist) { FactoryGirl.create(:gist, description: old_description, gid: old_gid, profile: profile) }
 

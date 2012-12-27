@@ -12,7 +12,7 @@ describe TagsController do
   let(:tag) { FactoryGirl.create(:tag) }
   let(:action) { 'show' }
   let(:params) { {:username => username, :id => tag.id} }
-  let(:title) { "#{username} tags: #{tag}" }
+  let(:title) { "#{username} tags: ##{tag}" }
 
   describe "GET 'show'" do
     it_behaves_like 'a profile'
