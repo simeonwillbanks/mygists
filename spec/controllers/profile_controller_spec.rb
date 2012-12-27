@@ -25,7 +25,7 @@ describe ProfileController do
         Profile.any_instance.stub(:owned_tags).and_return(list_items)
         get action, params
         list_items.each do |li|
-          page.should have_content(li.name)
+          page.should have_content("##{li.name}")
         end
       end
     end
