@@ -50,7 +50,7 @@ module MyGists
     end
 
     def tag_gist
-      profile.tag(gist, with: MyGists::Tag.for(gist), on: :descriptions)
+      profile.tag(gist, with: MyGists::Tags.for(gist), on: :descriptions)
     end
   end
 end

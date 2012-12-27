@@ -8,7 +8,8 @@
         = succeed ':' do
           tags
       %span.text-success
-        = current_tag
+        = precede '#' do
+          = current_tag
     %ul.gists
       - gists.each do |gist|
         %li
