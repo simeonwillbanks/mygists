@@ -17,7 +17,7 @@ describe MyGists::Tags do
     let(:gist_without_tag) { FactoryGirl.build_stubbed(:gist, description: 'Devise-OmniAuth-CanCan') }
     let(:tag) { ['RailsTemplate'] }
     let(:tags) { ['RailsTemplate', 'rails'] }
-    let(:uncategorized) { ['Uncategorized'] }
+    let(:without_tags) { ['Without Tags'] }
 
     context 'description has a tag' do
       it 'returns found tag' do
@@ -32,14 +32,14 @@ describe MyGists::Tags do
     end
 
     context 'description does not have a tag' do
-      it 'returns "uncategorized" tag' do
-        described_class.for(gist_without_tag).should eq(uncategorized)
+      it 'returns "without tags" tag' do
+        described_class.for(gist_without_tag).should eq(without_tags)
       end
     end
 
     context 'description is nil' do
-      it 'returns "uncategorized" tag' do
-        described_class.for(gist_without_tag).should eq(uncategorized)
+      it 'returns "without tags" tag' do
+        described_class.for(gist_without_tag).should eq(without_tags)
       end
     end
   end
