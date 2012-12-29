@@ -2,7 +2,11 @@ class ActsAsTaggableOn::TagDecorator < Draper::Base
   decorates :tag, class: 'ActsAsTaggableOn::Tag'
 
   def name
-    "##{model.name}"
+    model.default? ? model.name : "##{model.name}"
+  end
+
+  def classname
+    model.default? ? 'btn' : 'btn btn-success'
   end
 
   def to_s
