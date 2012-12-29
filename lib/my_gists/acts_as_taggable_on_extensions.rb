@@ -7,6 +7,9 @@ module MyGists
 
       default_scope order("\"#{table_name}\".\"name\" ASC")
 
+      extend ::FriendlyId
+      friendly_id :name, use: :slugged
+
       def default?
         name == DEFAULT
       end

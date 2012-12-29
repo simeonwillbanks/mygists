@@ -19,6 +19,7 @@ gem 'acts-as-taggable-on', git: 'git://github.com/mbleigh/acts-as-taggable-on.gi
                            ref: '62f5fea1e19e4520a7bc8b65e0207aea11d4927f'
 gem 'bootstrap-will_paginate', '~> 0.0.9'
 gem 'octokit', '~> 1.20.0'
+gem 'friendly_id', '~> 4.0.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
