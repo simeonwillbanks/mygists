@@ -1,6 +1,5 @@
 module MyGists
   class Tags
-    DEFAULT = 'Uncategorized'
 
     class << self
       protected :new
@@ -28,7 +27,7 @@ module MyGists
           tags << m[0]
         end
       end
-      tags << DEFAULT if tags.empty?
+      tags << ActsAsTaggableOn::Tag.default if tags.empty?
       tags
     end
   end
