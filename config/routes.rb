@@ -13,7 +13,7 @@ MyGists::Application.routes.draw do
                      controller: :profile,
                      action: :show
 
-  match ':username/tags/:id', as: :tag,
+  match ':username/tags/:slug', as: :tag,
                      via: :get,
                      controller: :tags,
                      action: :show

@@ -5,7 +5,9 @@ class TagsController < ApplicationController
                                         find_by: :username,
                                         id_param: :username
 
-  load_resource :tag, class: ActsAsTaggableOn::Tag
+  load_resource :tag, class: ActsAsTaggableOn::Tag,
+                      find_by: :slug,
+                      id_param: :slug
 
   expose(:profile) { @profile.decorate }
   expose(:current_tag) { @tag.decorate }

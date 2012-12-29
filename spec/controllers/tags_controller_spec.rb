@@ -11,7 +11,7 @@ describe TagsController do
   let(:params) { {:username => username} }
   let(:tag) { FactoryGirl.create(:tag) }
   let(:action) { 'show' }
-  let(:params) { {:username => username, :id => tag.id} }
+  let(:params) { {:username => username, :slug => tag.slug} }
   let(:title) { "#{username} tags: ##{tag}" }
 
   describe "GET 'show'" do
