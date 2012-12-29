@@ -26,6 +26,8 @@ describe MyGists::Refresh do
     let(:new_gists) do
       [{
         'description' => new_description,
+        'public' => true,
+        'starred' => true,
         'updated_at' => '2011-06-04T20:35:47Z',
         'created_at' => '2011-06-04T20:35:47Z',
         'id' => new_gid
@@ -34,6 +36,8 @@ describe MyGists::Refresh do
     let(:old_gists) do
       [{
         'description' => old_gist.description,
+        'public' => true,
+        'starred' => true,
         'updated_at' => old_gist.updated_at,
         'created_at' => old_gist.created_at,
         'id' => old_gid

@@ -9,9 +9,17 @@
           tags
       %span.text-success
         = current_tag
-    %ul.gists
+    .gists
       - gists.each do |gist|
-        %li
-          = link_to gist.description, gist.url
+        .row-fluid
+          .span1
+            - if gist.starred?
+              %i.icon-star
+            - if gist.public?
+              %i.icon-ok-sign
+            - else
+              %i.icon-lock
+          .span11
+            = link_to gist.description, gist.url
     .pagination.pagination-mini
       = will_paginate gists
