@@ -13,8 +13,11 @@ describe MyGists::Fetch do
 
   describe '.for' do
     let(:options) { {username: 'simeonwillbanks', token: '718a1ec03f404d5d35527cb953c99f521aee2700' } }
-    let(:gists) { [stub(description: 'gist 1'), stub(description: 'gist 2')] }
-    let(:client) { double(gists: gists) }
+    let(:gists) do
+      [stub(description: 'gist 1', :[] => 1, :[]= => nil),
+       stub(description: 'gist 2', :[] => 2, :[]= => nil)]
+    end
+    let(:client) { double(gists: gists, gist_starred?: true) }
 
     before(:each) do
       Octokit::Client.stub(:new).and_return(client)

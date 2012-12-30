@@ -5,5 +5,7 @@ FactoryGirl.define do
     sequence(:description) {|n| "Tag#{n}: Gist Title" }
     sequence(:gid) {|n| n.to_s}
     association :profile, strategy: :build
+    public { true }
+    starred { true }
   end
 end

@@ -11,14 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121229064818) do
+ActiveRecord::Schema.define(:version => 20121229175255) do
 
   create_table "gists", :force => true do |t|
     t.string   "description"
-    t.integer  "profile_id",  :null => false
-    t.string   "gid",         :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "profile_id",                     :null => false
+    t.string   "gid",                            :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "public"
+    t.boolean  "starred",     :default => false
   end
 
   add_index "gists", ["gid"], :name => "index_gists_on_gid", :unique => true

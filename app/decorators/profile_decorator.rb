@@ -25,7 +25,7 @@ class ProfileDecorator < Draper::Base
   private
 
   def github
-    h.user_signed_in? ? h.session['warden.user.user.session'].fetch(:github, {}) : {}
+    @github ||= h.user_signed_in? ? h.session['warden.user.user.session'].fetch(:github, {}) : {}
   end
 
   def latest_gist
