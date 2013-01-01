@@ -5,7 +5,7 @@ module MyGists
     included do
       DEFAULT = 'Without Tags'
 
-      default_scope order("\"#{table_name}\".\"name\" ASC")
+      default_scope order("\"#{table_name}\".\"slug\" ASC")
 
       extend ::FriendlyId
       friendly_id :name, use: :slugged

@@ -29,13 +29,7 @@ module MyGists
     end
 
     def gists
-      MyGists::Fetch.for(
-        username: profile.username,
-        token: profile.token,
-        # If Gists have not been marked as public or private,
-        # fetch all gists to mark them public or private
-        since: marked_public_or_private? ? profile.latest_gist_timestamp : nil
-      )
+      MyGists::Fetch.for(MyGists::Fetch::Options.hash(profile))
     end
 
     def gid
@@ -55,10 +49,6 @@ module MyGists
 
     def tag_gist
       profile.tag(gist, with: MyGists::Tags.for(gist), on: :descriptions)
-    end
-
-    def marked_public_or_private?
-      Gist.where(public: nil, profile_id: profile.id).limit(1).blank?
     end
   end
 end
