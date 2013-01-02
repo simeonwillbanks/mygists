@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MyGists::Fetch::Options do
 
   describe '.to_hash' do
-    let(:timestamp) { DateTime.now.in_time_zone.strftime('%Y-%m-%dT%H:%M:%SZ') }
+    let(:timestamp) { GithubApiTestHelpers.timestamp }
     let(:profile) do
       double(username: 'simeonwillbanks', token: '818a1ec03f404d5d35527cb953c99f521aee2700')
     end
