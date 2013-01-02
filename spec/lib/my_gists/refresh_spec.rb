@@ -13,40 +13,11 @@ describe MyGists::Refresh do
 
   describe '.for' do
     let(:profile) { FactoryGirl.create(:user).profile.decorate }
-    let(:tag) { '#ProTip' }
-
-    let(:new_gid) { rand(0..1000).to_s }
-    let(:old_gid) { rand(0..1000).to_s }
-
-    let(:new_description) { "#{tag} High Speed Rails Idioms" }
-    let(:old_description) { "#{tag} Tap That Object" }
-
-    let(:old_gist) { FactoryGirl.create(:gist, description: old_description, gid: old_gid, profile: profile) }
-
-    let(:new_gists) do
-      [{
-        'description' => new_description,
-        'public' => true,
-        'starred' => true,
-        'updated_at' => '2011-06-04T20:35:47Z',
-        'created_at' => '2011-06-04T20:35:47Z',
-        'id' => new_gid
-      }]
-    end
-    let(:old_gists) do
-      [{
-        'description' => old_gist.description,
-        'public' => true,
-        'starred' => true,
-        'updated_at' => old_gist.updated_at,
-        'created_at' => old_gist.created_at,
-        'id' => old_gid
-      }]
-    end
+    let(:tag) { "##{GithubApiTestHelpers.tag}" }
 
     context 'profile has no gists' do
       before(:each) do
-        described_class.any_instance.stub(:gists).and_return(new_gists)
+        described_class.any_instance.stub(:gists).and_return(GithubApiTestHelpers.gists)
       end
 
       it 'creates a gist for profile' do
@@ -63,8 +34,11 @@ describe MyGists::Refresh do
     end
 
     context 'profile has gists' do
+      let!(:gists) { GithubApiTestHelpers.gists }
+      let!(:gist) { gists.first }
       before(:each) do
-        described_class.any_instance.stub(:gists).and_return(old_gists)
+        FactoryGirl.create(:gist, profile: profile, gid: gist['id'])
+        described_class.any_instance.stub(:gists).and_return(gists)
       end
 
       it 'updates the gist' do

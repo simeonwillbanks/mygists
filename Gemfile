@@ -13,10 +13,7 @@ gem 'omniauth-github', '~> 1.0.3'
 gem 'cancan', '~> 1.6.8'
 gem 'draper', '>= 0.18.0'
 gem 'decent_exposure', '>= 2.0.1'
-# TODO
-# undo pin to specific commit when `ActsAsTaggableOn.strict_case_match = true` is released
-gem 'acts-as-taggable-on', git: 'git://github.com/mbleigh/acts-as-taggable-on.git',
-                           ref: '62f5fea1e19e4520a7bc8b65e0207aea11d4927f'
+gem 'acts-as-taggable-on', '~> 2.3.3'
 gem 'bootstrap-will_paginate', '~> 0.0.9'
 gem 'octokit', '~> 1.20.0'
 gem 'friendly_id', '~> 4.0.1'
