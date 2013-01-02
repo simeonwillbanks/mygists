@@ -1,0 +1,4 @@
+%ul.inline
+  - profile.owned_tags.each do |owned_tag|
+    %li
+      = link_to owned_tag, tag_path(profile, owned_tag), class: owned_tag.classname

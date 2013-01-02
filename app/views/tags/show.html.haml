@@ -3,7 +3,7 @@
     = image_tag(profile.gravatar, alt: profile.username, class: 'img-polaroid')
   .span10.profile-header
     %h3
-      = profile.username
+      = link_to profile.username, profile_path(profile)
       %span.muted
         = succeed ':' do
           tags

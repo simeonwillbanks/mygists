@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'email_spec'
 require 'rspec/autorun'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 require 'cancan/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -65,3 +66,5 @@ OmniAuth.config.add_mock(:github, {
     token: '818a1ec03f404d5d35527cb953c99f521aee2700'
   }
 })
+
+Capybara.javascript_driver = :poltergeist

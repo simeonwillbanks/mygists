@@ -45,6 +45,13 @@ body {
 .profile-header {
   h3 {
     margin-top: 0;
+    > a {
+      color: inherit;
+    }
+    > a:hover {
+      text-decoration: none;
+      color: #999999;
+    }
   }
 }
 

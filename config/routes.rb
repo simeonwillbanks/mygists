@@ -18,6 +18,11 @@ MyGists::Application.routes.draw do
                      controller: :tags,
                      action: :show
 
+  match ':username/tags', as: :tags,
+                     via: :get,
+                     controller: :tags,
+                     action: :index
+
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
 
   root :to => 'home#index'
