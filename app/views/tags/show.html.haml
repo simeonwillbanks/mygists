@@ -1,7 +1,7 @@
 .row-fluid
   .span2
     = image_tag(profile.gravatar, alt: profile.username, class: 'img-polaroid')
-  .span10
+  .span10.profile-header
     %h3
       = profile.username
       %span.muted
@@ -13,13 +13,9 @@
       - gists.each do |gist|
         .row-fluid
           .span1
-            - if gist.starred?
-              %i.icon-star
-            - if gist.public?
-              %i.icon-ok-sign
-            - else
-              %i.icon-lock
+            = gist.icons
           .span11
-            = link_to gist.description, gist.url
+            %p
+              = link_to gist.description, gist.url
     .pagination.pagination-mini
       = will_paginate gists

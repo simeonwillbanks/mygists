@@ -28,7 +28,10 @@ module MyGists
     end
 
     def gists
-      client.gists(username, options).collect{|g| g['starred'] = client.gist_starred?(g['id']); g }
+      client.gists(username, options).collect do |gist|
+        gist['starred'] = client.gist_starred?(gist['id'])
+        gist
+      end
     end
   end
 end

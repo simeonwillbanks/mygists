@@ -4,6 +4,18 @@ class GistDecorator < Draper::Base
   PROTOCOL_AND_DOMAIN = 'https://gist.github.com'
   DEFAULT_DESCRIPTION = 'Gist without a description'
 
+  def icons
+    icons = []
+    if gist.starred?
+      icons << h.content_tag(:i, nil, class: 'icon-star')
+    end
+    if gist.public?
+      icons << h.content_tag(:i, nil, class: 'icon-ok-sign')
+    else
+      icons << h.content_tag(:i, nil, class: 'icon-lock')
+    end
+    icons.join('').html_safe
+  end
 
   def url
     "#{PROTOCOL_AND_DOMAIN}/#{model.gid}"

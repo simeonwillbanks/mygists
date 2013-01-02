@@ -12,12 +12,9 @@ describe MyGists::Fetch do
   end
 
   describe '.for' do
-    let(:options) { {username: 'simeonwillbanks', token: '718a1ec03f404d5d35527cb953c99f521aee2700' } }
-    let(:gists) do
-      [stub(description: 'gist 1', :[] => 1, :[]= => nil),
-       stub(description: 'gist 2', :[] => 2, :[]= => nil)]
-    end
-    let(:client) { double(gists: gists, gist_starred?: true) }
+    let!(:options) { GithubApiTestHelpers.options }
+    let!(:gists) { GithubApiTestHelpers.gists }
+    let!(:client) { double(gists: gists, gist_starred?: true) }
 
     before(:each) do
       Octokit::Client.stub(:new).and_return(client)
@@ -28,9 +25,14 @@ describe MyGists::Fetch do
     end
 
     it 'fetching gists can be done with optional timestamp' do
-      options.merge!(since: DateTime.now.in_time_zone.strftime('%Y-%m-%dT%H:%M:%SZ'))
+      options.merge!(since: GithubApiTestHelpers.timestamp)
       client.should_receive(:gists).with(options[:username], options)
       described_class.for(options).should eq(gists)
+    end
+
+    it 'fetched gists are updated with star status' do
+      client.should_receive(:gist_starred?).once
+      described_class.for(options)
     end
   end
 end

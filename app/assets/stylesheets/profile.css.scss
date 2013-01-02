@@ -1,0 +1,7 @@
+ul.inline {
+  margin: 0;
+  > li {
+    display: inline-block;
+    padding: 10px 5px 0 0;
+  }
+}
