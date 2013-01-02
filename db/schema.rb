@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121229175255) do
+ActiveRecord::Schema.define(:version => 20130102171830) do
 
   create_table "gists", :force => true do |t|
     t.string   "description"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20121229175255) do
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
-    t.string "name"
-    t.string "slug"
+    t.string "name", :null => false
+    t.string "slug", :null => false
   end
 
   add_index "tags", ["slug"], :name => "index_tags_on_slug", :unique => true
