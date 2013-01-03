@@ -19,6 +19,8 @@ gem 'octokit', '~> 1.20.0'
 gem 'friendly_id', '~> 4.0.1'
 gem 'unicorn', '~> 4.5.0'
 gem 'foreman', '>= 0.60.2'
+gem 'google-analytics-rails', '>= 0.0.3'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
