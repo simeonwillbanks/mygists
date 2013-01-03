@@ -11,4 +11,8 @@ module ApplicationHelper
     pages = [pages] unless pages.is_a?(Array)
     (pages + ['My Gists']).join(' | ')
   end
+
+  def render_fetching_info?
+    flash[:from_omniauth_callback] == true
+  end
 end
