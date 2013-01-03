@@ -3,10 +3,10 @@
 
 
 /* TEAM */
-  <your title>: <your name>
-  Site:
-  Twitter:
-  Location:
+  Hacker: Simeon Foster Willbanks
+  Site: http://www.mygists.info
+  Twitter: @simeonwillbanks
+  Location: Long Beach, California
 
 /* THANKS */
   Daniel Kehoe (@rails_apps) for the RailsApps project
