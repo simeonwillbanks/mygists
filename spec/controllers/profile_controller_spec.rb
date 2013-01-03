@@ -19,14 +19,10 @@ describe ProfileController do
     it_behaves_like 'a profile'
 
     context 'authenticated' do
-      it 'list items' do
+      it 'renders fetching notice' do
         sign_in user
-        list_items = FactoryGirl.create_list(:tag, 3)
-        Profile.any_instance.stub(:owned_tags).and_return(list_items)
         get action, params
-        list_items.each do |li|
-          page.should have_content("##{li.name}")
-        end
+        page.should have_content('One moment please, your gists are being fetched from GitHub.')
       end
     end
 

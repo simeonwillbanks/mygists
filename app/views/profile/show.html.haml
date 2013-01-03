@@ -3,9 +3,10 @@
     = image_tag(profile.gravatar, alt: profile.username, class: 'img-polaroid')
   .span10.profile-header
     %h3
-      = profile.username
+      = link_to profile.username, profile_path(profile)
       %span.muted tags
-    %ul.inline
-      - profile.owned_tags.each do |owned_tag|
-        %li
-          = link_to owned_tag, tag_path(profile, owned_tag), class: owned_tag.classname
+    #gists-fetching.alert.alert-info
+      = image_tag 'spinner.gif', class: 'pull-left'
+      One moment please, your gists are being fetched from GitHub.
+    #tags
+

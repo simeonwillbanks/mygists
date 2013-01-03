@@ -77,5 +77,8 @@ module MyGists
     config.assets.initialize_on_precompile = false
 
     config.action_controller.include_all_helpers = false
+
+    # Unicorn wants logging through STDOUT
+    config.logger = Logger.new(STDOUT)
   end
 end

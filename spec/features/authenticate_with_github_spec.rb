@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 feature 'Authenticate with GitHub via OAuth' do
-  before(:each) do
-    ProfileController.any_instance.stub(:refresh_gists).and_return(true)
-  end
-
   scenario 'should sign in with GitHub' do
     visit root_path
     click_on 'Sign in with GitHub'

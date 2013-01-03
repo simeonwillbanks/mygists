@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.10'
 
 gem 'jquery-rails'
 gem 'thin', '>= 1.5.0'
@@ -17,6 +17,8 @@ gem 'acts-as-taggable-on', '~> 2.3.3'
 gem 'bootstrap-will_paginate', '~> 0.0.9'
 gem 'octokit', '~> 1.20.0'
 gem 'friendly_id', '~> 4.0.1'
+gem 'unicorn', '~> 4.5.0'
+gem 'foreman', '>= 0.60.2'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -44,6 +46,7 @@ end
 group :test do
   gem 'database_cleaner', '>= 0.9.1'
   gem 'email_spec', '>= 1.4.0'
-  gem 'capybara', '>= 2.0.1'
   gem 'shoulda-matchers', '~> 1.4.2'
+  gem 'capybara', '~> 1.1.4'
+  gem 'poltergeist', '~> 1.0.2'
 end
