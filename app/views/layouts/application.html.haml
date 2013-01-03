@@ -5,8 +5,8 @@
       %title= page_title
       %meta{content: content_for?(:description) ? yield(:description) : 'My Gists: Organize Your Gists!', name: 'description'}
         = stylesheet_link_tag 'application', media: 'all'
-        = javascript_include_tag 'application'
         = csrf_meta_tags
+        = analytics_init if Rails.env.production?
         = yield(:head)
   %body{class: "#{controller_name} #{action_name}"}
     .container-narrow
@@ -30,3 +30,4 @@
             for
             = succeed '!' do
               %strong gists
+  = javascript_include_tag 'application'
