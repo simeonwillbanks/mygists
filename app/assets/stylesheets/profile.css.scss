@@ -1,6 +1,12 @@
-#gists-fetching {
-  margin-bottom: 10px;
+#gists-fetching-finished {
+  display: none;
+}
+
+#gists-fetching-spinner {
+  display: inline-block;
   > img {
+    width: 18px;
+    height: 16px;
     padding-right: 10px;
   }
 }

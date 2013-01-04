@@ -6,3 +6,6 @@
   .alert.alert-success
     %button.close{'data-dismiss' => 'alert', :type => 'button'} &times;
     = notice
+- if render_fetching_info?
+  #gists-fetching-info.alert.alert-info
+    One moment please, your gists are being fetched from GitHub.

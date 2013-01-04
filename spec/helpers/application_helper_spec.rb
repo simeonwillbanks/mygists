@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
+  describe '.render_fetching_info?' do
+    context 'omniauth callback is referrer' do
+      it 'should be true' do
+        helper.stub(:flash).and_return({from_omniauth_callback: true})
+        helper.render_fetching_info?.should be_true
+      end
+    end
+
+    context 'omniauth callback is not referrer' do
+      it 'should be false' do
+        helper.stub(:flash).and_return({})
+        helper.render_fetching_info?.should be_false
+      end
+    end
+  end
+
   describe '.page_title' do
     context 'home page' do
       it 'should be My Gists' do
