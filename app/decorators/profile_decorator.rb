@@ -8,10 +8,6 @@ class ProfileDecorator < Draper::Base
     github.fetch(:gravatar, EMPTY_GRAVATAR)
   end
 
-  def token
-    github[:token]
-  end
-
   def gists(tag)
     Gist.tagged_with(tag.name, on: :descriptions, owned_by: profile).page(h.params[:page]).collect! {|g| g.decorate}
   end
