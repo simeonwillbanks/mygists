@@ -1,4 +1,19 @@
-%ul.inline
-  - profile.owned_tags.each do |owned_tag|
-    %li
-      = link_to owned_tag, tag_path(profile, owned_tag), class: owned_tag.classname
+- if profile.owned_tags.blank?
+  %p
+    Wait, you don"t have any
+    = succeed "?" do
+      %strong gists
+  %p
+    Go
+    = link_to "create", github.gist_page, target: "_blank"
+    and
+    %strong
+      = link_to "#tag", help_path
+    some
+    = succeed "!" do
+      %strong gists
+- else
+  %ul.inline
+    - profile.owned_tags.each do |owned_tag|
+      %li
+        = link_to owned_tag, tag_path(profile, owned_tag), class: owned_tag.classname

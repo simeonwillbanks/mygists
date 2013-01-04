@@ -1,24 +1,26 @@
 class GistDecorator < Draper::Base
   decorates :gist
 
-  PROTOCOL_AND_DOMAIN = 'https://gist.github.com'
-  DEFAULT_DESCRIPTION = 'Gist without a description'
+  DEFAULT_DESCRIPTION = "Gist without a description"
 
   def icons
     icons = []
+
     if gist.starred?
-      icons << h.content_tag(:i, nil, class: 'icon-star')
+      icons << h.content_tag(:i, nil, class: "icon-star")
     end
+
     if gist.public?
-      icons << h.content_tag(:i, nil, class: 'icon-ok-sign')
+      icons << h.content_tag(:i, nil, class: "icon-ok-sign")
     else
-      icons << h.content_tag(:i, nil, class: 'icon-lock')
+      icons << h.content_tag(:i, nil, class: "icon-lock")
     end
-    icons.join('').html_safe
+
+    icons.join("").html_safe
   end
 
   def url
-    "#{PROTOCOL_AND_DOMAIN}/#{model.gid}"
+    "#{GitHub.gist_page}/#{model.gid}"
   end
 
   def description
@@ -37,7 +39,7 @@ class GistDecorator < Draper::Base
   #     number_to_currency(2)
 
   # Defining an Interface
-  #   Control access to the wrapped subject's methods using one of the following:
+  #   Control access to the wrapped subject"s methods using one of the following:
   #
   #   To allow only the listed methods (whitelist):
   #     allows :method1, :method2
@@ -51,6 +53,6 @@ class GistDecorator < Draper::Base
   #
   #   def created_at
   #     h.content_tag :span, attributes["created_at"].strftime("%a %m/%d/%y"),
-  #                   :class => 'timestamp'
+  #                   :class => "timestamp"
   #   end
 end

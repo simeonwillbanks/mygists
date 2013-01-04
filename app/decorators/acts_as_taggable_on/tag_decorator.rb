@@ -1,12 +1,12 @@
 class ActsAsTaggableOn::TagDecorator < Draper::Base
-  decorates :tag, class: 'ActsAsTaggableOn::Tag'
+  decorates :tag, class: "ActsAsTaggableOn::Tag"
 
   def name
     model.default? ? model.name : "##{model.name}"
   end
 
   def classname
-    model.default? ? 'btn' : 'btn btn-success'
+    model.default? ? "btn" : "btn btn-success"
   end
 
   def to_s
@@ -25,7 +25,7 @@ class ActsAsTaggableOn::TagDecorator < Draper::Base
   #     number_to_currency(2)
 
   # Defining an Interface
-  #   Control access to the wrapped subject's methods using one of the following:
+  #   Control access to the wrapped subject"s methods using one of the following:
   #
   #   To allow only the listed methods (whitelist):
   #     allows :method1, :method2
@@ -39,6 +39,6 @@ class ActsAsTaggableOn::TagDecorator < Draper::Base
   #
   #   def created_at
   #     h.content_tag :span, attributes["created_at"].strftime("%a %m/%d/%y"),
-  #                   :class => 'timestamp'
+  #                   :class => "timestamp"
   #   end
 end

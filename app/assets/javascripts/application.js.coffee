@@ -14,5 +14,3 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require_tree .
-$ ->
-  $("#tag-tooltip").tooltip()

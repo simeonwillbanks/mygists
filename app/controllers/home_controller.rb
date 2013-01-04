@@ -5,7 +5,6 @@ class HomeController < ApplicationController
   end
 
   protected
-
   def redirect_signed_in_user
     redirect_to profile_path(current_user.profile) if user_signed_in?
   end

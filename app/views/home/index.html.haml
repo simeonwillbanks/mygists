@@ -3,15 +3,15 @@
   %p.lead
     %strong #Tag
     the description of your
-    = succeed '.' do
-      %strong= link_to 'gists', 'https://gist.github.com'
+    = succeed "." do
+      %strong= link_to "gists", github.gist_page
     Use
     %em My Gists
     for viewing
-    %strong= link_to 'gists', 'https://gist.github.com'
+    %strong= link_to "gists", github.gist_page
     by
-    = succeed '.' do
+    = succeed "." do
       %strong #tag
-  = link_to 'Sign in with GitHub', user_omniauth_authorize_path(:github), class: 'btn btn-large btn-primary'
+  = link_to "Sign in with GitHub", user_omniauth_authorize_path(:github), class: "btn btn-large btn-primary"
 %hr
-= render 'help/example'
+= render "help/example"
