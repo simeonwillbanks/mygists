@@ -7,5 +7,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     }
     sign_in_and_redirect(user, event: :authentication, github: github)
     set_flash_message(:notice, :success, kind: 'GitHub')
+    flash[:from_omniauth_callback] = true
   end
 end

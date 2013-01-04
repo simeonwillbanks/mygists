@@ -19,10 +19,10 @@ describe ProfileController do
     it_behaves_like 'a profile'
 
     context 'authenticated' do
-      it 'renders fetching notice' do
+      it 'renders fetching indicator' do
         sign_in user
         get action, params
-        page.should have_content('One moment please, your gists are being fetched from GitHub.')
+        page.should have_selector('div#gists-fetching-spinner img')
       end
     end
 
