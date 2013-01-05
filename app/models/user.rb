@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
           p.token = MyGists::Secure.encrypt(auth.credentials.token)
         end
         u.save!
+        u.profile.save! unless u.profile.persisted?
       end
     end
   end
