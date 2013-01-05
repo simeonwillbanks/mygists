@@ -10,4 +10,10 @@ describe Profile do
     subject { FactoryGirl.build_stubbed(:profile) }
     its(:to_param) { should eq('simeonwillbanks') }
   end
+
+  context 'decrypted token' do
+    let(:token) { MyGists::Secure.encrypt('token') }
+    subject { FactoryGirl.build_stubbed(:profile, token: token) }
+    its(:token) { should eq('token') }
+  end
 end
