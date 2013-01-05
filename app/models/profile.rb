@@ -6,6 +6,10 @@ class Profile < ActiveRecord::Base
 
   acts_as_tagger
 
+  def token
+    MyGists::Secure.decrypt(self[:token])
+  end
+
   def to_param
     persisted? ? username : nil
   end
