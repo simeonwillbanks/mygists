@@ -27,8 +27,9 @@ see [LICENSE](https://github.com/simeonwillbanks/mygists/blob/master/LICENSE.md)
 
 ## Thanks
 
-Much appreciation to early adopters for their suggestions!
+Much appreciation to early adopters for their suggestions and help!
 
 * [@bgreenlee](https://github.com/bgreenlee)
 * [@jrust](https://github.com/jrust)
 * [@forest](https://github.com/forest)
+* [@elimisteve](https://github.com/elimisteve)
