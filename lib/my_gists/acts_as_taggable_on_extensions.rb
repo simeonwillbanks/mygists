@@ -3,12 +3,13 @@ module MyGists
     extend ActiveSupport::Concern
 
     included do
-      DEFAULT = 'Without Tags'
+      DEFAULT = "Without Tags"
 
       default_scope order("\"#{table_name}\".\"slug\" ASC")
 
       extend ::FriendlyId
       friendly_id :name, use: :slugged
+
       validates_presence_of :name, :slug
 
       def normalize_friendly_id(value)

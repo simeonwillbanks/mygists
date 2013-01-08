@@ -3,11 +3,11 @@ module MyGists
 
     class << self
       protected :new
+    end
 
-      def for(profile)
-        new(profile) do
-          refresh
-        end
+    def self.for(profile)
+      new(profile) do
+        refresh
       end
     end
 
@@ -17,13 +17,14 @@ module MyGists
     end
 
     private
-
     attr_reader :profile, :fetched_gist, :gist
 
     def refresh
       gists.each do |fetched_gist|
         @fetched_gist = fetched_gist
+
         save_gist
+
         tag_gist
       end
     end
@@ -33,16 +34,16 @@ module MyGists
     end
 
     def gid
-      fetched_gist['id']
+      fetched_gist["id"]
     end
 
     def save_gist
       @gist = Gist.find_or_create_by_profile_id_and_gid(profile.id, gid).tap do |g|
-        g.description = fetched_gist['description']
-        g.created_at = fetched_gist['created_at']
-        g.updated_at = fetched_gist['updated_at']
-        g.public = fetched_gist['public']
-        g.starred = fetched_gist['starred']
+        g.description = fetched_gist["description"]
+        g.created_at = fetched_gist["created_at"]
+        g.updated_at = fetched_gist["updated_at"]
+        g.public = fetched_gist["public"]
+        g.starred = fetched_gist["starred"]
         g.save!
       end
     end

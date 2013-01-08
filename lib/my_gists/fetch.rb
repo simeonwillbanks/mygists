@@ -3,12 +3,13 @@ module MyGists
 
     class << self
       protected :new
+    end
 
-      def for(options)
-        new(options) do
-          login
-          return gists
-        end
+    def self.for(options)
+      new(options) do
+        login
+
+        return gists
       end
     end
 
@@ -20,7 +21,6 @@ module MyGists
     end
 
     private
-
     attr_reader :username, :token, :options, :client
 
     def login
@@ -29,7 +29,7 @@ module MyGists
 
     def gists
       client.gists(username, options).collect do |gist|
-        gist['starred'] = client.gist_starred?(gist['id'])
+        gist["starred"] = client.gist_starred?(gist["id"])
         gist
       end
     end

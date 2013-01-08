@@ -1,4 +1,5 @@
 %ul.nav.nav-pills.pull-right
   - navigation_items.each_pair do |key, path|
-    %li{class: "#{'active' if controller_name == key}"}
-      = link_to key.titleize, path
+    - navigation_item_controller_name = key.to_s
+    %li{ class: "#{"active" if controller_name == navigation_item_controller_name}" }
+      = link_to navigation_item_controller_name.titleize, path

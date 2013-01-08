@@ -2,10 +2,8 @@ module MyGists
   class Fetch::Options
     attr_reader :profile
 
-    class << self
-      def hash(profile)
-        new(profile).to_hash
-      end
+    def self.hash(profile)
+      new(profile).to_hash
     end
 
     def initialize(profile)
@@ -33,8 +31,9 @@ module MyGists
 
     def timestamp
       gist = Gist.last_touched_for(profile.id)
+
       unless gist.blank?
-        gist.updated_at.in_time_zone.strftime('%Y-%m-%dT%H:%M:%SZ')
+        gist.updated_at.in_time_zone.strftime("%Y-%m-%dT%H:%M:%SZ")
       end
     end
   end

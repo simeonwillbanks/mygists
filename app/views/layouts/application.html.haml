@@ -1,33 +1,33 @@
 !!!
 %html
   %head
-    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+    %meta{ content: "width=device-width, initial-scale=1.0", name: "viewport" }
       %title= page_title
-      %meta{content: content_for?(:description) ? yield(:description) : 'My Gists: Organize Your Gists!', name: 'description'}
-        = stylesheet_link_tag 'application', media: 'all'
+      %meta{ content: content_for?(:description) ? yield(:description) : "My Gists: Organize Your Gists!", name: "description" }
+        = stylesheet_link_tag "application", media: "all"
         = csrf_meta_tags
         = analytics_init if Rails.env.production?
         = yield(:head)
-  %body{class: "#{controller_name} #{action_name}"}
+  %body{ class: "#{controller_name} #{action_name}" }
     .container-narrow
       .masthead
-        = render 'layouts/navigation'
+        = render "layouts/navigation"
         %h2.muted My Gists
       %hr/
-      = render 'layouts/alerts'
+      = render "layouts/alerts"
       = yield
       %hr/
       .footer
         .row-fluid
           .span5
             %em My Gists
-            = link_to 'crafted', 'https://github.com/simeonwillbanks/mygists'
+            = link_to "crafted", github.my_gists_page
             by
-            = link_to '@simeonwillbanks', 'https://github.com/simeonwillbanks'
+            = link_to "@simeonwillbanks", github.simeon_page
           .span4.pull-right
             Thank you
-            = link_to 'GitHub', 'https://github.com'
+            = link_to "GitHub", github.home_page
             for
-            = succeed '!' do
+            = succeed "!" do
               %strong gists
-  = javascript_include_tag 'application'
+  = javascript_include_tag "application"

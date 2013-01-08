@@ -25,7 +25,6 @@ class TagsController < ApplicationController
   end
 
   protected
-
   def refresh_gists
     MyGists::Refresh.for(profile)
   end
