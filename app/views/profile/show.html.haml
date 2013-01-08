@@ -1,11 +1,12 @@
 .row-fluid
   .span2
-    = image_tag(profile.gravatar, alt: profile.username, class: 'img-polaroid')
-  .span10.profile-header
+    = image_tag(profile.gravatar, alt: profile.username, class: "img-polaroid")
+  #profile-header.span10
     %h3
       = link_to profile.username, profile_path(profile)
-      %span.muted{id:'tag-tooltip', rel: 'tooltip', title: 'Include one or many #hashtags in each gist description'} tags
+      %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
+        tags
       #gists-fetching-spinner
-        = image_tag 'spinner.gif', class: 'pull-left'
+        = image_tag "spinner.gif", class: "pull-left"
     #tags
 

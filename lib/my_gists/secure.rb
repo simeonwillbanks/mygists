@@ -14,15 +14,19 @@ module MyGists
       c = cipher
       c.encrypt
       c.key = key
+
       encrypted = c.update(data) + c.final
+
       Base64.encode64(encrypted).encode(Encoding::UTF_8)
     end
 
     def aes256_decrypt(key, data)
       decoded = Base64.decode64(data.encode(Encoding::ASCII_8BIT))
+
       c = cipher
       c.decrypt
       c.key = key
+
       c.update(decoded) + c.final
     end
 

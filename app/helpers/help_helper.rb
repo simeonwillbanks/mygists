@@ -1,5 +1,5 @@
 module HelpHelper
   def page_title
-    super('Help')
+    super("Help")
   end
 end

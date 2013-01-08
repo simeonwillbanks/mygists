@@ -1,0 +1,40 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.container-narrow {
+  margin: 0 auto;
+  max-width: 700px;
+  > hr {
+    margin: 20px 0;
+  }
+}
+
+.example {
+  text-align: center;
+  .muted {
+    margin-top: 20px;
+  }
+}
+
+.lead, .example {
+  a {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.pagination {
+  margin: 20px 0 0 0;
+}
+
+.footer {
+  .pull-right {
+    text-align: right;
+  }
+}

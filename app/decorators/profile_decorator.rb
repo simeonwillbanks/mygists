@@ -1,5 +1,5 @@
 class ProfileDecorator < Draper::Base
-  EMPTY_GRAVATAR = 'empty_gravatar.png'
+  EMPTY_GRAVATAR = "empty_gravatar.png"
 
   decorates :profile
   decorates_association :owned_tags
@@ -9,13 +9,20 @@ class ProfileDecorator < Draper::Base
   end
 
   def gists(tag)
-    Gist.tagged_with(tag.name, on: :descriptions, owned_by: profile).page(h.params[:page]).collect! {|g| g.decorate}
+    gists = Gist.find_page_by_tag_name_and_profile(h.params[:page],
+                                                   tag.name,
+                                                   profile)
+
+    gists.collect! { |g| g.decorate }
   end
 
   private
-
   def github
-    @github ||= h.user_signed_in? ? h.session['warden.user.user.session'].fetch(:github, {}) : {}
+    @github ||= if h.user_signed_in?
+                  h.session["warden.user.user.session"].fetch(:github, {})
+                else
+                  {}
+                end
   end
 
   # Accessing Helpers
@@ -30,7 +37,7 @@ class ProfileDecorator < Draper::Base
   #     number_to_currency(2)
 
   # Defining an Interface
-  #   Control access to the wrapped subject's methods using one of the following:
+  #   Control access to the wrapped subject"s methods using one of the following:
   #
   #   To allow only the listed methods (whitelist):
   #     allows :method1, :method2
@@ -44,6 +51,6 @@ class ProfileDecorator < Draper::Base
   #
   #   def created_at
   #     h.content_tag :span, attributes["created_at"].strftime("%a %m/%d/%y"),
-  #                   :class => 'timestamp'
+  #                   :class => "timestamp"
   #   end
 end

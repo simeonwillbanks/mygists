@@ -3,11 +3,11 @@ module MyGists
 
     class << self
       protected :new
+    end
 
-      def for(gist)
-        new(gist) do
-          return tags
-        end
+    def self.for(gist)
+      new(gist) do
+        return tags
       end
     end
 
@@ -17,16 +17,17 @@ module MyGists
     end
 
     private
-
     attr_reader :description
 
     def tags
       tags = []
+
       unless description.blank?
         description.scan(/#([^\s]+)/) do |m|
           tags << m[0]
         end
       end
+
       tags << ActsAsTaggableOn::Tag.default if tags.empty?
       tags
     end

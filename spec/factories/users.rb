@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :user do
     provider "GitHub"
-    sequence(:uid) {|n| n}
+    sequence(:uid) { |n| n }
     association :profile, strategy: :build
   end
 end

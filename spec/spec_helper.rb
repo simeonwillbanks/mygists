@@ -1,16 +1,16 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+# This file is copied to spec/ when you run "rails generate rspec:install"
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'email_spec'
-require 'rspec/autorun'
-require 'capybara/rails'
-require 'capybara/poltergeist'
-require 'cancan/matchers'
+require "rspec/rails"
+require "email_spec"
+require "rspec/autorun"
+require "capybara/rails"
+require "capybara/poltergeist"
+require "cancan/matchers"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
@@ -23,10 +23,10 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  # Remove this line if you"re not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # If you"re not using ActiveRecord, or you"d prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
@@ -57,13 +57,13 @@ end
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.add_mock(:github, {
-  uid: '12345',
+  uid: "12345",
   info: {
-    nickname: 'simeonwillbanks',
-    image: 'https://secure.gravatar.com/avatar/a624cb08e20db3ac4adb6380928a7b11?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png'
+    nickname: "simeonwillbanks",
+    image: "https://secure.gravatar.com/avatar/a624cb08e20db3ac4adb6380928a7b11?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
   },
   credentials: {
-    token: '818a1ec03f404d5d35527cb953c99f521aee2700'
+    token: "818a1ec03f404d5d35527cb953c99f521aee2700"
   }
 })
 
