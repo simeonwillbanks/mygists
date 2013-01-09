@@ -3,7 +3,7 @@ MyGists
 ## Organize Your Gists!
 Tag the description of your gists. Use My Gists for viewing gists by tag.
 
-[http://www.mygists.info](http://www.mygists.info)
+[https://www.mygists.info](https://www.mygists.info)
 
 ## Contributing
 
