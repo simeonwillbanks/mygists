@@ -6,20 +6,19 @@ class ApplicationController < ActionController::Base
   def set_new_relic_custom_parameters
     return unless defined?(NewRelic)
 
-    if user_signed_in?
-      user_id = current_user.id
-      profile_username = current_user.profile.username
-    else
-      user_id = "0"
-      profile_username = "anonymous"
-    end
-
-    NewRelic::Agent.add_custom_parameters(
-      user_id:          user_id,
-      profile_username: profile_username,
+    custom_params = {
+      user_id:          0,
+      profile_username: "anonymous",
       user_agent:       request.env["HTTP_USER_AGENT"],
       remote_ip:        request.remote_ip
-    )
+    }
+
+    if user_signed_in?
+      custom_params.merge!(user_id: current_user.id,
+                           profile_username: current_user.profile.username)
+    end
+
+    NewRelic::Agent.add_custom_parameters(custom_params)
   end
 
   def after_sign_in_path_for(user)

@@ -37,7 +37,7 @@ describe ApplicationController do
 
     context "user not logged into the site" do
       it "should add an anonymous user id" do
-        parameters = hash_including(user_id: "0")
+        parameters = hash_including(user_id: 0)
         NewRelic::Agent.should_receive(:add_custom_parameters).with(parameters)
       end
 
