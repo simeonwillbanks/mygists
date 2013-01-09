@@ -1,6 +1,27 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :set_new_relic_custom_parameters
+
+  def set_new_relic_custom_parameters
+    return unless defined?(NewRelic)
+
+    if user_signed_in?
+      user_id = current_user.id
+      profile_username = current_user.profile.username
+    else
+      user_id = "0"
+      profile_username = "anonymous"
+    end
+
+    NewRelic::Agent.add_custom_parameters(
+      user_id:          user_id,
+      profile_username: profile_username,
+      user_agent:       request.env["HTTP_USER_AGENT"],
+      remote_ip:        request.remote_ip
+    )
+  end
+
   def after_sign_in_path_for(user)
     profile_path(user.profile)
   end
