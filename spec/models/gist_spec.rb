@@ -49,27 +49,5 @@ describe Gist do
         expect(subject).to eq(last_touched_for)
       end
     end
-
-    describe ".find_page_by_tag_name_and_profile" do
-      let(:tag) { GithubApiTestHelpers.tag }
-      let!(:gist) { FactoryGirl.create(:gist, profile: profile) }
-
-      context "first page" do
-        subject { Gist.find_page_by_tag_name_and_profile(1, tag, profile) }
-
-        it "should find the correct page" do
-          profile.tag(gist, with: tag, on: :descriptions)
-          expect(subject).to match_array([gist])
-        end
-      end
-
-      context "second page" do
-        subject { Gist.find_page_by_tag_name_and_profile(2, tag, profile) }
-
-        it "should find the correct page" do
-          expect(subject).to be_empty
-        end
-      end
-    end
   end
 end

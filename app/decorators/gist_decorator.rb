@@ -1,8 +1,21 @@
 class GistDecorator < Draper::Base
   decorates :gist
 
+  # Public: String of default description text.
   DEFAULT_DESCRIPTION = "Gist without a description"
 
+  # Public: Builds the icon HTML (starred, public or private) from the gist
+  #         state.
+  #
+  # Examples
+  #
+  #   icons
+  #   # => "<i class=\"icon-star\"></i><i class="\icon-ok-sign\"></i>"
+  #
+  #   icons
+  #   # => "<i class=\"icon-ok-sign\"></i>"
+  #
+  # Returns the gist icon HTML String.
   def icons
     icons = []
 
@@ -19,10 +32,32 @@ class GistDecorator < Draper::Base
     icons.join("").html_safe
   end
 
+  # Public: Build a link back to the gist on GitHub.
+  #
+  # Examples
+  #
+  #   url
+  #   # => "https://gist.github.com/3183191"
+  #
+  # Returns the gist url String.
   def url
     "#{GitHub.gist_page}/#{model.gid}"
   end
 
+  # Public: The view needs a description to provide text for an anchor
+  #         tag which links back to GitHub. Therefore, when a description is
+  #         empty, a default should be used. Otherwise, use the gist's
+  #         description.
+  #
+  # Examples
+  #
+  #   description
+  #   # => "Gist without a description"
+  #
+  #   description
+  #   # => "A gist about #Rails"
+  #
+  # Returns the gist description String.
   def description
     model.description? ? model.description : DEFAULT_DESCRIPTION
   end

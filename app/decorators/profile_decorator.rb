@@ -1,22 +1,54 @@
 class ProfileDecorator < Draper::Base
+
+  # Public: String of default gravatar png file
   EMPTY_GRAVATAR = "empty_gravatar.png"
 
   decorates :profile
   decorates_association :owned_tags
 
+  # Public: When a user has a gravatar, use it for their profile avatar.
+  #         Otherwise, use the default empty avatar.
+  #
+  # Examples
+  #
+  #   gravatar
+  #   # => "empty_gravatar.png"
+  #
+  #   gravatar
+  #   # => "https://1.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?s=200&r=pg&d=mm"
+  #
+  # Returns String to gravatar file.
   def gravatar
     github.fetch(:gravatar, EMPTY_GRAVATAR)
   end
 
-  def gists(tag)
-    gists = Gist.find_page_by_tag_name_and_profile(h.params[:page],
-                                                   tag.name,
-                                                   profile)
-
-    gists.collect! { |g| g.decorate }
+  # Public: Gets all the profile's gists by a received tag, paginate the list
+  #         and decorate each gist. Finally, return all the found gists. We
+  #         do not decorate the profile's gists association with Draper because
+  #         the tagged_with and page methods clobber the decorated association.
+  #         Also, under the hood, the decorates_association macro collects and
+  #         decoratres a collection, so our implementation is very similiar.
+  #
+  # tag - The Tag instance used to find gists.
+  #
+  # Returns an Array of paginated and decorated gists.
+  def gists_for(tag)
+    found = gists.tagged_with(tag.name, on: :descriptions).page(h.params[:page])
+    found.collect! { |gist| gist.decorate }
   end
 
   private
+  # Internal: Extract and memoize GitHub session key value pairs.
+  #
+  # Examples
+  #
+  #   github
+  #   # => { :gravatar => "https://1.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?s=200&r=pg&d=mm" }
+  #
+  #   github
+  #   # => {}
+  #
+  # Returns Hash of GitHub session.
   def github
     @github ||= if h.user_signed_in?
                   h.session["warden.user.user.session"].fetch(:github, {})

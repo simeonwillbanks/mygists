@@ -1,24 +1,56 @@
 module MyGists
+
+  # Public: Refreshes gists for a given profile.
+  #
+  # Examples
+  #
+  #   MyGists::Refresh.for(profile)
   class Refresh
 
     class << self
+      # Internal: Only Refresh.for can initialize a new Refresh.
       protected :new
     end
 
+    # Public: Refreshes gists for a received profile.
+    #
+    # profile - The Profile instance whose gists need refreshing.
+    #
+    # Examples
+    #
+    #   MyGists::Refresh.for(profile)
+    #
+    # Returns nothing.
     def self.for(profile)
       new(profile) do
         refresh
       end
     end
 
+    # Public: Initialize a Refresh.
+    #
+    # profile - The Profile instance whose gists need refreshing.
+    #
+    # Yields within context of self.
     def initialize(profile, &block)
       @profile = profile
       instance_eval(&block) if block_given?
     end
 
     private
-    attr_reader :profile, :fetched_gist, :gist
+    # Internal: Returns the recieved Profile instance.
+    attr_reader :profile
 
+    # Internal: Returns the Hash of fetched gist.
+    attr_reader :fetched_gist
+
+    # Internal: Returns the Gist instance from the fetched gist.
+    attr_reader :gist
+
+    # Internal: Using the GitHub API, fetch gists for the profile attribute.
+    #           For each fetched gist, save a Gist instance and tag the Gist.
+    #
+    # Returns nothing.
     def refresh
       gists.each do |fetched_gist|
         @fetched_gist = fetched_gist
@@ -29,14 +61,40 @@ module MyGists
       end
     end
 
+    # Internal: Using the GitHub API, fetch gists for the profile attribute.
+    #
+    # Examples
+    #
+    #   gists
+    #   # => [{ "id"          => "1"
+    #           "description" => "A gist with a #tag",
+    #           "public"      => true,
+    #           "updated_at"  => "2013-01-10T17:03:56Z",
+    #           "created_at"  => "2013-01-08T16:11:46Z",
+    #           "starred"     => true }]
+    #
+    # Returns an Array of Hashes. Each Hash is a fetched gist.
     def gists
       MyGists::Fetch.for(MyGists::Fetch::Options.hash(profile))
     end
 
+    # Internal: For the current fetched gist, get the gist's GitHub ID.
+    #
+    # Examples
+    #
+    #   gid
+    #   # => "1"
+    #
+    # Returns a String ID.
     def gid
       fetched_gist["id"]
     end
 
+    # Internal: With the profile and gid attributes, find or create a new Gist
+    #           from the current fetched gist. Once the Gist instance is
+    #           created set the gist attribute.
+    #
+    # Returns nothing.
     def save_gist
       @gist = Gist.find_or_create_by_profile_id_and_gid(profile.id, gid).tap do |g|
         g.description = fetched_gist["description"]
@@ -48,6 +106,11 @@ module MyGists
       end
     end
 
+    # Internal: For the current gist attribute, extract tags from the gist's
+    #           description. Next, tag the gist with the extracted tags. The
+    #           tags are owned by the profile attribute.
+    #
+    # Returns nothing.
     def tag_gist
       profile.tag(gist, with: MyGists::Tags.for(gist), on: :descriptions)
     end
