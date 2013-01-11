@@ -77,4 +77,27 @@ module ApplicationHelper
   def github
     GitHub
   end
+
+  # Public: Google Analytics allows you to set Custom Variables. Custom
+  #         variables are name-value pair tags that you can insert in your
+  #         tracking code in order to refine Google Analytics tracking.
+  #
+  # Examples
+  #
+  #   # => [#<GoogleAnalytics::Events::SetCustomVar:0x007fb0c7b433c0
+  #        @name="_setCustomVar",
+  #        @params=[1, "profile_username", "", 2]>]
+  #
+  # Returns an Array of GA::Events.
+  def google_analytics_events
+    # The slot for the custom variable.
+    index = 1
+    # The name for the custom variable.
+    name = "Profile Username"
+    # The value for the custom variable.
+    value = user_signed_in? ? current_user.profile.username : "anonymous"
+    # The scope for the custom variable. 2 is session-level.
+    scope = 2
+    [GA::Events::SetCustomVar.new(index, name, value, scope)]
+  end
 end
