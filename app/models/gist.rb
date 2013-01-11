@@ -9,15 +9,55 @@ class Gist < ActiveRecord::Base
 
   scope :last_touched, reorder("\"#{table_name}\".\"updated_at\" DESC").limit(1)
 
+  # Public: For a specific profile, find a gist with its public status set to
+  #         NULL.
+  #
+  # profile_id - The Integer ID of a profile.
+  #
+  # Examples
+  #
+  #   Gist.public_null_for(1)
+  #   # => #<Gist id: 532 ...>
+  #
+  #   Gist.public_null_for(2)
+  #   # => nil
+  #
+  # Returns a NilClass or an instance of a Gist.
   def self.public_null_for(profile_id)
     where(profile_id: profile_id, public: nil).first
   end
 
-  def self.last_touched_for(profile_id)
-    last_touched.where(profile_id: profile_id).first
+  # Public: For a specific profile, find its last updated gist.
+  #
+  # profile_id - The Integer ID of a profile.
+  #
+  # Examples
+  #
+  #   Gist.last_touched_for(1)
+  #   # => #<Gist id: 532 ...>
+  #
+  #   Gist.last_touched_for(2)
+  #   # => nil
+  #
+  # Returns a NilClass or an instance of a Gist.
+  def self.public_null_for(profile_id)
+    where(profile_id: profile_id, public: nil).first
   end
 
-  def self.find_page_by_tag_name_and_profile(page, tag_name, profile)
-    Gist.tagged_with(tag_name, on: :descriptions, owned_by: profile).page(page)
+  # Public: For a specific profile, find its last updated gist.
+  #
+  # profile_id - The Integer ID of a profile.
+  #
+  # Examples
+  #
+  #   Gist.last_touched_for(1)
+  #   # => #<Gist id: 532 ...>
+  #
+  #   Gist.last_touched_for(1)
+  #   # => nil
+  #
+  # Returns a NilClass or an instance of a Gist.
+  def self.last_touched_for(profile_id)
+    last_touched.where(profile_id: profile_id).first
   end
 end
