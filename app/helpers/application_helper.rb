@@ -93,7 +93,7 @@ module ApplicationHelper
     # The slot for the custom variable.
     index = 1
     # The name for the custom variable.
-    name = "profile_username"
+    name = "Profile Username"
     # The value for the custom variable.
     value = user_signed_in? ? current_user.profile.username : "anonymous"
     # The scope for the custom variable. 2 is session-level.
