@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_new_relic_custom_parameters
+  before_filter :set_google_analytics_custom_variables
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to profile_path(current_user.profile), alert: exception.message
@@ -46,6 +47,23 @@ class ApplicationController < ActionController::Base
     end
 
     NewRelic::Agent.add_custom_parameters(custom_params)
+  end
+
+  # Internal: Google Analytics allows you to set Custom Variables. Custom
+  #           variables are name-value pair tags that you can insert in your
+  #           tracking code in order to refine Google Analytics tracking.
+  #
+  # Returns nothing.
+  def set_google_analytics_custom_variables
+    # The slot for the custom variable.
+    index = 1
+    # The name for the custom variable.
+    name = "profile_username"
+    # The value for the custom variable.
+    value = user_signed_in? ? current_user.profile.username : "anonymous"
+    # The scope for the custom variable. 1 is visitor-level.
+    scope = 1
+    GA::Events::SetCustomVar.new(index, name, value, scope)
   end
 
   def after_sign_in_path_for(user)
