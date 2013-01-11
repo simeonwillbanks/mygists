@@ -38,7 +38,7 @@ describe ApplicationHelper do
 
     context "tags page" do
       it "should be tag | username | My Gists" do
-        helper.page_title(%w(rails simeonwillbanks)).should eq("rails | simeonwillbanks | My Gists")
+        helper.page_title("rails", "simeonwillbanks").should eq("rails | simeonwillbanks | My Gists")
       end
     end
   end

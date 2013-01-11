@@ -11,7 +11,7 @@ class TagsController < ApplicationController
 
   expose(:profile) { @profile.decorate }
   expose(:current_tag) { @tag.decorate }
-  expose(:gists) { profile.gists(@tag) }
+  expose(:gists) { profile.gists_for(@tag) }
 
   before_filter :refresh_gists, only: :index
 
@@ -25,6 +25,9 @@ class TagsController < ApplicationController
   end
 
   protected
+  # Internal: Refreshes gists for the signed in user's profile.
+  #
+  # Returns nothing.
   def refresh_gists
     MyGists::Refresh.for(profile)
   end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe MyGists::GithubSession do
+describe MyGists::GitHubSession do
   let!(:user) { FactoryGirl.build_stubbed(:user) }
   let!(:auth) { OpenStruct.new(session: {}) }
 
