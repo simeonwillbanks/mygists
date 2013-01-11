@@ -26,8 +26,8 @@ module ApplicationHelper
   #         controller helper can define .page_title and call super to build
   #         full page title.
   #
-  # pages - The Array of pages which define the path to the current page. The
-  #         argument can also be a String.
+  # pages - The Array of pages which define the path to the current page.
+  #         The pages array is built with the splat operator (optional).
   #
   # Examples
   #
@@ -37,13 +37,11 @@ module ApplicationHelper
   #   page_title("Profile")
   #   # => "Profile | My Gists"
   #
-  #   page_title(["simeonwillbanks", "Profile"])
+  #   page_title("simeonwillbanks", "Profile")
   #   # => "simeonwillbanks | Profile | My Gists"
   #
   # Returns a String of the page title.
-  def page_title(pages = [])
-    pages = [pages] unless pages.is_a?(Array)
-
+  def page_title(*pages)
     (pages + ["My Gists"]).join(" | ")
   end
 
