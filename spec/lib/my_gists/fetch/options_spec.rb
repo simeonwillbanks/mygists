@@ -4,33 +4,35 @@ describe MyGists::Fetch::Options do
 
   describe ".to_hash" do
     let(:timestamp) { GithubApiTestHelpers.timestamp }
-    let(:profile) do
-      double(username: "simeonwillbanks", token: "818a1ec03f404d5d35527cb953c99f521aee2700")
-    end
+    let(:gist) { FactoryGirl.build_stubbed(:gist, updated_at: timestamp) }
+    let(:profile) { FactoryGirl.build_stubbed(:profile) }
 
     context "profile gists can be filtered by timestamp" do
-      it "returns a hash with a timestamp" do
-        described_class.any_instance.tap do |klass|
-          klass.should_receive(:filterable?).and_return(true)
-          klass.should_receive(:timestamp).and_return(timestamp)
-        end
-        options = {
+      let(:options) do
+        {
           username: profile.username,
           token: profile.token,
           since: timestamp
         }
+      end
+
+      it "returns a hash with a timestamp" do
+        Gist.should_receive(:last_touched_for).with(profile.id).and_return(gist)
         described_class.hash(profile).should eq(options)
       end
     end
 
     context "profile gists can not be filtered by timestamp" do
-      it "returns a hash without a timestamp" do
-        described_class.any_instance.should_receive(:filterable?).and_return(false)
-        options = {
+      let(:options) do
+        {
           username: profile.username,
           token: profile.token,
           since: nil
         }
+      end
+
+      it "returns a hash without a timestamp" do
+        Gist.should_receive(:last_touched_for).with(profile.id).and_return(nil)
         described_class.hash(profile).should eq(options)
       end
     end

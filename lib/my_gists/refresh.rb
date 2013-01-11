@@ -111,7 +111,22 @@ module MyGists
     #
     # Returns nothing.
     def tag_gist
-      profile.tag(gist, with: MyGists::Tags.for(gist), on: :descriptions)
+      profile.tag(gist, with: MyGists::Tags.for(gist), on: context)
+    end
+
+    # Internal: Each tagging has a context. The context can either be public
+    #           or private. The context matches the gist state. When a gist is
+    #           public, its tags are public, and vice versa.
+    #
+    #   context
+    #   # => "public"
+    #
+    #   context
+    #   # => "private"
+    #
+    # Returns a String of the tag context.
+    def context
+      gist.public? ? ActsAsTaggableOn::Tag.context(:public) : ActsAsTaggableOn::Tag.context(:private)
     end
   end
 end

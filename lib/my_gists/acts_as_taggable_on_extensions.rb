@@ -10,12 +10,26 @@ module MyGists
       # Public: String of default tag.
       DEFAULT = "Without Tags"
 
-      default_scope order("\"#{table_name}\".\"slug\" ASC")
+      # Public: String of public tagging context for tag.
+      CONTEXT_PUBLIC = "public"
+
+      # Public: String of private tagging context for tag.
+      CONTEXT_PRIVATE = "private"
 
       extend ::FriendlyId
       friendly_id :name, use: :slugged
 
       validates_presence_of :name, :slug
+
+      default_scope order("\"#{table_name}\".\"slug\" ASC")
+
+      # Public: Find tagged objects within the 'public' context.
+      scope :only_public, where("\"taggings\".\"context\" = '#{CONTEXT_PUBLIC}'")
+
+      # Public: Find a tag by its name.
+      def self.by_name(name)
+        where(name: name)
+      end
 
       # Public: Creates a slug for a tag from received value. If the value is
       #         not sluggable, use a default slug.
@@ -66,6 +80,28 @@ module MyGists
       # Returns a String of the default tag.
       def default
         DEFAULT
+      end
+
+      # Public: A public API to get the various tag contexts.
+      #
+      # context - The Symbol used to match a context constant
+      #
+      # Examples
+      #
+      #   ActsAsTaggableOn::Tag.context(:public)
+      #   # => "public"
+      #
+      #   ActsAsTaggableOn::Tag.context(:private)
+      #   # => "private"
+      #
+      # Returns a String of the tag context.
+      def context(context)
+        case
+        when context == :public
+          CONTEXT_PUBLIC
+        when context == :private
+          CONTEXT_PRIVATE
+        end
       end
     end
   end

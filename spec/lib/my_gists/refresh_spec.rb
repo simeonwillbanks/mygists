@@ -12,8 +12,8 @@ describe MyGists::Refresh do
   end
 
   describe ".for" do
-    let(:tag) { "##{GithubApiTestHelpers.tag}" }
-    let(:profile) { FactoryGirl.create(:user).profile.decorate }
+    let(:tag) { GithubApiTestHelpers.tag }
+    let(:profile) { FactoryGirl.create(:user).profile }
     let!(:gists) { GithubApiTestHelpers.gists }
 
     context "profile has no gists" do
@@ -28,6 +28,7 @@ describe MyGists::Refresh do
       it "tags the profile from gist description" do
         described_class.for(profile)
         profile.owned_tags.length.should eq(1)
+        profile.owned_tags.only_public.length.should eq(1)
         profile.owned_tags.first.name.should eq(tag)
       end
     end
@@ -46,6 +47,7 @@ describe MyGists::Refresh do
       it "profile tags stay the same" do
         described_class.for(profile)
         profile.owned_tags.length.should eq(1)
+        profile.owned_tags.only_public.length.should eq(1)
         profile.owned_tags.first.name.should eq(tag)
       end
     end

@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
     find_or_create_by_provider_and_uid(auth.provider, auth.uid).tap do |u|
 
       u.profile = Profile.find_or_create_by_user_id(u.id).tap do |p|
+        p.gravatar_id = auth.extra.raw_info.gravatar_id
         p.username = auth.extra.raw_info.login
         p.token = MyGists::Secure.encrypt(auth.credentials.token)
       end

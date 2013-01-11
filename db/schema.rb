@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108200452) do
+ActiveRecord::Schema.define(:version => 20130115183221) do
 
   create_table "gists", :force => true do |t|
     t.text     "description"
@@ -27,11 +27,12 @@ ActiveRecord::Schema.define(:version => 20130108200452) do
   add_index "gists", ["profile_id"], :name => "index_gists_on_profile_id"
 
   create_table "profiles", :force => true do |t|
-    t.string   "username",   :null => false
-    t.integer  "user_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "username",    :null => false
+    t.integer  "user_id",     :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "token"
+    t.string   "gravatar_id"
   end
 
   add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"

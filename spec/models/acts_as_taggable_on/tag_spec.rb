@@ -5,26 +5,43 @@ describe ActsAsTaggableOn::Tag do
   it { should validate_presence_of(:slug) }
 
   context "class methods" do
-    subject { described_class }
-    its(:default) { should eq("Without Tags") }
+    subject(:klass) { described_class }
+
+    it { klass.default.should eq("Without Tags") }
+    it { klass.context(:public).should eq("public") }
+    it { klass.context(:private).should eq("private") }
+  end
+
+  context "scopes" do
+    describe ".by_name" do
+      let(:name) { "rails" }
+      let!(:by_name) { FactoryGirl.create(:tag, name: name) }
+      subject(:tag) { ActsAsTaggableOn::Tag.by_name(name) }
+
+      it "gets tag by name" do
+        expect(tag).to match_array([by_name])
+      end
+    end
   end
 
   context "instance methods" do
+    subject(:tag) { FactoryGirl.create(:tag, name: name) }
+
     context "default tag" do
-      subject { FactoryGirl.create(:tag, name: "Without Tags") }
-      its(:default?) { should be_true }
-      its(:slug) { should eq("without-tags") }
+      let(:name) { "Without Tags" }
+      it { tag.default?.should be_true }
+      it { tag.slug.should eq("without-tags") }
     end
 
     context "tag other than default" do
-      subject { FactoryGirl.create(:tag, name: "rails") }
-      its(:default?) { should be_false }
-      its(:slug) { should eq("rails") }
+      let(:name) { "rails" }
+      it { tag.default?.should be_false }
+      it { tag.slug.should eq("rails") }
     end
 
     context "tag is not sluggable" do
-      subject { FactoryGirl.create(:tag, name: '#{}') }
-      its(:slug) { should eq("--") }
+      let(:name) { '#{}' }
+      it { tag.slug.should eq("--") }
     end
   end
 end
