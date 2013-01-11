@@ -1,6 +1,6 @@
 module HelpHelper
 
-  # Public: Builds HTML title tag text for Help pages
+  # Public: Builds HTML title tag text for Help pages.
   #
   # Examples
   #

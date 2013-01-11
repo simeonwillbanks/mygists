@@ -1,16 +1,16 @@
 module MyGists
-  # Public: Builds a options Hash for MyGists::Fetch.for.
+  # Public: Builds an options Hash for MyGists::Fetch.for.
   #
   # Examples
   #
   #   MyGists::Fetch::Options.hash(profile)
   class Fetch::Options
 
-    # Public: Returns the Profile profile of Fetch::Options.
+    # Public: Returns the Profile instance received by initializer.
     attr_reader :profile
 
     # Public: Receives a Profile and returns an options Hash expected by
-    #         MyGists::Fetch.for
+    #         MyGists::Fetch.for.
     #
     # profile - An instance of Profile.
     #

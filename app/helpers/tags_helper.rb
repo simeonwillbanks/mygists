@@ -1,6 +1,7 @@
 module TagsHelper
 
-  # Public: Builds HTML title tag text from an array of pages for tags views.
+  # Public: Builds HTML title tag text from current tag and profile username
+  #         for tags views.
   #
   # Examples
   #

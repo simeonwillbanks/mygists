@@ -1,7 +1,6 @@
 module ProfileHelper
 
-  # Public: Builds HTML title tag text from an array of pages for profile
-  #         views.
+  # Public: Builds HTML title tag text from the profile username.
   #
   # Examples
   #

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # Public: Url helper for a new session. When a new session fails to be
   #         created, the user should be redirected to the home page.
   #         Devise::OmniauthCallbacksController#after_omniauth_failure_path_for
-  #         sends a message to .new_session_path which is route Devise no
+  #         sends a message to .new_session_path which is a route Devise no
   #         longer sets. Therefore, we need to define the helper until the
   #         Devise::OmniauthCallbacksController is refactored.
   #         TODO: Remove new_session_path helper.

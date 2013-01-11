@@ -68,10 +68,10 @@ module MyGists
     end
 
     private
-    # Internal: Returns the String username of the received options.
+    # Internal: Returns the String username from the received options.
     attr_reader :username
 
-    # Internal: Returns the String token of the received options.
+    # Internal: Returns the String token from the received options.
     attr_reader :token
 
     # Internal: Returns the Hash of the received options.
@@ -94,8 +94,8 @@ module MyGists
     end
 
     # Internal: Via the client attribute, fetch gists by the username and
-    #           and options attributes. Once the gists have fetched, get and
-    #           set the gists star status.
+    #           and options attributes. Once the gists have been fetched, get
+    #           and set the gist's star status.
     # Examples
     #
     #   gists

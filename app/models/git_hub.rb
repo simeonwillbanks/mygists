@@ -9,7 +9,7 @@
 #   # => "https://gist.github.com"
 class GitHub
 
-  # Public: String of GitHub homepage.
+  # Public: String of GitHub home page url.
   HOME_PAGE     = "https://github.com"
 
   # Public: String of Gist page url.

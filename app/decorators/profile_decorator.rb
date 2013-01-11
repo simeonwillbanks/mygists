@@ -1,13 +1,13 @@
 class ProfileDecorator < Draper::Base
 
-  # Public: String of default gravatar png file
+  # Public: String of default gravatar png file.
   EMPTY_GRAVATAR = "empty_gravatar.png"
 
   decorates :profile
   decorates_association :owned_tags
 
   # Public: When a user has a gravatar, use it for their profile avatar.
-  #         Otherwise, use the default empty avatar.
+  #         Otherwise, use the default empty gravatar.
   #
   # Examples
   #
@@ -22,7 +22,7 @@ class ProfileDecorator < Draper::Base
     github.fetch(:gravatar, EMPTY_GRAVATAR)
   end
 
-  # Public: Gets all the profile's gists by a received tag, paginate the list
+  # Public: Get all the profile's gists by a received tag, paginate the list
   #         and decorate each gist. Finally, return all the found gists. We
   #         do not decorate the profile's gists association with Draper because
   #         the tagged_with and page methods clobber the decorated association.
@@ -38,7 +38,7 @@ class ProfileDecorator < Draper::Base
   end
 
   private
-  # Internal: Extract and memoize GitHub session key value pairs.
+  # Internal: Extract and memoize GitHub session key/value pairs.
   #
   # Examples
   #

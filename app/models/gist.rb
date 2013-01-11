@@ -19,7 +19,7 @@ class Gist < ActiveRecord::Base
   #   Gist.public_null_for(1)
   #   # => #<Gist id: 532 ...>
   #
-  #   Gist.public_null_for(1)
+  #   Gist.public_null_for(2)
   #   # => nil
   #
   # Returns a NilClass or an instance of a Gist.
@@ -36,7 +36,7 @@ class Gist < ActiveRecord::Base
   #   Gist.last_touched_for(1)
   #   # => #<Gist id: 532 ...>
   #
-  #   Gist.last_touched_for(1)
+  #   Gist.last_touched_for(2)
   #   # => nil
   #
   # Returns a NilClass or an instance of a Gist.

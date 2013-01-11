@@ -70,8 +70,7 @@ module MyGists
     #           "description" => "A gist with a #tag",
     #           "public"      => true,
     #           "updated_at"  => "2013-01-10T17:03:56Z",
-    #           "created_at"  => "2013-01-08T16:11:46Z",
-    #           "starred"     => true }]
+    #           "created_at"  => "2013-01-08T16:11:46Z" }]
     #
     # Returns an Array of Hashes. Each Hash is a fetched gist.
     def gists
@@ -92,7 +91,7 @@ module MyGists
 
     # Internal: With the profile and gid attributes, find or create a new Gist
     #           from the current fetched gist. Once the Gist instance is
-    #           created set the gist attribute.
+    #           created set the gist attribute on self.
     #
     # Returns nothing.
     def save_gist
