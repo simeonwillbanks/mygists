@@ -1,19 +1,24 @@
-- if profile.owned_tags.blank?
-  %p
-    Wait, you don"t have any
-    = succeed "?" do
-      %strong gists
-  %p
-    Go
-    = link_to "create", github.gist_page, target: "_blank"
-    and
-    %strong
-      = link_to "#tag", help_path
-    some
-    = succeed "!" do
-      %strong gists
+- if tags.empty?
+  - if can? :refresh_gists, profile
+    %p
+      Wait, you don't have any
+      = succeed "?" do
+        %strong gists
+    %p
+      Go
+      = link_to "create", github.gist_page, target: "_blank"
+      and
+      %strong
+        = link_to "#tag", help_path
+      some
+      = succeed "!" do
+        %strong gists
+  - else
+    %p
+      %strong= profile.username
+      has not created any gists.
 - else
   %ul.inline
-    - profile.owned_tags.each do |owned_tag|
+    - tags.each do |a_tag|
       %li
-        = link_to owned_tag, tag_path(profile, owned_tag), class: owned_tag.classname
+        = link_to a_tag, tag_path(profile, a_tag), class: a_tag.classname

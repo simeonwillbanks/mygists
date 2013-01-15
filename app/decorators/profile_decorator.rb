@@ -1,40 +1,13 @@
 class ProfileDecorator < Draper::Base
 
-  # Public: String of default gravatar png file.
-  EMPTY_GRAVATAR = "empty_gravatar.png"
-
-  decorates :profile
-  decorates_association :owned_tags
-
-  # Public: When a user has a gravatar, use it for their profile avatar.
-  #         Otherwise, use the default empty gravatar.
+  # Public: Build an image tag with profiles gravatar url as the source.
   #
-  # Examples
-  #
-  #   gravatar
-  #   # => "empty_gravatar.png"
-  #
-  #   gravatar
-  #   # => "https://1.gravatar.com/avatar/767fc9c115a1b989744c755db47feb60?s=200&r=pg&d=mm"
-  #
-  # Returns String to gravatar file.
+  # Returns String HTML image tag.
   def gravatar
-    github.fetch(:gravatar, EMPTY_GRAVATAR)
-  end
-
-  # Public: Get all the profile's gists by a received tag, paginate the list
-  #         and decorate each gist. Finally, return all the found gists. We
-  #         do not decorate the profile's gists association with Draper because
-  #         the tagged_with and page methods clobber the decorated association.
-  #         Also, under the hood, the decorates_association macro collects and
-  #         decoratres a collection, so our implementation is very similiar.
-  #
-  # tag - The Tag instance used to find gists.
-  #
-  # Returns an Array of paginated and decorated gists.
-  def gists_for(tag)
-    found = gists.tagged_with(tag.name, on: :descriptions).page(h.params[:page])
-    found.collect! { |gist| gist.decorate }
+    h.image_tag(Gravatar.url(model.gravatar_id), alt: model.username,
+                                                 width: 90,
+                                                 height: 90,
+                                                 class: "img-polaroid")
   end
 
   private

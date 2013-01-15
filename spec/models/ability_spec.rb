@@ -7,12 +7,16 @@ describe Ability do
 
   context "user views their profile" do
     let(:user) { FactoryGirl.create(:user) }
-    it { should be_able_to(:read, user.profile) }
+    it { should be_able_to(:read_private_tags, user.profile) }
+    it { should be_able_to(:read_private_gists, user.profile) }
+    it { should be_able_to(:refresh_gists, user.profile) }
   end
 
   context "user views another users profile" do
     let(:user) { FactoryGirl.create(:user) }
     let(:another_user) { FactoryGirl.create(:user) }
-    it { should_not be_able_to(:read, another_user.profile) }
+    it { should_not be_able_to(:read_private_tags, another_user.profile) }
+    it { should_not be_able_to(:read_private_gists, another_user.profile) }
+    it { should_not be_able_to(:refresh_gists, another_user.profile) }
   end
 end

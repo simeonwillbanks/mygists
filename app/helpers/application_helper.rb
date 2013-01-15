@@ -16,10 +16,23 @@ module ApplicationHelper
   # Returns a Hash of navigation items.
   def navigation_items
     {
-      profile:  profile_path(current_user.profile),
-      help:     help_path,
-      sign_out: destroy_user_session_path
+      my_profile: profile_path(current_user.profile),
+      help:       help_path,
+      sign_out:   destroy_user_session_path
     }
+  end
+
+  # Public: Determine whether or not the current navigation item matches the
+  #         current request.
+  #
+  # Returns a TrueClass or FalseClass.
+  def navigation_item_matches_request?(key)
+    case key
+    when :my_profile
+      current_user.profile.username == params[:username]
+    else
+      controller_name.to_sym == key
+    end
   end
 
   # Public: Builds HTML title tag text from an array of pages. Current

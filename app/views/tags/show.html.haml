@@ -1,6 +1,6 @@
 .row-fluid
   .span2
-    = image_tag(profile.gravatar, alt: profile.username, class: "img-polaroid")
+    = profile.gravatar
   #profile-header.span10
     %h3
       = link_to profile.username, profile_path(profile)
@@ -9,13 +9,20 @@
           tags
       %span.text-success
         = current_tag
-    #gists
-      - gists.each do |gist|
-        .row-fluid
-          .span1
-            = gist.icons
-          .span11
-            %p
-              = link_to gist.description, gist.url, target: "_blank"
-    .pagination.pagination-mini
-      = will_paginate gists
+    - if gists.empty?
+      %p
+        %strong= profile.username
+        has not created any gists tagged with
+        = succeed "." do
+          %strong= current_tag
+    - else
+      #gists
+        - gists.each do |gist|
+          .row-fluid
+            .span1
+              = gist.icons
+            .span11
+              %p
+                = link_to gist.description, gist.url, target: "_blank"
+      .pagination.pagination-mini
+        = will_paginate gists

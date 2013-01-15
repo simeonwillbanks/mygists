@@ -1,6 +1,6 @@
 .row-fluid
   .span2
-    = image_tag(profile.gravatar, alt: profile.username, class: "img-polaroid")
+    = profile.gravatar
   #profile-header.span10
     %h3
       = link_to profile.username, profile_path(profile)
