@@ -26,7 +26,41 @@ module MyGists
       # Public: Find tagged objects within the 'public' context.
       scope :only_public, where("\"taggings\".\"context\" = '#{CONTEXT_PUBLIC}'")
 
+      # Public: Find all tag names.
+      #
+      # Examples
+      #
+      #   names
+      #   # => ["rails", "secret tag"]
+      #
+      # Returns an Array of profile usernames.
+      def self.names
+        pluck(:name)
+      end
+
+      # Public: Find all public tag names.
+      #
+      # Examples
+      #
+      #   names
+      #   # => ["rails"]
+      #
+      # Returns an Array of profile usernames.
+      def self.public_names
+        select_clause = "DISTINCT(\"tags\".\"slug\"), \"tags\".\"name\""
+        select(select_clause).joins(:taggings).only_public.map(&:name)
+      end
+
       # Public: Find a tag by its name.
+      #
+      # name - The String tag name.
+      #
+      # Examples
+      #
+      #   by_name("rails")
+      #   # => [#<ActsAsTaggableOn::Tag id: 1, name: "rails", slug: "rails">]
+      #
+      # Returns an ActiveRecord::Relation of tags.
       def self.by_name(name)
         where(name: name)
       end

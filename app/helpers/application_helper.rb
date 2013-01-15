@@ -17,6 +17,7 @@ module ApplicationHelper
   def navigation_items
     {
       my_profile: profile_path(current_user.profile),
+      search:     search_path,
       help:       help_path,
       sign_out:   destroy_user_session_path
     }

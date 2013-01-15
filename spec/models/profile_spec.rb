@@ -16,4 +16,19 @@ describe Profile do
     subject(:profile) { FactoryGirl.build_stubbed(:profile, token: token) }
     it { profile.token.should eq("token") }
   end
+
+  context "scopes" do
+    describe ".usernames" do
+      let!(:usernames) do
+        FactoryGirl.create_list(:user, 2).inject([]) do |result, user|
+          result << user.profile.username
+        end
+      end
+      subject(:scope) { Profile.usernames }
+
+      it "gets usernames" do
+        expect(scope).to match_array(usernames)
+      end
+    end
+  end
 end

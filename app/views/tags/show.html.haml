@@ -1,7 +1,7 @@
 .row-fluid
   .span2
     = profile.gravatar
-  #profile-header.span10
+  #header.span10
     %h3
       = link_to profile.username, profile_path(profile)
       %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
@@ -16,13 +16,9 @@
         = succeed "." do
           %strong= current_tag
     - else
-      #gists
+      %dl#gists.dl-horizontal
         - gists.each do |gist|
-          .row-fluid
-            .span1
-              = gist.icons
-            .span11
-              %p
-                = link_to gist.description, gist.url, target: "_blank"
+          %dt= gist.icons
+          %dd= link_to gist.description, gist.url, target: "_blank"
       .pagination.pagination-mini
         = will_paginate gists
