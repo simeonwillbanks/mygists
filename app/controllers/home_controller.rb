@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :redirect_signed_in_user
 
   def index
+    respond_to { |format| format.html }
   end
 
   protected

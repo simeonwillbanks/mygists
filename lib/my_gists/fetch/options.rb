@@ -54,8 +54,9 @@ module MyGists
       }
     end
 
-    # Public: If a profile's gists are filterable, return a timestamp for
-    #         filtering. If the gists are not filterable, return nil.
+    # Public: Find the last gist updated by profile attribute. If a gist is
+    #         found, return its updated timestamp in ISO 8601 format. If a
+    #         gist is not found, return nil.
     #
     # Examples
     #
@@ -67,38 +68,6 @@ module MyGists
     #
     # Returns A String timestamp or NilClass.
     def since
-      filterable? ? timestamp : nil
-    end
-
-    # Public: Once a profile's gists have been set to public or private, a
-    #         profile will have no gists with public set to NULL, and fetching
-    #         gists can be filtered by a timestamp.
-    #
-    # Examples
-    #
-    #   filterable?
-    #   # => true
-    #
-    #   filterable?
-    #   # => false
-    #
-    # Returns A TrueClass or FalseClass.
-    def filterable?
-      Gist.public_null_for(profile.id).blank?
-    end
-
-    # Public: Find the last gist updated by profile attribute. If a gist is
-    #         found, return its updated timestamp in ISO 8601 format. If a
-    #         gist is not found, return nil.
-    #
-    #   timestamp
-    #   # => "2013-01-09T18:04:56Z"
-    #
-    #   timestamp
-    #   # => nil
-    #
-    # Returns A String timestamp or NilClass.
-    def timestamp
       gist = Gist.last_touched_for(profile.id)
 
       unless gist.blank?

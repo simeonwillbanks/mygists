@@ -2,7 +2,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, Profile, user_id: user.id
+    can :read_private_tags, Profile, user_id: user.id
+    can :read_private_gists, Profile, user_id: user.id
+    can :refresh_gists, Profile, user_id: user.id
 
     # Define abilities for the passed in user here. For example:
     #

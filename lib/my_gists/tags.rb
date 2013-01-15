@@ -39,7 +39,7 @@ module MyGists
     end
 
     private
-    # Public: Returns the String description of Gist.
+    # Internal: Returns the String description of Gist.
     attr_reader :description
 
     # Internal: Scans description attribute for #hashtags and extracts each

@@ -3,21 +3,20 @@ require "spec_helper"
 describe Gist do
   it { should validate_presence_of(:gid) }
   it { should belong_to(:profile) }
-  its(:starred?) { should be_false }
 
   context "starred" do
-    subject { FactoryGirl.build(:gist, starred: true) }
-    its(:starred?) { should be_true }
+    subject(:gist) { FactoryGirl.build(:gist, starred: true) }
+    it { gist.starred?.should be_true }
   end
 
   context "public" do
-    subject { FactoryGirl.build(:gist, public: true) }
-    its(:public?) { should be_true }
+    subject(:gist) { FactoryGirl.build(:gist, public: true) }
+    it { gist.public?.should be_true }
   end
 
   context "private" do
-    subject { FactoryGirl.build(:gist, public: false) }
-    its(:public?) { should be_false }
+    subject(:gist) { FactoryGirl.build(:gist, public: false) }
+    it { gist.public?.should be_false }
   end
 
   context "scopes" do
@@ -25,28 +24,28 @@ describe Gist do
 
     describe ".last_touched" do
       let!(:last_touched) { FactoryGirl.create_list(:gist, 2, profile: profile).last }
-      subject { Gist.last_touched }
+      subject(:gist) { Gist.last_touched }
 
       it "gets last updated gist" do
-        expect(subject).to match_array([last_touched])
+        expect(gist).to match_array([last_touched])
       end
     end
 
-    describe ".public_null_for" do
-      let!(:public_null_for) { FactoryGirl.create(:gist, public: nil, profile: profile) }
-      subject { Gist.public_null_for(profile.id) }
+    describe ".only_public" do
+      let!(:only_public) { FactoryGirl.create(:gist, public: true, profile: profile) }
+      subject(:gist) { Gist.only_public(profile.id) }
 
-      it "by profile id, get gists where public IS NULL" do
-        expect(subject).to eq(public_null_for)
+      it "by profile id, get public gists" do
+        expect(gist).to match_array([only_public])
       end
     end
 
     describe ".last_touched_for" do
       let!(:last_touched_for) { FactoryGirl.create(:gist, profile: profile) }
-      subject { Gist.last_touched_for(profile.id) }
+      subject(:gist) { Gist.last_touched_for(profile.id) }
 
       it "by profile id, get updated gist" do
-        expect(subject).to eq(last_touched_for)
+        expect(gist).to eq(last_touched_for)
       end
     end
   end
