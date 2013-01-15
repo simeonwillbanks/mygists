@@ -1,9 +1,8 @@
 class ProfileDecorator < Draper::Base
 
-  # Public: When a user has a gravatar, use it for their profile avatar.
-  #         Otherwise, use the default from the GravatarImageTag config.
+  # Public: Build an image tag with profiles gravatar url as the source.
   #
-  # Returns String HTML to gravatar.
+  # Returns String HTML image tag.
   def gravatar
     h.image_tag(Gravatar.url(model.gravatar_id), alt: model.username,
                                                  width: 90,

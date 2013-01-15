@@ -84,7 +84,7 @@ module MyGists
 
       # Public: A public API to get the various tag contexts.
       #
-      # context - The Symbol used to match a context constant
+      # context - The Symbol used to match a context constant.
       #
       # Examples
       #

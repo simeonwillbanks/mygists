@@ -102,7 +102,7 @@ module MyGists
 
     # Public: Expose WillPaginate current page API from scope.
     #
-    # Returns the Integer of the current page
+    # Returns the Integer of the current page.
     def current_page
       scope.current_page
     end

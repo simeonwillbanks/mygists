@@ -1,4 +1,5 @@
-# Public: A simple data container to house static Gravatar urls.
+# Public: A simple data container to house Gravatar url parts and build a
+#         gravatar url from an ID.
 #
 # Examples
 #
