@@ -26,7 +26,7 @@ module ApplicationHelper
   #         current request.
   #
   # Returns a TrueClass or FalseClass.
-  def navigation_item_match_request?(key)
+  def navigation_item_matches_request?(key)
     case key
     when :my_profile
       current_user.profile.username == params[:username]

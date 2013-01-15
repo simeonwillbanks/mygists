@@ -1,14 +1,14 @@
 require "spec_helper"
 
 describe ApplicationHelper do
-  describe ".navigation_item_match_request?" do
+  describe ".navigation_item_matches_request?" do
     let(:user) { FactoryGirl.build_stubbed(:user) }
 
     context "current user visits their profile" do
       it "should be true" do
         helper.stub(:current_user).and_return(user)
         helper.stub(:params).and_return({ username: user.profile.username })
-        helper.navigation_item_match_request?(:my_profile).should be_true
+        helper.navigation_item_matches_request?(:my_profile).should be_true
       end
     end
 
@@ -16,14 +16,14 @@ describe ApplicationHelper do
       it "should be false" do
         helper.stub(:current_user).and_return(user)
         helper.stub(:params).and_return({ username: "another" })
-        helper.navigation_item_match_request?(:my_profile).should be_false
+        helper.navigation_item_matches_request?(:my_profile).should be_false
       end
     end
 
     context "any user visits the help page" do
       it "should be true" do
         helper.stub(:controller_name).and_return("help")
-        helper.navigation_item_match_request?(:help).should be_true
+        helper.navigation_item_matches_request?(:help).should be_true
       end
     end
   end
