@@ -1,6 +1,13 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+// Override Bootstrap dropdown menu. When a dropdown is mousedover, change the
+// font color to white.
+
+// .active a       - Changes font color to white.
+// .active a:hover - Changes font color to white.
+//
+// No styleguide reference.
 .dropdown-menu {
   .active {
     > a,
@@ -10,6 +17,12 @@
   }
 }
 
+// Override Bootstrap horizontal definition list <dl.dl-horizontal>. The
+// definition list titles must be smaller since they contain gist icons. The
+// definition list descriptions must be larger since the contain gist
+// descriptions.
+//
+// No styleguide reference.
 .dl-horizontal {
   dt {
     width: 32px;

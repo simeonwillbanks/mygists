@@ -1,3 +1,6 @@
+// Layout styles borrowed from Bootstrap narrow marketing example.
+//
+// No styleguide reference.
 body {
   padding-top: 20px;
   padding-bottom: 40px;
@@ -39,6 +42,9 @@ body {
   }
 }
 
+// Profile and Search section header styles for header text and anchors.
+//
+// No styleguide reference.
 #header {
   h3 {
     margin-top: 0;
@@ -52,6 +58,10 @@ body {
   }
 }
 
+// Definition list styles for anywhere gists are listed. Provide a bit of
+// spacing between gist icons.
+//
+// No styleguide reference.
 #gists {
   dt {
     i:last-child {
