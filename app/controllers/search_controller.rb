@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:tags) { ActsAsTaggableOn::Tag.public_names }
-  expose(:profiles) { Profile.usernames }
+  expose(:tags) { MyGists::Cache.read(:tags) }
+  expose(:profiles) { MyGists::Cache.read(:profiles) }
 
   expose(:gists) { @gists }
 

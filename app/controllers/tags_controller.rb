@@ -43,6 +43,6 @@ class TagsController < ApplicationController
   #
   # Returns nothing.
   def refresh_gists
-    MyGists::Refresh.for(profile) if can?(:refresh_gists, @profile)
+    MyGists::Refresh.for(@profile) if can?(:refresh_gists, @profile)
   end
 end

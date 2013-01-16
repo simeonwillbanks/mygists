@@ -26,3 +26,10 @@ SECRET_TOKEN: fallback_token_for_development
 # @see https://newrelic.com/docs/ruby/ruby-agent-configuration
 NEW_RELIC_APP_NAME: YourMyGists
 NEW_RELIC_LICENSE_KEY: new_relic_license_key
+
+# In production, Redis is used for caching
+# We set the environment variable key used to get Redis DSN
+# On Heroku with RedisToGo:
+# REDIS: redis://redistogo:86a1b907d54bf7010394bf316e183e67@subdomain.redistogo.com:9748/
+# Our own Redis server:
+REDIS: redis://localhost:6379/

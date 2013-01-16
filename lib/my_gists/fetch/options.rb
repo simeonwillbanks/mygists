@@ -55,7 +55,9 @@ module MyGists
     end
 
     # Public: Find the last gist updated by profile attribute. If a gist is
-    #         found, return its updated timestamp in ISO 8601 format. If a
+    #         found, return its updated timestamp in ISO 8601 format. The
+    #         found gist's updated at timestamp is increased by one second,
+    #         so it will not be included in response from GitHub API. If a
     #         gist is not found, return nil.
     #
     # Examples
@@ -71,7 +73,7 @@ module MyGists
       gist = Gist.last_touched_for(profile.id)
 
       unless gist.blank?
-        gist.updated_at.in_time_zone.strftime("%Y-%m-%dT%H:%M:%SZ")
+        gist.updated_at.advance(seconds: 1).in_time_zone.strftime("%Y-%m-%dT%H:%M:%SZ")
       end
     end
   end

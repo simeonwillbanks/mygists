@@ -21,6 +21,7 @@ gem "unicorn", "~> 4.5.0"
 gem "foreman", ">= 0.60.2"
 gem "google-analytics-rails", ">= 0.0.3"
 gem "newrelic_rpm"
+gem "redis-rails", "~> 3.2.3"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"

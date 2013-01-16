@@ -79,7 +79,7 @@ module MyGists
       @include_private = options.fetch(:private, true)
 
       profile_option = options.delete(:profile)
-      @profile = if profile_option.is_a?(String)
+      @profile = if profile_option.is_a?(String) && profile_option.present?
                    Profile.find_by_username(profile_option)
                  else
                    profile_option
@@ -167,9 +167,9 @@ module MyGists
       elsif profile.present? && tag_name.blank?
         scope = profile.gists
       elsif profile.blank? && tag_name.present?
-        scope = Gist.tagged_with(tag_name)
+        scope = Gist.tagged_with(tag_name).includes(:profile)
       else
-        scope = Gist.scoped
+        scope = Gist.scoped.includes(:profile)
       end
 
       scope = scope.only_public unless include_private

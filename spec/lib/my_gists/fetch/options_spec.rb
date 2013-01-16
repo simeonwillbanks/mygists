@@ -3,7 +3,8 @@ require "spec_helper"
 describe MyGists::Fetch::Options do
 
   describe ".to_hash" do
-    let(:timestamp) { GithubApiTestHelpers.timestamp }
+    let(:timestamp) { DateTime.now }
+    let(:since) { timestamp.advance(seconds: 1).in_time_zone.strftime("%Y-%m-%dT%H:%M:%SZ") }
     let(:gist) { FactoryGirl.build_stubbed(:gist, updated_at: timestamp) }
     let(:profile) { FactoryGirl.build_stubbed(:profile) }
 
@@ -12,7 +13,7 @@ describe MyGists::Fetch::Options do
         {
           username: profile.username,
           token: profile.token,
-          since: timestamp
+          since: since
         }
       end
 

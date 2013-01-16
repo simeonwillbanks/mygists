@@ -24,7 +24,7 @@ class ProfileDecorator < Draper::Base
   # Returns Hash of GitHub session.
   def github
     @github ||= if h.user_signed_in?
-                  h.session["warden.user.user.session"].fetch(:github, {})
+                  h.user_session.fetch(:github, {})
                 else
                   {}
                 end

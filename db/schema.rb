@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115183221) do
+ActiveRecord::Schema.define(:version => 20130117034235) do
 
   create_table "gists", :force => true do |t|
     t.text     "description"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130115183221) do
 
   add_index "gists", ["gid"], :name => "index_gists_on_gid", :unique => true
   add_index "gists", ["profile_id"], :name => "index_gists_on_profile_id"
+  add_index "gists", ["updated_at"], :name => "index_gists_on_updated_at"
 
   create_table "profiles", :force => true do |t|
     t.string   "username",    :null => false
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130115183221) do
     t.string "slug", :null => false
   end
 
+  add_index "tags", ["name"], :name => "index_tags_on_name"
   add_index "tags", ["slug"], :name => "index_tags_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
