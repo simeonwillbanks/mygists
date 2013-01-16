@@ -1,36 +1,9 @@
-#profile-header {
-  h3 {
-    margin-top: 0;
-    > a {
-      color: inherit;
-    }
-    > a:hover {
-      text-decoration: none;
-      color: #999999;
-    }
-  }
-}
-
 #tags {
   ul.inline {
     margin: 0;
     > li {
       display: inline-block;
       padding: 10px 5px 0 0;
-    }
-  }
-}
-
-#gists {
-  .row-fluid {
-    .span1 {
-      text-align: right;
-      i {
-        margin-right: 3px;
-      }
-    }
-    .span11 {
-      margin-left: 3px;
     }
   }
 }

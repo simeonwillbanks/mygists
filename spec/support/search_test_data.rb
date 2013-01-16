@@ -6,10 +6,13 @@ class SearchTestData
               :generic_public_gist_decorated
 
   def self.generate
-    new.tap { |sd| sd.generate_pubilc_and_private }
+    new.tap do |sd|
+      sd.generate_public_and_private
+      sd.generate_generic
+    end
   end
 
-  def generate_pubilc_and_private
+  def generate_public_and_private
     @user = FactoryGirl.create(:user)
     @profile = @user.profile
     @public_tag = FactoryGirl.create(:tag, name: public_tag_name)

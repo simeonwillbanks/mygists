@@ -6,6 +6,18 @@ class Profile < ActiveRecord::Base
 
   acts_as_tagger
 
+  # Public: Find all profile usernames.
+  #
+  # Examples
+  #
+  #   usernames
+  #   # => ["simeonwillbanks"]
+  #
+  # Returns an Array of profile usernames.
+  def self.usernames
+    pluck(:username)
+  end
+
   # Public: Overloads the token reader, so the token can be decrypted before
   #         being returned.
   #

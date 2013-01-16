@@ -46,7 +46,7 @@ module MyGists
     # options -  The Hash options used to refine the search (default: {}):
     #            :tag     - Tag or String of tag name (optional).
     #            :page    - Integer for page of collection (optional).
-    #            :profile - Profile who owns resources (optional).
+    #            :profile - Profile or String who owns resources (optional).
     #            :private - TrueClass or FalseClass used to exclude private
     #                       resources from search results (optional).
     #
@@ -76,8 +76,14 @@ module MyGists
     # Yields within context of self.
     def initialize(options, &block)
       @page = options.delete(:page)
-      @profile = options.delete(:profile)
       @include_private = options.fetch(:private, true)
+
+      profile_option = options.delete(:profile)
+      @profile = if profile_option.is_a?(String)
+                   Profile.find_by_username(profile_option)
+                 else
+                   profile_option
+                 end
 
       tag_option = options.delete(:tag)
       @tag_name = tag_option.respond_to?(:name) ? tag_option.name : tag_option

@@ -1,0 +1,4 @@
+%form.form-inline{ action: search_path, method: "get", autocomplete: "off" }
+  %input.input-xlarge{ name: "tag", "data-source" => tags, "data-provide" => "typeahead", placeholder: "Tag", type: "text" }
+  %input.input-xlarge{ name: "profile", "data-source" => profiles, "data-provide" => "typeahead", placeholder: "Profile", type: "text" }
+  %button.btn.btn-inverse.pull-right{ type: "submit" } Search

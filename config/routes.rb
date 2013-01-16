@@ -6,6 +6,11 @@ MyGists::Application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
+  match "search", as: :search,
+                  via: :get,
+                  controller: :search,
+                  action: :index
+
   match "help", as: :help,
                 via: :get,
                 controller: :help,

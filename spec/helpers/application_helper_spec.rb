@@ -57,6 +57,12 @@ describe ApplicationHelper do
       end
     end
 
+    context "search page" do
+      it "should be search | My Gists" do
+        helper.page_title("Search").should eq("Search | My Gists")
+      end
+    end
+
     context "help page" do
       it "should be Help | My Gists" do
         helper.page_title("Help").should eq("Help | My Gists")
@@ -76,5 +82,6 @@ describe ApplicationHelper do
     it { github.gist_page.should eq("https://gist.github.com") }
     it { github.my_gists_page.should eq("https://github.com/simeonwillbanks/mygists") }
     it { github.simeon_page.should eq("https://github.com/simeonwillbanks") }
+    it { github.profile_page("simeonwillbanks").should eq("https://github.com/simeonwillbanks") }
   end
 end

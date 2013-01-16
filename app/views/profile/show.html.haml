@@ -1,7 +1,7 @@
 .row-fluid
   .span2
     = profile.gravatar
-  #profile-header.span10
+  #header.span10
     %h3
       = link_to profile.username, profile_path(profile)
       %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }

@@ -38,3 +38,24 @@ body {
     text-align: right;
   }
 }
+
+#header {
+  h3 {
+    margin-top: 0;
+    > a {
+      color: inherit;
+    }
+    > a:hover {
+      text-decoration: none;
+      color: #999999;
+    }
+  }
+}
+
+#gists {
+  dt {
+    i:last-child {
+      margin-left: 3px;
+    }
+  }
+}
