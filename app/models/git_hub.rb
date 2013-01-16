@@ -68,4 +68,15 @@ class GitHub
   def self.my_gists_page
     MY_GISTS_PAGE
   end
+
+  # Public: Get any users profile page by their username.
+  #
+  # Examples
+  #
+  #   GitHub.profile_page("simeonwillbanks")
+  #   # => "https://github.com/simeonwillbanks
+  #
+  def self.profile_page(username)
+    "#{HOME_PAGE}/#{username}"
+  end
 end

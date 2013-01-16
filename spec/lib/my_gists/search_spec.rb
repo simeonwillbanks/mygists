@@ -17,34 +17,46 @@ describe MyGists::Search do
     include_context "search test data"
 
     it "user searches their tags, they find public and private tags" do
-      result = described_class.for(:tags, profile: profile).to_a
-      expect(result).to match_array([public_tag_decorated, private_tag_decorated])
+      options = { profile: profile }
+      tags = [public_tag_decorated, private_tag_decorated, generic_tag_decorated]
+      result = described_class.for(:tags, options).to_a
+      expect(result).to match_array(tags)
     end
 
     it "user searches another user's tags, public but not private tags are found" do
-      result = described_class.for(:tags, profile: profile, private: false).to_a
-      expect(result).to match_array([public_tag_decorated])
+      options = { profile: profile, private: false }
+      tags = [public_tag_decorated, generic_tag_decorated]
+      result = described_class.for(:tags, options).to_a
+      expect(result).to match_array(tags)
     end
 
     it "user searches their gists, they find public and private gists" do
-      result = described_class.for(:gists, profile: profile).to_a
-      expect(result).to match_array([public_gist_decorated, private_gist_decorated])
+      options = { profile: profile }
+      gists = [public_gist_decorated, private_gist_decorated,
+               generic_public_gist_decorated, generic_private_gist_decorated]
+      result = described_class.for(:gists, options).to_a
+      expect(result).to match_array(gists)
     end
 
     it "user searches another user's gists, public but not find private gists are found" do
-      result = described_class.for(:gists, profile: profile, private: false).to_a
-      expect(result).to match_array([public_gist_decorated])
+      options = { profile: profile, private: false }
+      gists = [public_gist_decorated, generic_public_gist_decorated]
+      result = described_class.for(:gists, options).to_a
+      expect(result).to match_array(gists)
     end
 
     it "user searches their gists by tag, they find public and private gists" do
-      search_data.generate_generic
-      result = described_class.for(:gists, profile: profile, tag: generic_tag_name).to_a
-      expect(result).to match_array([generic_public_gist_decorated, generic_private_gist_decorated])
+      options = { profile: profile, tag: generic_tag_name }
+      gists = [generic_public_gist_decorated, generic_private_gist_decorated]
+      result = described_class.for(:gists, options).to_a
+      expect(result).to match_array(gists)
     end
 
     it "user searches another user's gists by tag, public but private gists are found" do
-      result = described_class.for(:gists, profile: profile, tag: public_tag_name, private: false).to_a
-      expect(result).to match_array([public_gist_decorated])
+      options = { profile: profile, tag: public_tag_name, private: false }
+      gists = [public_gist_decorated]
+      result = described_class.for(:gists, options).to_a
+      expect(result).to match_array(gists)
     end
   end
 end

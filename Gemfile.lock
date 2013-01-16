@@ -37,7 +37,7 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.7.0)
     binding_of_caller (0.6.8)
-    bootstrap-sass (2.2.1.1)
+    bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
       will_paginate
@@ -235,7 +235,7 @@ GEM
     ruby_parser (3.1.1)
       sexp_processor (~> 4.1)
     rubyzip (0.9.9)
-    sass (3.2.3)
+    sass (3.2.5)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)

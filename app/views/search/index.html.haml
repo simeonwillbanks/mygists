@@ -1,0 +1,20 @@
+.row-fluid
+  = render "form"
+#header.row-fluid
+  = render "header"
+- if search?
+  .row-fluid
+    - if gists.empty?
+      %p Uh oh, no gists were found!
+    - else
+      %dl#gists.dl-horizontal
+        - gists.each do |gist|
+          %dt= gist.icons
+          %dd
+            - unless profile_search?
+              %strong.username
+                = succeed ":" do
+                  = link_to gist.profile.username, profile_path(gist.profile)
+            = link_to gist.description, gist.url, target: "_blank"
+      .pagination.pagination-mini
+        = will_paginate gists

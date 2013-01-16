@@ -1,0 +1,10 @@
+%h3
+  - if tag_search?
+    %span.muted
+      tag:
+    %span.text-success
+      = search_hash_tag
+  - if profile_search?
+    %span.muted
+      profile:
+    = search_profile_link

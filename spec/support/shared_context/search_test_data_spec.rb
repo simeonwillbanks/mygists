@@ -10,6 +10,7 @@ shared_context "search test data" do
 
   let(:public_tag_decorated) { search_data.public_tag_decorated }
   let(:private_tag_decorated) { search_data.private_tag_decorated }
+  let(:generic_tag_decorated) { search_data.generic_tag_decorated }
 
   let(:public_gist_decorated) { search_data.public_gist_decorated }
   let(:private_gist_decorated) { search_data.private_gist_decorated }
