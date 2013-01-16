@@ -15,7 +15,7 @@ describe SearchHelper do
   let(:profile_link) { "<a href=\"/#{profile}\">#{profile}</a>" }
   let(:hash_tag) { "##{tag}" }
 
-  context "user visits search page by clicking 'search' in the navigation" do
+  context "user visits search page by clicking 'Search' in the navigation" do
     before(:each) { helper.stub(:params).and_return(params_nil) }
 
     describe ".profile_search_term" do

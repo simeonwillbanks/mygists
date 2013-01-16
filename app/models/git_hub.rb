@@ -69,7 +69,7 @@ class GitHub
     MY_GISTS_PAGE
   end
 
-  # Public: Get any users profile page by their username
+  # Public: Get any users profile page by their username.
   #
   # Examples
   #

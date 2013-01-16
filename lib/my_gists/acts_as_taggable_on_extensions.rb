@@ -33,7 +33,7 @@ module MyGists
       #   names
       #   # => ["rails", "secret tag"]
       #
-      # Returns an Array of profile usernames.
+      # Returns an Array of tag names.
       def self.names
         pluck(:name)
       end
@@ -45,7 +45,7 @@ module MyGists
       #   names
       #   # => ["rails"]
       #
-      # Returns an Array of profile usernames.
+      # Returns an Array of tag names.
       def self.public_names
         select_clause = "DISTINCT(\"tags\".\"slug\"), \"tags\".\"name\""
         select(select_clause).joins(:taggings).only_public.map(&:name)
