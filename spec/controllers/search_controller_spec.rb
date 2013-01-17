@@ -51,7 +51,7 @@ describe SearchController do
     context "unauthenticated" do
       it "redirects to home page" do
         get :index
-        response.should redirect_to root_path
+        response.should be_success
       end
     end
   end

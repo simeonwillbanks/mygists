@@ -16,7 +16,9 @@
   - else
     %p
       %strong= profile.username
-      has not created any gists.
+      has not created any
+      = succeed "." do
+        %strong gists
 - else
   %ul.inline
     - tags.each do |a_tag|

@@ -1,5 +1,4 @@
 class SearchController < ApplicationController
-  before_filter :authenticate_user!
 
   expose(:tags) { MyGists::Cache.read(:tags) }
   expose(:profiles) { MyGists::Cache.read(:profiles) }

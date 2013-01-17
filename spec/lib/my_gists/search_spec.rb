@@ -45,6 +45,13 @@ describe MyGists::Search do
       expect(result).to match_array(gists)
     end
 
+    it "user searches for a user who does not exist, so no gists are found" do
+      options = { profile: "lakdj", private: false }
+      gists = []
+      result = described_class.for(:gists, options).to_a
+      expect(result).to match_array(gists)
+    end
+
     it "user searches their gists by tag, they find public and private gists" do
       options = { profile: profile, tag: generic_tag_name }
       gists = [generic_public_gist_decorated, generic_private_gist_decorated]

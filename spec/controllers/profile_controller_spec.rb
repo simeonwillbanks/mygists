@@ -34,12 +34,5 @@ describe ProfileController do
         end
       end
     end
-
-    context "unauthenticated" do
-      it "redirects to home page" do
-        get action, params
-        response.should redirect_to root_path
-      end
-    end
   end
 end
