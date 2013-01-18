@@ -338,6 +338,7 @@ DEPENDENCIES
   pry-rails (>= 0.2.2)
   quiet_assets (>= 1.0.1)
   rails (= 3.2.11)
+  rake (~> 10.0.3)
   redis-rails (~> 3.2.3)
   rspec-rails (>= 2.11.4)
   ruby_parser (>= 3.1.0)

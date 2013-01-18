@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - 1.9.3
+before_script:
+  - psql -c 'create database mygists_test;' -U postgres
+  - cp config/database.example.yml config/database.yml
+  - bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare --trace
+env:
+  global:
+    - GITHUB_APP_ID="fake_id"
+    - GITHUB_APP_SECRET="fake_secret"
+    - GOOGLE_ANALYTICS_TRACKING_ID="UA-XXXXX-Y"
+    - SECRET_TOKEN="021a795ec4008ffc04d2bef8b819d4ae3ec5798c3a8ddb505d2cd9e8664350f9ae76355f43777c6e09d0790f180e0b846fb56806508eabfe7c676ef01f9c2850"
+    - NEW_RELIC_APP_NAME="MyGistsOnTravis"
+    - NEW_RELIC_LICENSE_KEY="new_relic_license_key"

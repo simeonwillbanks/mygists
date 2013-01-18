@@ -50,6 +50,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "rake", "~> 10.0.3"
   gem "database_cleaner", ">= 0.9.1"
   gem "email_spec", ">= 1.4.0"
   gem "shoulda-matchers", "~> 1.4.2"

@@ -1,5 +1,8 @@
-MyGists [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/simeonwillbanks/mygists)
+MyGists  
 ========================
+
+[![Travis CI](https://secure.travis-ci.org/simeonwillbanks/mygists.png?branch=master)](http://travis-ci.org/simeonwillbanks/mygists)  [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/simeonwillbanks/mygists)
+
 ## Organize Your Gists!
 Tag the description of your gists. Use My Gists for viewing gists by tag.
 
