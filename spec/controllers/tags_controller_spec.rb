@@ -16,37 +16,32 @@ describe TagsController do
     it_behaves_like "a profile"
 
     context "authenticated" do
-      before(:all) do
+      before(:each) do
         profile.gists << FactoryGirl.create_list(:gist, 3, profile: user.profile)
 
         profile.gists.each do |gist|
           profile.tag(gist, with: tag, on: :descriptions)
         end
+
+        sign_in user
+        get action, params
       end
 
       it "list items" do
-        sign_in user
-        get action, params
         profile.gists.each do |li|
           page.should have_content(li.description)
         end
       end
 
       it "items are public" do
-        sign_in user
-        get action, params
         page.should have_selector("i.icon-ok-sign", count: 3)
       end
 
       it "and are starred" do
-        sign_in user
-        get action, params
         page.should have_selector("i.icon-star", count: 3)
       end
 
       it "viewing another users gists by tag renders that users gists" do
-        sign_in user
-        get action, params
         page.should have_content(title)
 
         sign_in FactoryGirl.create(:user, profile: FactoryGirl.build(:profile, username: "another"))

@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-  before_filter :authenticate_user!
 
   load_resource :profile, singleton: true,
                           find_by: :username,
@@ -24,7 +23,7 @@ class TagsController < ApplicationController
                                private: can?(:read_private_tags, @profile)
   end
 
-  before_filter :refresh_gists, only: :index
+  before_filter :refresh_gists, only: :index, if: :user_signed_in?
 
   def index
     respond_to do |format|

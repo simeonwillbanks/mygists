@@ -80,7 +80,11 @@ module MyGists
 
       profile_option = options.delete(:profile)
       @profile = if profile_option.is_a?(String) && profile_option.present?
-                   Profile.find_by_username(profile_option)
+                   # When a profile search term exists, we only want to
+                   # perform a search if we find a Profile. If we don't find
+                   # a Profile, an empty Profile instance is used in the
+                   # scope, and no gists will be found.
+                   Profile.find_or_initialize_by_username(profile_option)
                  else
                    profile_option
                  end

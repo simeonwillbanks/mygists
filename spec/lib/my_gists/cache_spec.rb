@@ -7,7 +7,7 @@ describe MyGists::Cache do
 
   describe ".read" do
     it "fetches data from the cache, using the given key" do
-      Profile.stub(:usernames).and_return(username_array)
+      Rails.cache.should_receive(:fetch).with(key, race_condition_ttl: 10).once.and_return(username_array)
       described_class.read(key).should match_array(username_array)
     end
   end
