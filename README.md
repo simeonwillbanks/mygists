@@ -1,9 +1,11 @@
-MyGists {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/simeonwillbanks/mygists]
+MyGists [<img src="https://codeclimate.com/badge.png" />](https://codeclimate.com/github/simeonwillbanks/mygists) 
 ========================
 ## Organize Your Gists!
 Tag the description of your gists. Use My Gists for viewing gists by tag.
 
 [https://www.mygists.info](https://www.mygists.info)
+
+
 
 ## Contributing
 
