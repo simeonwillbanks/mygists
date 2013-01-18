@@ -9,6 +9,6 @@ module ProfileHelper
   #
   # Returns a String of the page title.
   def page_title
-    super(current_user.profile.username)
+    super(profile.username)
   end
 end

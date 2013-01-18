@@ -15,12 +15,21 @@ module ApplicationHelper
   #
   # Returns a Hash of navigation items.
   def navigation_items
-    {
-      my_profile: profile_path(current_user.profile),
-      search:     search_path,
-      help:       help_path,
-      sign_out:   destroy_user_session_path
-    }
+    if user_signed_in?
+      {
+        my_profile: profile_path(current_user.profile),
+        search:     search_path,
+        help:       help_path,
+        sign_out:   destroy_user_session_path
+      }
+    else
+      {
+        home:    root_path,
+        search:  search_path,
+        help:    help_path,
+        sign_in: user_omniauth_authorize_path(:github)
+      }
+    end
   end
 
   # Public: Determine whether or not the current navigation item matches the

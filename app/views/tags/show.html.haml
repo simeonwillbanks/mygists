@@ -12,9 +12,11 @@
     - if gists.empty?
       %p
         %strong= profile.username
-        has not created any gists tagged with
+        has not created any
+        %strong gists
+        tagged with
         = succeed "." do
-          %strong= current_tag
+          %strong.text-success= current_tag
     - else
       %dl#gists.dl-horizontal
         - gists.each do |gist|

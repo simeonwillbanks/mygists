@@ -5,7 +5,10 @@
 - if search?
   .row-fluid
     - if gists.empty?
-      %p Uh oh, no gists were found!
+      %p
+        Uh oh, no
+        %strong gists
+        were found!
     - else
       %dl#gists.dl-horizontal
         - gists.each do |gist|
