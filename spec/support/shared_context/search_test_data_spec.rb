@@ -12,6 +12,11 @@ shared_context "search test data" do
   let(:private_tag_decorated) { search_data.private_tag_decorated }
   let(:generic_tag_decorated) { search_data.generic_tag_decorated }
 
+  let(:public_gist) { search_data.public_gist }
+  let(:private_gist) { search_data.private_gist }
+  let(:generic_public_gist) { search_data.generic_public_gist }
+  let(:generic_private_gist) { search_data.generic_private_gist }
+
   let(:public_gist_decorated) { search_data.public_gist_decorated }
   let(:private_gist_decorated) { search_data.private_gist_decorated }
   let(:generic_public_gist_decorated) { search_data.generic_public_gist_decorated }

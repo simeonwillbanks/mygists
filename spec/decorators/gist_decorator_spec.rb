@@ -32,10 +32,17 @@ describe GistDecorator do
   end
 
   describe "#description" do
-    context "gist has a description" do
-      let(:description) { "Tag: Look at this gist" }
+    context "gist has a description without a tag" do
+      let(:description) { "Look at this gist" }
       let(:options) { { description: description } }
       it { decorator.description.should eq(description) }
+    end
+
+    context "gist has a description with a tag" do
+      let(:description) { "Look at this gist #tag" }
+      let(:description_with_html) { "Look at this gist <span class=\"text-success\">#tag</span>" }
+      let(:options) { { description: description } }
+      it { decorator.description.should eq(description_with_html) }
     end
 
     context "gist has no description" do

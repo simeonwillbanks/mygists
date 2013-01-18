@@ -47,7 +47,7 @@ class GistDecorator < Draper::Base
   # Public: The view needs a description to provide text for an anchor
   #         tag which links back to GitHub. Therefore, when a description is
   #         empty, a default should be used. Otherwise, use the gist's
-  #         description.
+  #         description. Also, we hightlight any tag text.
   #
   # Examples
   #
@@ -55,11 +55,28 @@ class GistDecorator < Draper::Base
   #   # => "Gist without a description"
   #
   #   description
-  #   # => "A gist about #Rails"
+  #   # => "A gist about <span class=\"text-success\">#Rails</span>"
   #
   # Returns the gist description String.
   def description
-    model.description? ? model.description : DEFAULT_DESCRIPTION
+    hightlight_tags(model.description? ? model.description : DEFAULT_DESCRIPTION)
+  end
+
+  private
+  # Internal: Hightlight gist description tags. Given a gist description,
+  #           search for all tags, and wrap the tags in HTML tag.
+  #
+  # Examples
+  #
+  #   hightlight_tags(description)
+  #   # => "Gist without a tag"
+  #
+  #   hightlight_tags(description)
+  #   # => "A gist about <span class=\"text-success\">#Rails</span>"
+  #
+  # Returns the description String.
+  def hightlight_tags(description)
+    description.gsub(/(#[^\s]+)/) { |m| "<span class=\"text-success\">#{m}</span>" }.html_safe
   end
 
   # Accessing Helpers

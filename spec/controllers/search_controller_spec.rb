@@ -29,22 +29,26 @@ describe SearchController do
       it "finds public and not private gists by profile" do
         sign_in user
         get :index, profile: profile.username
-        page.should have_content(public_gist_decorated.description)
-        page.should_not have_content(private_gist_decorated.description)
+        page.should have_content(public_gist.description)
+        page.should_not have_content(private_gist.description)
       end
 
       it "finds public and not private gists by tag" do
         sign_in user
         get :index, tag: public_tag_name
-        page.should have_content(public_gist_decorated.description)
-        page.should_not have_content(private_gist_decorated.description)
+        page.should have_content(public_gist.description)
+        page.should have_css("span.text-success", text: public_tag_decorated.name,
+                                                  count: 1)
+        page.should_not have_content(private_gist.description)
       end
 
       it "finds public and not private gists by tag and profile" do
         sign_in user
         get :index, tag: generic_tag_name, profile: profile.username
-        page.should have_content(generic_public_gist_decorated.description)
-        page.should_not have_content(private_gist_decorated.description)
+        page.should have_css("span.text-success", text: generic_tag_decorated.name,
+                                                  count: 1)
+        page.should have_content(generic_public_gist.description)
+        page.should_not have_content(private_gist.description)
       end
     end
 

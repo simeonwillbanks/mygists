@@ -25,8 +25,8 @@ class SearchTestData
   end
 
   def generate_generic
-    @generic_public_gist = FactoryGirl.create(:gist, :public, profile: profile, tags: [generic_tag]).decorate
-    @generic_private_gist = FactoryGirl.create(:gist, :private, profile: profile, tags: [generic_tag]).decorate
+    @generic_public_gist = FactoryGirl.create(:gist, :public, profile: profile, tags: [generic_tag])
+    @generic_private_gist = FactoryGirl.create(:gist, :private, profile: profile, tags: [generic_tag])
   end
 
   def private_tag_name
