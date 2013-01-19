@@ -69,9 +69,21 @@ describe ApplicationHelper do
       end
     end
 
-    context "tags page" do
+    context "profile tags page" do
       it "should be tag | username | My Gists" do
         helper.page_title("rails", "simeonwillbanks").should eq("rails | simeonwillbanks | My Gists")
+      end
+    end
+
+    context "tags page" do
+      it "should be Tags | My Gists" do
+        helper.page_title(*["Tags"]).should eq("Tags | My Gists")
+      end
+    end
+
+    context "tags show page" do
+      it "should be tag | Tags | My Gists" do
+        helper.page_title(*["tag", "Tags"]).should eq("tag | Tags | My Gists")
       end
     end
   end

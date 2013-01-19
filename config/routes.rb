@@ -16,19 +16,29 @@ MyGists::Application.routes.draw do
                 controller: :help,
                 action: :index
 
+  match "tags/:slug", as: :tag,
+                      via: :get,
+                      controller: :tags,
+                      action: :show
+
+  match "tags", as: :tags,
+                via: :get,
+                controller: :tags,
+                action: :index
+
   match ":username", as: :profile,
                      via: :get,
                      controller: :profile,
                      action: :show
 
-  match ":username/tags/:slug", as: :tag,
+  match ":username/tags/:slug", as: :profile_tag,
                                 via: :get,
-                                controller: :tags,
+                                controller: "profile/tags",
                                 action: :show
 
-  match ":username/tags", as: :tags,
+  match ":username/tags", as: :profile_tags,
                           via: :get,
-                          controller: :tags,
+                          controller: "profile/tags",
                           action: :index
 
   root :to => "home#index"
