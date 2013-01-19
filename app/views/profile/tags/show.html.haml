@@ -1,0 +1,26 @@
+.row-fluid
+  .span2
+    = profile.gravatar
+  #header.span10
+    %h3
+      = link_to profile.username, profile_path(profile)
+      %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
+        = succeed ":" do
+          tags
+      %span.text-success
+        = current_tag
+    - if gists.empty?
+      %p
+        %strong= profile.username
+        has not created any
+        %strong gists
+        tagged with
+        = succeed "." do
+          %strong.text-success= current_tag
+    - else
+      %dl#gists.dl-horizontal
+        - gists.each do |gist|
+          %dt= gist.icons
+          %dd= link_to gist.description, gist.url, target: "_blank"
+      .pagination.pagination-mini
+        = will_paginate gists
