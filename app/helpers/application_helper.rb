@@ -18,6 +18,7 @@ module ApplicationHelper
     if user_signed_in?
       {
         my_profile: profile_path(current_user.profile),
+        tags:       tags_path,
         search:     search_path,
         help:       help_path,
         sign_out:   destroy_user_session_path
@@ -25,6 +26,7 @@ module ApplicationHelper
     else
       {
         home:    root_path,
+        tags:    tags_path,
         search:  search_path,
         help:    help_path,
         sign_in: user_omniauth_authorize_path(:github)
@@ -40,6 +42,8 @@ module ApplicationHelper
     case key
     when :my_profile
       current_user.profile.username == params[:username]
+    when :tags
+      request.path =~ /\A\/tags/
     else
       controller_name.to_sym == key
     end

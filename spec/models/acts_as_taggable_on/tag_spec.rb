@@ -41,8 +41,22 @@ describe ActsAsTaggableOn::Tag do
       end
       subject(:scope) { ActsAsTaggableOn::Tag.public_names }
 
-      it "gets usernames" do
+      it "gets names" do
         expect(scope).to match_array(["rails"])
+      end
+    end
+
+    describe ".public_tags" do
+      before(:each) do
+        profile = FactoryGirl.create(:user).profile
+        FactoryGirl.create(:gist, :public, tags: ["rails"], profile: profile)
+        FactoryGirl.create(:gist, :private, tags: ["secret"], profile: profile)
+      end
+      subject(:scope) { ActsAsTaggableOn::Tag.public_tags }
+      let(:rails) { ActsAsTaggableOn::Tag.find_by_name("rails") }
+
+      it "gets tags" do
+        expect(scope).to match_array([rails])
       end
     end
   end

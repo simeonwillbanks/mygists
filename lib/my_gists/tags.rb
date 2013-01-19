@@ -21,7 +21,7 @@ module MyGists
     #   MyGists::Tags.for(gist)
     #   # => ["Rails", "Ruby"]
     #
-    # Returns An array of extracted String tags.
+    # Returns an array of extracted String tags.
     def self.for(gist)
       new(gist) do
         return tags
@@ -54,7 +54,7 @@ module MyGists
     #   tags
     #   # => ["Without Tags"]
     #
-    # Returns An array of extracted String tags.
+    # Returns an array of extracted String tags.
     def tags
       tags = []
 

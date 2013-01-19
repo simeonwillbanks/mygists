@@ -1,53 +1,48 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe TagsController do
   render_views
 
   let(:page) { Capybara::Node::Simple.new(response.body) }
-  let(:action) { "show" }
   let(:user) { FactoryGirl.create(:user) }
   let(:profile) { user.profile.decorate }
-  let(:username) { profile.username }
-  let(:params) { { username: username, slug: tag.slug } }
-  let(:title) { "#{username} tags: ##{tag}" }
   let(:tag) { FactoryGirl.create(:tag) }
 
+  before(:each) do
+    profile.gists << FactoryGirl.create(:gist, profile: user.profile)
+
+    profile.gists.each do |gist|
+      profile.tag(gist, with: tag, on: "public")
+    end
+  end
+
+  describe "GET 'index'" do
+
+    before(:each) { get :index }
+
+    it "has tag" do
+      page.should have_content(tag.name)
+    end
+
+    it "tags menu item" do
+      page.should have_css(".nav .active a", text: "Tags", count: 1)
+    end
+  end
+
   describe "GET 'show'" do
-    it_behaves_like "a profile"
 
-    context "authenticated" do
-      before(:each) do
-        profile.gists << FactoryGirl.create_list(:gist, 3, profile: user.profile)
+    before(:each) { get :show, slug: tag.slug }
 
-        profile.gists.each do |gist|
-          profile.tag(gist, with: tag, on: :descriptions)
-        end
+    it "has tag" do
+      page.should have_content(tag.name)
+    end
 
-        sign_in user
-        get action, params
-      end
+    it "tags menu item" do
+      page.should have_css(".nav .active a", text: "Tags", count: 1)
+    end
 
-      it "list items" do
-        profile.gists.each do |li|
-          page.should have_content(li.description)
-        end
-      end
-
-      it "items are public" do
-        page.should have_selector("i.icon-ok-sign", count: 3)
-      end
-
-      it "and are starred" do
-        page.should have_selector("i.icon-star", count: 3)
-      end
-
-      it "viewing another users gists by tag renders that users gists" do
-        page.should have_content(title)
-
-        sign_in FactoryGirl.create(:user, profile: FactoryGirl.build(:profile, username: "another"))
-        get action, params
-        page.should have_content(title)
-      end
+    it "has gist" do
+      page.should have_content(profile.gists.first.description)
     end
   end
 end

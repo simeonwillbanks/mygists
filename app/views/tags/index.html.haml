@@ -1,26 +1,7 @@
-- if tags.empty?
-  - if can? :refresh_gists, profile
-    %p
-      Wait, you don't have any
-      = succeed "?" do
-        %strong gists
-    %p
-      Go
-      = link_to "create", github.gist_page, target: "_blank"
-      and
-      %strong
-        = link_to "#tag", help_path
-      some
-      = succeed "!" do
-        %strong gists
-  - else
-    %p
-      %strong= profile.username
-      has not created any
-      = succeed "." do
-        %strong gists
-- else
+#tags.row-fluid
   %ul.inline
     - tags.each do |a_tag|
       %li
-        = link_to a_tag, tag_path(profile, a_tag), class: a_tag.classname
+        = link_to a_tag, tag_path(a_tag), class: a_tag.classname
+  .pagination.pagination-mini
+    = will_paginate tags

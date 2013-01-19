@@ -1,16 +1,10 @@
 // Extend search <body.search> form inputs <input.input-xlarge> as large as
-// possible within their container. Force gist owner profile username links
-// font color to be black.
+// possible within their container.
 //
 // No styleguide reference.
 .search {
   .input-xlarge {
     width: 280px;
     margin-right: 16px;
-  }
-  .username {
-    a {
-      color: inherit;
-    }
   }
 }

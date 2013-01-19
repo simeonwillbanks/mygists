@@ -1,15 +1,19 @@
 module TagsHelper
 
-  # Public: Builds HTML title tag text from current tag and profile username
-  #         for tags views.
+  # Public: Builds HTML title tag text from current tag and "Tags".
   #
   # Examples
   #
   #   page_title
-  #   # => "Rails | simeonwillbanks | My Gists"
+  #   # => "Tags | My Gists"
+  #
+  #   page_title
+  #   # => "Rails | Tags | My Gists"
   #
   # Returns a String of the page title.
   def page_title
-    super(current_tag.name, profile.username)
+    args = ["Tags"]
+    args.prepend(current_tag.name) if current_tag
+    super(*args)
   end
 end
