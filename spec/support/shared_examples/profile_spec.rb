@@ -10,6 +10,10 @@ shared_examples "a profile" do
       page.should have_link("Home", count: 1)
     end
 
+    it "tags menu item" do
+      page.should have_link("Tags", count: 1)
+    end
+
     it "search menu item" do
       page.should have_link("Search", count: 1)
     end

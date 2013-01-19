@@ -2,7 +2,7 @@ require "spec_helper"
 
 feature "Profile fetches gists" do
   before(:each) do
-    TagsController.any_instance.stub(:refresh_gists).and_return(true)
+    Profile::TagsController.any_instance.stub(:refresh_gists).and_return(true)
   end
 
   context "success" do
@@ -15,7 +15,7 @@ feature "Profile fetches gists" do
 
   context "failure" do
     scenario "should alert user of failure", js: true do
-      TagsController.any_instance.stub(:index).and_raise(Exception)
+      Profile::TagsController.any_instance.stub(:index).and_raise(Exception)
       visit root_path
       click_on "Sign in with GitHub"
       page.should have_content("An error has occurred, and an administrator notified.")

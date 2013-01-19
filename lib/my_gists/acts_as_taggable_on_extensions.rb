@@ -51,6 +51,19 @@ module MyGists
         select(select_clause).joins(:taggings).only_public.map(&:name)
       end
 
+      # Public: Find all public tags.
+      #
+      # Examples
+      #
+      #   public_tags
+      #   # => [#<ActsAsTaggableOn::Tag id: 1, name: "rails", slug: "rails">]
+      #
+      # Returns an ActiveRecord::Relation of tags.
+      def self.public_tags
+        select_clause = "DISTINCT(\"tags\".\"slug\"), \"tags\".*"
+        select(select_clause).joins(:taggings).only_public
+      end
+
       # Public: Find a tag by its name.
       #
       # name - The String tag name.
@@ -96,7 +109,7 @@ module MyGists
       #   default?
       #   # => false
       #
-      # Returns A TrueClass or FalseClass.
+      # Returns a TrueClass or FalseClass.
       def default?
         name == DEFAULT
       end

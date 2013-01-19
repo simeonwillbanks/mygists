@@ -22,7 +22,7 @@ module MyGists
     #   MyGists::Fetch::Options.hash(profile)
     #   # => { username: "foo", token: "7bfdda", since: nil }
     #
-    # Returns An options Hash.
+    # Returns an options Hash.
     def self.hash(profile)
       new(profile).to_hash
     end
@@ -45,7 +45,7 @@ module MyGists
     #   to_hash
     #   # => { username: "foo", token: "7bfdda", since: nil }
     #
-    # Returns An options Hash.
+    # Returns an options Hash.
     def to_hash
       {
         username: profile.username,
@@ -68,7 +68,7 @@ module MyGists
     #   since
     #   # => nil
     #
-    # Returns A String timestamp or NilClass.
+    # Returns a String timestamp or NilClass.
     def since
       gist = Gist.last_touched_for(profile.id)
 
