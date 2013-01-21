@@ -1,18 +1,25 @@
 = render "help/example"
 %hr
-#gists
-  .row-fluid
-    .span1
-      %i.icon-ok-sign
-    .span11
-      Public gist
-  .row-fluid
-    .span1
-      %i.icon-lock
-    .span11
-      Private gist
-  .row-fluid
-    .span1
-      %i.icon-star
-    .span11
-      Starred gist
+%dl#gists.dl-horizontal
+  %dt
+    %i.icon-github
+  %dd
+    Link to
+    %strong gist
+    on
+    = link_to "GitHub", github.home_page
+  %dt
+    %i.icon-ok-sign
+  %dd
+    Public
+    %strong gist
+  %dt
+    %i.icon-lock
+  %dd
+    Secret
+    %strong gist
+  %dt
+    %i.icon-star
+  %dd
+    Starred
+    %strong gist

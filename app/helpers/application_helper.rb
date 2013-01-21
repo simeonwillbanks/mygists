@@ -7,6 +7,36 @@
 #         super.
 module ApplicationHelper
 
+  # Public: By default, all requests are not considered a profile. This method
+  #         can be overridden by classes like ProfileHelper.
+  #
+  # Returns a FalseClass.
+  def profile?
+    false
+  end
+
+  # Public: Within the correct context, build a tag path which matches the
+  #         given slug.
+  #
+  # options - The Hash of param options for a specific Tag.
+  #
+  # Examples
+  #
+  #   tag_path(slug: "rails")
+  #   # => "/tags/rails"
+  #
+  #   tag_path(slug: "rails")
+  #   # => "/simeonwillbanks/tags/rails"
+  #
+  # Returns a String of the page title.
+  def tag_path(options)
+    if profile?
+      profile_tag_path(profile, options)
+    else
+      super(options)
+    end
+  end
+
   # Public: A hash of navigation items for the main navigation partial. The
   #         keys are the anchor text, and the values are the anchor href.
   #         A current controller helper can overload .navigation_items to
@@ -126,5 +156,25 @@ module ApplicationHelper
     # The scope for the custom variable. 2 is session-level.
     scope = 2
     [GA::Events::SetCustomVar.new(index, name, value, scope)]
+  end
+
+  # Public: Find and memoize the slug for a hashtag.
+  #
+  # slug - The String slug for a specific Tag.
+  #
+  # Examples
+  #
+  #   hashtag_to_slug("#Rails")
+  #   # => "rails"
+  #
+  # Returns a String of the Tag's slug.
+  def hashtag_to_slug(hashtag)
+    @memoized_slugs ||= {}
+
+    unless @memoized_slugs[hashtag].present?
+      @memoized_slugs[hashtag] = MyGists::Cache::Tags::Helper.slug_from_hashtag(hashtag)
+    end
+
+    @memoized_slugs[hashtag]
   end
 end

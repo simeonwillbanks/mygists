@@ -24,10 +24,13 @@
 //
 // No styleguide reference.
 .dl-horizontal {
+  dt, dd {
+    margin-top: 5px;
+  }
   dt {
-    width: 32px;
+    width: 52px;
   }
   dd {
-    margin-left: 42px;
+    margin-left: 62px;
   }
 }

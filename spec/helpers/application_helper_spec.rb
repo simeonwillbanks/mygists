@@ -90,10 +90,47 @@ describe ApplicationHelper do
 
   describe ".github" do
     subject(:github) { helper.github }
+
     it { github.home_page.should eq("https://github.com") }
     it { github.gist_page.should eq("https://gist.github.com") }
     it { github.my_gists_page.should eq("https://github.com/simeonwillbanks/mygists") }
     it { github.simeon_page.should eq("https://github.com/simeonwillbanks") }
     it { github.profile_page("simeonwillbanks").should eq("https://github.com/simeonwillbanks") }
+  end
+
+  describe ".hashtag_to_slug" do
+    subject(:hashtag_to_slug) { helper.hashtag_to_slug("#Rails") }
+
+    context "slug is found" do
+      let(:slug) { "rails" }
+
+      before(:each) { MyGists::Cache::Tags::Helper.stub(:slug_from_hashtag).and_return(slug) }
+
+      it { should eq(slug) }
+    end
+
+    context "slug is not found" do
+
+      before(:each) { MyGists::Cache::Tags::Helper.stub(:slug_from_hashtag).and_return(nil) }
+
+      it { should be_nil }
+    end
+  end
+
+  describe ".tag_path" do
+    subject(:tag_path) { helper.tag_path(slug: "rails") }
+
+    it { should eq("/tags/rails") }
+
+    context "within a profile request" do
+      let(:profile) { FactoryGirl.build_stubbed(:user).profile }
+
+      it "builds a path to the profiles tags" do
+        helper.should_receive(:profile?).and_return(true)
+        helper.should_receive(:profile).and_return(profile)
+
+        tag_path.should eq("/simeonwillbanks/tags/rails")
+      end
+    end
   end
 end

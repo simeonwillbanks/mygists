@@ -13,7 +13,7 @@ describe SearchHelper do
   let(:params_nil) { { } }
 
   let(:profile_link) { "<a href=\"/#{profile}\">#{profile}</a>" }
-  let(:hash_tag) { "##{tag}" }
+  let(:hashtag) { "##{tag}" }
 
   context "user visits search page by clicking 'Search' in the navigation" do
     before(:each) { helper.stub(:params).and_return(params_nil) }
@@ -101,9 +101,9 @@ describe SearchHelper do
       it { should be_true }
     end
 
-    describe ".search_hash_tag" do
-      subject { helper.search_hash_tag }
-      it { should eq(hash_tag) }
+    describe ".search_hashtag" do
+      subject { helper.search_hashtag }
+      it { should eq(hashtag) }
     end
   end
 
@@ -169,9 +169,9 @@ describe SearchHelper do
       it { should be_true }
     end
 
-    describe ".search_hash_tag" do
-      subject { helper.search_hash_tag }
-      it { should eq(hash_tag) }
+    describe ".search_hashtag" do
+      subject { helper.search_hashtag }
+      it { should eq(hashtag) }
     end
 
     describe ".search_profile_link" do
