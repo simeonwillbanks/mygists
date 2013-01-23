@@ -19,14 +19,20 @@ class SearchTestData
     @private_tag = FactoryGirl.create(:tag, name: private_tag_name)
     @generic_tag = FactoryGirl.create(:tag, name: generic_tag_name)
     @public_gist = FactoryGirl.create(:gist, :public, profile: profile,
-                                                      tags: [public_tag])
+                                                      description: public_gist_description,
+                                                      tags: [public_tag_name])
     @private_gist = FactoryGirl.create(:gist, :private, profile: profile,
-                                                        tags: [private_tag])
+                                                        description: private_gist_description,
+                                                        tags: [private_tag_name])
   end
 
   def generate_generic
-    @generic_public_gist = FactoryGirl.create(:gist, :public, profile: profile, tags: [generic_tag])
-    @generic_private_gist = FactoryGirl.create(:gist, :private, profile: profile, tags: [generic_tag])
+    @generic_public_gist = FactoryGirl.create(:gist, :public, profile: profile,
+                                                              description: generic_gist_description,
+                                                              tags: [generic_tag_name])
+    @generic_private_gist = FactoryGirl.create(:gist, :private, profile: profile,
+                                                                description: generic_gist_description,
+                                                                tags: [generic_tag_name])
   end
 
   def private_tag_name
@@ -67,5 +73,17 @@ class SearchTestData
 
   def generic_private_gist_decorated
     generic_private_gist.decorate
+  end
+
+  def public_gist_description
+    "##{public_tag_name} Gist Title"
+  end
+
+  def private_gist_description
+    "##{private_tag_name} Gist Title"
+  end
+
+  def generic_gist_description
+    "##{generic_tag_name} Gist Title"
   end
 end

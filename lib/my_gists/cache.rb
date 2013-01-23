@@ -76,12 +76,9 @@ module MyGists
     # Returns the data for the cache.
     # Raises MyGists::Cache::InvalidCacheKey if source data is not found.
     def self.source(key)
-      case key
-      when :profiles
-        Profile.usernames
-      when :tags
-        ActsAsTaggableOn::Tag.public_names
-      else
+      begin
+        "MyGists::Cache::#{key.to_s.camelize}".constantize.data
+      rescue NameError
         raise InvalidCacheKey
       end
     end

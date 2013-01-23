@@ -66,12 +66,12 @@ module MyGists
 
     # Public: Initialize a Search.
     #
-    # options -  The Hash options used to refine the search:
-    #            :tag     - Tag or String of tag name (optional).
-    #            :page    - Integer for page of collection (optional).
-    #            :profile - Profile who owns resources (optional).
-    #            :private - TrueClass or FalseClass used to exclude private
-    #                       resources from search results (optional).
+    # options - The Hash options used to refine the search:
+    #           :tag     - Tag or String of tag name (optional).
+    #           :page    - Integer for page of collection (optional).
+    #           :profile - Profile who owns resources (optional).
+    #           :private - TrueClass or FalseClass used to exclude private
+    #                      resources from search results (optional).
     #
     # Yields within context of self.
     def initialize(options, &block)

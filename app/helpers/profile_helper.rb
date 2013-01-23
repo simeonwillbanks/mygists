@@ -1,5 +1,14 @@
 module ProfileHelper
 
+  # Public: By default, all requests are not considered a profile. However,
+  #         the ProfileHelper is mixed into profile requests, so we override
+  #         the ApplicationHelper.profile? definition.
+  #
+  # Returns a TrueClass.
+  def profile?
+    true
+  end
+
   # Public: Builds HTML title tag text from the profile username.
   #
   # Examples

@@ -4,8 +4,6 @@ describe SearchController do
   render_views
 
   let(:page) { Capybara::Node::Simple.new(response.body) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:profile) { user.profile.decorate }
 
   describe "GET 'index'" do
 
@@ -38,7 +36,7 @@ describe SearchController do
         get :index, tag: public_tag_name
         page.should have_content(public_gist.description)
         page.should have_css("span.text-success", text: public_tag_decorated.name,
-                                                  count: 1)
+                                                  count: 2)
         page.should_not have_content(private_gist.description)
       end
 
@@ -46,14 +44,17 @@ describe SearchController do
         sign_in user
         get :index, tag: generic_tag_name, profile: profile.username
         page.should have_css("span.text-success", text: generic_tag_decorated.name,
-                                                  count: 1)
+                                                  count: 2)
         page.should have_content(generic_public_gist.description)
         page.should_not have_content(private_gist.description)
       end
     end
 
     context "unauthenticated" do
-      it "redirects to home page" do
+
+      include_context "search test data"
+
+      it "should be a success" do
         get :index
         response.should be_success
       end

@@ -6,7 +6,7 @@
   .row-fluid
     - if gists.empty?
       %p
-        Uh oh, no
+        Uh oh, no public
         %strong gists
         were found!
     - else
@@ -18,6 +18,6 @@
               %strong.username
                 = succeed ":" do
                   = link_to gist.profile.username, profile_path(gist.profile)
-            = link_to gist.description, gist.url, target: "_blank"
+            = gist.description
       .pagination.pagination-mini
         = will_paginate gists

@@ -26,31 +26,6 @@ module MyGists
       # Public: Find tagged objects within the 'public' context.
       scope :only_public, where("\"taggings\".\"context\" = '#{CONTEXT_PUBLIC}'")
 
-      # Public: Find all tag names.
-      #
-      # Examples
-      #
-      #   names
-      #   # => ["rails", "secret tag"]
-      #
-      # Returns an Array of tag names.
-      def self.names
-        pluck(:name)
-      end
-
-      # Public: Find all public tag names.
-      #
-      # Examples
-      #
-      #   names
-      #   # => ["rails"]
-      #
-      # Returns an Array of tag names.
-      def self.public_names
-        select_clause = "DISTINCT(\"tags\".\"slug\"), \"tags\".\"name\""
-        select(select_clause).joins(:taggings).only_public.map(&:name)
-      end
-
       # Public: Find all public tags.
       #
       # Examples
@@ -62,6 +37,18 @@ module MyGists
       def self.public_tags
         select_clause = "DISTINCT(\"tags\".\"slug\"), \"tags\".*"
         select(select_clause).joins(:taggings).only_public
+      end
+
+      # Public: Find all tags whose ids are not in the given list.
+      #
+      # Examples
+      #
+      #   not_in([1,2])
+      #   # => [#<ActsAsTaggableOn::Tag id: 3, name: "rails", slug: "rails">]
+      #
+      # Returns an ActiveRecord::Relation of tags.
+      def self.not_in(ids)
+        where("id NOT IN (?)", ids)
       end
 
       # Public: Find a tag by its name.
