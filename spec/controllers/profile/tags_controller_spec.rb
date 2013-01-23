@@ -10,18 +10,27 @@ describe Profile::TagsController do
   let(:username) { profile.username }
   let(:params) { { username: username, slug: tag.slug } }
   let(:title) { "#{username} tags: ##{tag}" }
+  let(:public_state) { true }
   let(:tag) { FactoryGirl.create(:tag) }
+  let(:tags_cache) do
+    {
+      MyGists::Cache::Tags.key(tag.name) => { name: tag.name,
+                                              slug: tag.slug,
+                                              public: public_state }
+    }
+  end
 
   describe "GET 'show'" do
+
     it_behaves_like "a profile"
 
     context "authenticated" do
       before(:each) do
-        profile.gists << FactoryGirl.create_list(:gist, 3, profile: user.profile)
+        FactoryGirl.create_list(:gist, 3, tags: [tag.name],
+                                          public: public_state,
+                                          profile: user.profile)
 
-        profile.gists.each do |gist|
-          profile.tag(gist, with: tag, on: "public")
-        end
+        MyGists::Cache.should_receive(:read).at_most(:twice).with(:tags).and_return(tags_cache)
 
         sign_in user
         get action, params
@@ -46,6 +55,7 @@ describe Profile::TagsController do
 
         sign_in FactoryGirl.create(:user, profile: FactoryGirl.build(:profile, username: "another"))
         get action, params
+
         page.should have_content(title)
       end
     end

@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 
-  expose(:tags) { MyGists::Cache.read(:tags) }
-  expose(:profiles) { MyGists::Cache.read(:profiles) }
+  expose(:tags) { MyGists::Search::Terms.tags }
+  expose(:profiles) { MyGists::Search::Terms.profiles }
 
   expose(:gists) { @gists }
 

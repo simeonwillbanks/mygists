@@ -6,14 +6,20 @@ describe TagsController do
   let(:page) { Capybara::Node::Simple.new(response.body) }
   let(:user) { FactoryGirl.create(:user) }
   let(:profile) { user.profile.decorate }
+  let(:public_state) { true }
   let(:tag) { FactoryGirl.create(:tag) }
+  let(:tags_cache) do
+    {
+      MyGists::Cache::Tags.key(tag.name) => { name: tag.name,
+                                              slug: tag.slug,
+                                              public: public_state }
+    }
+  end
 
   before(:each) do
-    profile.gists << FactoryGirl.create(:gist, profile: user.profile)
-
-    profile.gists.each do |gist|
-      profile.tag(gist, with: tag, on: "public")
-    end
+    FactoryGirl.create(:gist, tags: [tag.name],
+                              public: public_state,
+                              profile: user.profile)
   end
 
   describe "GET 'index'" do
@@ -31,7 +37,11 @@ describe TagsController do
 
   describe "GET 'show'" do
 
-    before(:each) { get :show, slug: tag.slug }
+    before(:each) do
+      MyGists::Cache.should_receive(:read).once.with(:tags).and_return(tags_cache)
+
+      get :show, slug: tag.slug
+    end
 
     it "has tag" do
       page.should have_content(tag.name)

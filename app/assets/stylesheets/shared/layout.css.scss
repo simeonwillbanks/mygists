@@ -42,15 +42,6 @@ body {
   }
 }
 
-// Force gist owner profile username links font color to be black.
-//
-// No styleguide reference.
-.username {
-  a {
-    color: inherit;
-  }
-}
-
 // Profile and Search section header styles for header text and anchors.
 //
 // No styleguide reference.
@@ -63,31 +54,6 @@ body {
     > a:hover {
       text-decoration: none;
       color: #999999;
-    }
-  }
-}
-
-// Definition list styles for anywhere gists are listed. Provide a bit of
-// spacing between gist icons.
-//
-// No styleguide reference.
-#gists {
-  dt {
-    i:last-child {
-      margin-left: 3px;
-    }
-  }
-}
-
-// Tags unordered list styles to render the tags list items next to each other.
-//
-// No styleguide reference.
-#tags {
-  ul.inline {
-    margin: 0;
-    > li {
-      display: inline-block;
-      padding: 10px 5px 0 0;
     }
   }
 }

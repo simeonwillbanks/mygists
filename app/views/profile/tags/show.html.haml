@@ -21,6 +21,6 @@
       %dl#gists.dl-horizontal
         - gists.each do |gist|
           %dt= gist.icons
-          %dd= link_to gist.description, gist.url, target: "_blank"
+          %dd= gist.description
       .pagination.pagination-mini
         = will_paginate gists

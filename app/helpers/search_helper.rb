@@ -56,11 +56,11 @@ module SearchHelper
   #
   # Examples
   #
-  #   search_hash_tag
+  #   search_hashtag
   #   # => "#rails"
   #
   # Returns a String of hashtag.
-  def search_hash_tag
+  def search_hashtag
     "##{tag_search_term}"
   end
 

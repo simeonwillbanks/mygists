@@ -23,29 +23,6 @@ describe ActsAsTaggableOn::Tag do
       end
     end
 
-    describe ".names" do
-      let(:name) { "rails" }
-      let!(:by_name) { FactoryGirl.create(:tag, name: name) }
-      subject(:tag) { ActsAsTaggableOn::Tag.names }
-
-      it "gets all tag names" do
-        expect(tag).to match_array([name])
-      end
-    end
-
-    describe ".public_names" do
-      before(:each) do
-        profile = FactoryGirl.create(:user).profile
-        FactoryGirl.create(:gist, :public, tags: ["rails"], profile: profile)
-        FactoryGirl.create(:gist, :private, tags: ["secret"], profile: profile)
-      end
-      subject(:scope) { ActsAsTaggableOn::Tag.public_names }
-
-      it "gets names" do
-        expect(scope).to match_array(["rails"])
-      end
-    end
-
     describe ".public_tags" do
       before(:each) do
         profile = FactoryGirl.create(:user).profile
@@ -57,6 +34,16 @@ describe ActsAsTaggableOn::Tag do
 
       it "gets tags" do
         expect(scope).to match_array([rails])
+      end
+    end
+
+    describe ".not_in" do
+      let!(:tag1) { FactoryGirl.create(:tag) }
+      let!(:tag2) { FactoryGirl.create(:tag) }
+      subject(:tag) { ActsAsTaggableOn::Tag.not_in([tag1.id]) }
+
+      it "gets tag by name" do
+        expect(tag).to match_array([tag2])
       end
     end
   end

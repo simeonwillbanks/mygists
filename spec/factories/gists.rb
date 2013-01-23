@@ -22,6 +22,7 @@ FactoryGirl.define do
 
     after(:create) do |gist, evaluator|
       context = gist.public? ? "public" : "private"
+      gist.description = "##{evaluator.tags.join(" #")} Gist Title"
       gist.profile.tag(gist, with: evaluator.tags, on: context)
     end
   end
