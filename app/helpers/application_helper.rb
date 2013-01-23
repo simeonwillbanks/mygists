@@ -8,7 +8,7 @@
 module ApplicationHelper
 
   # Public: By default, all requests are not considered a profile. This method
-  #         can be overridden by classes like ProfileHelper.
+  #         can be overridden by modules like ProfileHelper.
   #
   # Returns a FalseClass.
   def profile?

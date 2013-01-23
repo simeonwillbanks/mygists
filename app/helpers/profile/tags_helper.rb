@@ -2,7 +2,7 @@ module Profile::TagsHelper
 
   # Public: By default, all requests are not considered a profile. However,
   #         the Profile::TagsHelper is mixed into profile requests, so we
-  #         override the method definition in ApplicationHelper.
+  #         override the ApplicationHelper.profile? definition.
   #
   # Returns a TrueClass.
   def profile?

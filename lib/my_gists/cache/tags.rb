@@ -7,15 +7,15 @@ module MyGists
   #   MyGists::Cache::Tags.data
   class Cache::Tags
 
-    # Public: Data for tags cache which is all Tags with status and slug.
+    # Public: Data for tags cache which is all Tags with name, slug and status.
     #
     # Examples
     #
     #   MyGists::Cache::Tags.data
-    #   # => {"ActiveRecord"=>{:slug=>"activerecord", :public=>true}}
+    #   # => {"activerecord"=>{:name=>"ActiveRecord", :slug=>"activerecord", :public=>true}}
     #
     #   MyGists::Cache::Tags.data
-    #   # => {"diff"=>{:slug=>"diff", :public=>false}}
+    #   # => {"diff"=>{:name=>"diff", :slug=>"diff", :public=>false}}
     #
     # Returns a Hash of all Tags.
     def self.data
@@ -95,7 +95,7 @@ module MyGists
     #
     # name   - The String of the tag name.
     # slug   - The String of the tag slug.
-    # status - The TrueClass or FalseClass or the tag status.
+    # status - The TrueClass or FalseClass of the tag status.
     #
     # Examples
     #
@@ -104,6 +104,7 @@ module MyGists
     #
     # Returns the Hash data container.
     def meta(name, slug, status)
+      { name: name, slug: slug, public: status }
       # TODO
       # Use MyGists::Cache::Tags::Meta.
       # When the cache is fetched, an error is thrown:
@@ -111,7 +112,6 @@ module MyGists
       # The class is not being autoloaded.
       # A fix has been accepted, but it has not been released.
       # See https://github.com/rails/rails/issues/8167
-      { name: name, slug: slug, public: status }
       # MyGists::Cache::Tags::Meta.new(name, slug, status)
     end
   end

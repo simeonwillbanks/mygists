@@ -71,7 +71,7 @@ module MyGists
     #           :page    - Integer for page of collection (optional).
     #           :profile - Profile who owns resources (optional).
     #           :private - TrueClass or FalseClass used to exclude private
-    #                       resources from search results (optional).
+    #                      resources from search results (optional).
     #
     # Yields within context of self.
     def initialize(options, &block)

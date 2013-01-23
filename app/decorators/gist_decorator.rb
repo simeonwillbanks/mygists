@@ -71,7 +71,7 @@ class GistDecorator < Draper::Base
   private
   # Internal: Linkify gist description tags. Given a gist description,
   #           search for all tags, and wrap the tags in a HTML anchor and
-  #           highlighting tag unless the found tag does not have a slug.
+  #           highlight tag unless the found tag does not have a slug.
   #
   # Examples
   #

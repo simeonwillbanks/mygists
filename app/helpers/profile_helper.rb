@@ -2,7 +2,7 @@ module ProfileHelper
 
   # Public: By default, all requests are not considered a profile. However,
   #         the ProfileHelper is mixed into profile requests, so we override
-  #         the method definition in ApplicationHelper.
+  #         the ApplicationHelper.profile? definition.
   #
   # Returns a TrueClass.
   def profile?
