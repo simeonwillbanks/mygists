@@ -32,6 +32,9 @@ module MyGists
 
     include Enumerable
 
+    # Public: Expose WillPaginate API from scope.
+    delegate :current_page, :per_page, :offset, :total_entries, :total_pages, to: :scope
+
     class << self
       # Internal: Only Search.for can initialize a new Search.
       protected :new
@@ -101,20 +104,6 @@ module MyGists
     # Yields a decorated resource.
     def each(&block)
       scope.each { |resource| block.call(resource.decorate) }
-    end
-
-    # Public: Expose WillPaginate total pages API from scope.
-    #
-    # Returns the Integer of total pages.
-    def total_pages
-      scope.total_pages
-    end
-
-    # Public: Expose WillPaginate current page API from scope.
-    #
-    # Returns the Integer of the current page.
-    def current_page
-      scope.current_page
     end
 
     # Public: Whether or not our search result set is empty.

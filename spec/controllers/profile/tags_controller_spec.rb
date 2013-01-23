@@ -37,7 +37,7 @@ describe Profile::TagsController do
       end
 
       it "list items" do
-        profile.gists.each do |li|
+        profile.source.gists.each do |li|
           page.should have_content(li.description)
         end
       end
