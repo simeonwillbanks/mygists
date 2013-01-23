@@ -60,12 +60,11 @@ describe GistDecorator do
 
     context "gist has a description with a tag that does not a slug" do
       let(:description) { "Look at this gist with a #IHaveNoSlug" }
-      let(:description_with_html) { description }
       let(:options) { { description: description } }
 
       it "the description contains a link to the tag" do
         decorator.stub(:h).and_return(double(hashtag_to_slug: nil))
-        decorator.description.should eq(description_with_html)
+        decorator.description.should eq(description)
       end
     end
 
