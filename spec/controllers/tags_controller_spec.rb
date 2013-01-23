@@ -52,7 +52,7 @@ describe TagsController do
     end
 
     it "has gist" do
-      page.should have_content(profile.gists.first.description)
+      page.should have_content(profile.source.gists.first.description)
     end
   end
 end

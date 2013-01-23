@@ -4,7 +4,7 @@ describe GistDecorator do
   subject(:decorator) { FactoryGirl.build(:gist, options).decorate }
 
   let(:github_icon) do
-    "<a href=\"https://gist.github.com/#{decorator.gid}\" target=\"_blank\">" \
+    "<a href=\"https://gist.github.com/#{decorator.source.gid}\" target=\"_blank\">" \
     "<i class=\"icon-github\"></i></a>"
   end
 
