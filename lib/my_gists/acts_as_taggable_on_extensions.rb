@@ -21,6 +21,7 @@ module MyGists
 
       validates_presence_of :name, :slug
 
+      # Public: Order tags by their slugs.
       scope :ordered_by_slug, order("\"#{table_name}\".\"slug\" ASC")
 
       # Public: Find tagged objects within the 'public' context.
