@@ -36,8 +36,10 @@ module MyGists
       #
       # Returns an ActiveRecord::Relation of tags.
       def self.public_tags
-        distinct = "DISTINCT(\"#{table_name}\".\"id\")"
-        where(id: select(distinct).joins(:taggings).only_public).ordered_by_slug
+        select_clause = "DISTINCT(\"#{table_name}\".\"id\"), " \
+                        "\"#{table_name}\".\"slug\", " \
+                        "\"#{table_name}\".\"name\""
+        select(select_clause).joins(:taggings).only_public.ordered_by_slug
       end
 
       # Public: Find all tags whose ids are not in the given list.
