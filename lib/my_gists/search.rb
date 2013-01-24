@@ -32,8 +32,8 @@ module MyGists
 
     include Enumerable
 
-    # Public: Expose WillPaginate API from scope.
-    delegate :current_page, :per_page, :offset, :total_entries, :total_pages, to: :scope
+    # Public: Expose Kaminari API.
+    delegate :current_page, :total_pages, :limit_value, to: :scope
 
     class << self
       # Internal: Only Search.for can initialize a new Search.
