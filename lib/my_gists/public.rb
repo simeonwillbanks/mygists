@@ -17,12 +17,11 @@ module MyGists
     # Examples
     #
     #   MyGists::Public.tags(page)
-    #   # => [#<ActsAsTaggableOn::Tag id: 1, name: "rails" slug: "rails">]
+    #   # => #<PaginationDecorator of ActsAsTaggableOn::TagDecorator for [#<ActsAsTaggableOn::Tag id: 1, name: "rails" slug: "rails">]>
     #
-    # Returns an Array of paginated and decorated ActsAsTaggableOn::Tags tags.
+    # Returns an Enumerable object of paginated and decorated ActsAsTaggableOn::Tags tags.
     def self.tags(page)
-      options = { page: page, per_page: TAGS_PER_PAGE }
-      ActsAsTaggableOn::Tag.public_tags.paginate(options).decorate
+      ActsAsTaggableOn::Tag.public_tags.page(page).per(TAGS_PER_PAGE).decorate
     end
   end
 end
