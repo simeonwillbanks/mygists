@@ -21,7 +21,7 @@ module MyGists
 
       validates_presence_of :name, :slug
 
-      default_scope order("\"#{table_name}\".\"slug\" ASC")
+      scope :ordered_by_slug, order("\"#{table_name}\".\"slug\" ASC")
 
       # Public: Find tagged objects within the 'public' context.
       scope :only_public, where("\"taggings\".\"context\" = '#{CONTEXT_PUBLIC}'")
@@ -35,8 +35,8 @@ module MyGists
       #
       # Returns an ActiveRecord::Relation of tags.
       def self.public_tags
-        select_clause = "DISTINCT(\"tags\".\"slug\"), \"tags\".*"
-        select(select_clause).joins(:taggings).only_public
+        distinct = "DISTINCT(\"#{table_name}\".\"id\")"
+        where(id: select(distinct).joins(:taggings).only_public).ordered_by_slug
       end
 
       # Public: Find all tags whose ids are not in the given list.

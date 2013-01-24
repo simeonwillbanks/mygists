@@ -138,11 +138,11 @@ module MyGists
       if profile.present? && tag_name.present?
         scope = profile.owned_tags.by_name(tag_name)
       elsif profile.present? && tag_name.blank?
-        scope = profile.owned_tags
+        scope = profile.owned_tags.ordered_by_slug
       elsif profile.blank? && tag_name.present?
         scope = ActsAsTaggableOn::Tag.by_name(tag_name)
       else
-        scope = ActsAsTaggableOn::Tag.scoped
+        scope = ActsAsTaggableOn::Tag.scoped.ordered_by_slug
       end
 
       scope = scope.only_public unless include_private
