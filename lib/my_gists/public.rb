@@ -8,7 +8,7 @@ module MyGists
   class Public
 
     # Public: Integer number of tags per page.
-    TAGS_PER_PAGE = 60
+    TAGS_PER_PAGE = 120
 
     # Public: Gets, paginates and decorates public tags.
     #
