@@ -5,8 +5,7 @@
     %h3
       = link_to profile.username, profile_path(profile)
       %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
-        = succeed ":" do
-          tags
+        tags :
       %span.tag
         = current_tag
     - if gists.empty?

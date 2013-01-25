@@ -9,7 +9,7 @@ describe Profile::TagsController do
   let(:profile) { user.profile.decorate }
   let(:username) { profile.username }
   let(:params) { { username: username, slug: tag.slug } }
-  let(:title) { "#{username} tags: ##{tag}" }
+  let(:title) { "#{username} tags : ##{tag}" }
   let(:public_state) { true }
   let(:tag) { FactoryGirl.create(:tag) }
   let(:tags_cache) do

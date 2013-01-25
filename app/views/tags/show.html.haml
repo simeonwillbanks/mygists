@@ -2,8 +2,7 @@
   %h3
     = link_to tags_path do
       %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
-        = succeed ":" do
-          tags
+        tags :
     %span.tag
       = current_tag
 .row-fluid

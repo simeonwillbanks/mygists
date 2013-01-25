@@ -1,9 +1,9 @@
 %h3
   - if tag_search?
     %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
-      tag:
+      tag :
     %span.tag= search_hashtag
   - if profile_search?
     %span.muted
-      profile:
+      profile :
     = search_profile_link
