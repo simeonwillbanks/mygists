@@ -38,3 +38,5 @@ Much appreciation to early adopters for their suggestions and help!
 * [@jrust](https://github.com/jrust)
 * [@forest](https://github.com/forest)
 * [@elimisteve](https://github.com/elimisteve)
+* [@kitsched](https://github.com/kitsched)
+* [@pjschreifels](https://github.com/pjschreifels)

@@ -89,6 +89,22 @@ module MyGists
       fetched_gist["id"]
     end
 
+    # Internal: For the current fetched gist, get the gist's title from it's
+    #           files.
+    #
+    # Examples
+    #
+    #   title
+    #   # => "gistfile1.txt"
+    #
+    #   title
+    #   # => ".pryrc"
+    #
+    # Returns a String title.
+    def title
+      fetched_gist["files"].try(:first).try(:first) || Gist.default_title
+    end
+
     # Internal: With the profile and gid attributes, find or create a new Gist
     #           from the current fetched gist. Once the Gist instance is
     #           created set the gist attribute on self.
@@ -96,6 +112,7 @@ module MyGists
     # Returns nothing.
     def save_gist
       @gist = Gist.find_or_create_by_profile_id_and_gid(profile.id, gid).tap do |g|
+        g.title = title
         g.description = fetched_gist["description"]
         g.created_at = fetched_gist["created_at"]
         g.updated_at = fetched_gist["updated_at"]

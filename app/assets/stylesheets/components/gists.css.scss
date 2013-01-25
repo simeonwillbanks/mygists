@@ -1,21 +1,16 @@
-// Definition list styles for anywhere gists are listed. Provide a bit of
-// spacing between gist icons.
+// Unordered list styles for anywhere gists are listed. Provide a bit of
+// spacing between gists and their icons.
 //
 // No styleguide reference.
 #gists {
-  dt {
-    i {
-      margin-left: 3px;
-    }
-    i.icon-lock {
-      margin-left: 2px;
-    }
+  i {
+    margin-right: 2px;
   }
-  .icon-github {
-    background-image: image-url("blacktocat.png");
-    background-position: 0;
-    width: 16px;
-    height: 16px;
+  li {
+    margin-bottom: 10px;
+    p {
+      margin: 0;
+    }
   }
 }
 

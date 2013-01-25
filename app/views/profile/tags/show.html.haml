@@ -7,7 +7,7 @@
       %span.muted{ id:"tag-tooltip", rel: "tooltip", title: "Include one or many #hashtags in each gist description" }
         = succeed ":" do
           tags
-      %span.text-success
+      %span.tag
         = current_tag
     - if gists.empty?
       %p
@@ -16,11 +16,13 @@
         %strong gists
         tagged with
         = succeed "." do
-          %strong.text-success= current_tag
+          %strong.tag= current_tag
     - else
-      %dl#gists.dl-horizontal
+      %ul#gists.unstyled
         - gists.each do |gist|
-          %dt= gist.icons
-          %dd= gist.description
+          %li
+            = gist.title
+            = gist.icons
+            = gist.description
       .pagination.pagination-mini
         = paginate gists
