@@ -79,7 +79,7 @@ class GitHub
   #   GitHub.api
   #   # => "http://developer.github.com"
   #
-  # Returns a String of My Gists application repository url.
+  # Returns a String of GitHub API page url.
   def self.api
     API
   end
