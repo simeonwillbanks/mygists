@@ -3,37 +3,24 @@ class GistDecorator < ApplicationDecorator
   # Public: Delegate certain methods from the decorator to the source model.
   delegate :profile
 
-  # Public: String of default description text.
-  DEFAULT_DESCRIPTION = "Gist without a description"
-
-  # Public: Builds the icon HTML (starred, public or private) from the gist
-  #         state. Plus, appended a GitHub icon which links to gist on GitHub.
+  # Public: Builds the icon HTML (starred or private) from the gist
+  #         state.
   #
   # Examples
   #
   #   icons
-  #   # => "<i class=\"icon-star\"></i><i class="\icon-ok-sign\"></i><a href=\"https://gist.github.com/4\" target=\"_blank\"><i class=\"icon-github\"></i></a>"
+  #   # => "<i class=\"icon-star\"></i>"
   #
   #   icons
-  #   # => "<i class=\"icon-ok-sign\"></i><a href=\"https://gist.github.com/4\" target=\"_blank\"><i class=\"icon-github\"></i></a>"
+  #   # => "<i class=\"icon-star\"></i><i class=\"icon-lock\"></i>
   #
   # Returns the gist icon HTML String.
   def icons
     icons = []
 
-    if source.starred?
-      icons << h.content_tag(:i, nil, class: "icon-star")
-    end
+    icons << h.content_tag(:i, nil, class: "icon-star") if source.starred?
 
-    if source.public?
-      icons << h.content_tag(:i, nil, class: "icon-ok-sign")
-    else
-      icons << h.content_tag(:i, nil, class: "icon-lock")
-    end
-
-    icons << h.link_to(url, target: "_blank") do
-      h.content_tag(:i, nil, class: "icon-github")
-    end
+    icons << h.content_tag(:i, nil, class: "icon-lock") unless source.public?
 
     icons.join("").html_safe
   end
@@ -50,24 +37,40 @@ class GistDecorator < ApplicationDecorator
     "#{GitHub.gist_page}/#{source.gid}"
   end
 
-  # Public: The view needs a description to provide text for an anchor
-  #         tag which links back to GitHub. Therefore, when a description is
-  #         empty, a default should be used. Otherwise, use the gist's
-  #         description. Also, we linkify any tag text.
+  # Public: The view needs a title to provide text for an anchor
+  #         tag which links back to GitHub. Therefore, when the title is the
+  #         default, build default text just like GitHub: gist:4630341.
+  #
+  # Examples
+  #
+  #   title
+  #   # => "gist:4630341"
+  #
+  #   title
+  #   # => "settings.yml"
+  #
+  # Returns the gist title String.
+  def title
+    h.link_to(url, target: "_blank") do
+      source.title =~ source.class.default_title_regex ? default_title : source.title
+    end
+  end
+
+
+  # Public: When a description is empty, nil is returned. Otherwise, use the
+  #         gist's description. Also, we linkify any tag text.
   #
   # Examples
   #
   #   description
-  #   # => "Gist without a description"
+  #   # => nil
   #
   #   description
-  #   # => "A gist about <span class=\"text-success\">#Rails</span>"
+  #   # => "<p>A gist about <span class=\"tag\">#Rails</span></p>"
   #
-  # Returns the gist description String.
+  # Returns the gist description String or NilClass.
   def description
-    description = source.description? ? source.description : DEFAULT_DESCRIPTION
-
-    linkify_tags(description).html_safe
+    h.content_tag(:p, linkify_tags(source.description).html_safe) if source.description?
   end
 
   private
@@ -81,7 +84,7 @@ class GistDecorator < ApplicationDecorator
   #   # => "Gist without a tag"
   #
   #   linkify_tags(description)
-  #   # => "A gist about <a href="/tags/rails"><span class=\"text-success\">#Rails</span></a>"
+  #   # => "A gist about <a href="/tags/rails"><span class=\"tag\">#Rails</span></a>"
   #
   #   linkify_tags(description)
   #   # => "A gist about a #TagWithOutASlug"
@@ -94,12 +97,24 @@ class GistDecorator < ApplicationDecorator
 
         h.link_to(h.tag_path(slug: slug)) do
 
-          h.content_tag(:span, hashtag, class: "text-success")
+          h.content_tag(:span, hashtag, class: "tag")
         end
 
       else
         hashtag
       end
     end
+  end
+
+  # Internal: A default gist title for views.
+  #
+  # Examples
+  #
+  #   default_title
+  #   # => "gist:1012967"
+  #
+  # Returns the default title String.
+  def default_title
+    "gist:#{source.gid}"
   end
 end

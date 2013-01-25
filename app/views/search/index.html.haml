@@ -10,14 +10,15 @@
         %strong gists
         were found!
     - else
-      %dl#gists.dl-horizontal
+      %ul#gists.unstyled
         - gists.each do |gist|
-          %dt= gist.icons
-          %dd
+          %li
             - unless profile_search?
               %strong.username
-                = succeed ":" do
+                = succeed "&nbsp;/".html_safe do
                   = link_to gist.profile.username, profile_path(gist.profile)
+            = gist.title
+            = gist.icons
             = gist.description
       .pagination.pagination-mini
         = paginate gists

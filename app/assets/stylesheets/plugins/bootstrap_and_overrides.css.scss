@@ -17,20 +17,10 @@
   }
 }
 
-// Override Bootstrap horizontal definition list <dl.dl-horizontal>. The
-// definition list titles must be smaller since they contain gist icons. The
-// definition list descriptions must be larger since the contain gist
-// descriptions.
+// All tags styles throughout the entire site.
 //
 // No styleguide reference.
-.dl-horizontal {
-  dt, dd {
-    margin-top: 5px;
-  }
-  dt {
-    width: 52px;
-  }
-  dd {
-    margin-left: 62px;
-  }
+.tag {
+  @extend .text-success;
+  font-weight: bold;
 }

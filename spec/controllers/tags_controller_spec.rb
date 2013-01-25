@@ -51,7 +51,11 @@ describe TagsController do
       page.should have_css(".nav .active a", text: "Tags", count: 1)
     end
 
-    it "has gist" do
+    it "has gist title" do
+      page.should have_content(profile.source.gists.first.title)
+    end
+
+    it "and description" do
       page.should have_content(profile.source.gists.first.description)
     end
   end

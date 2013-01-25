@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117034235) do
+ActiveRecord::Schema.define(:version => 20130125001701) do
 
   create_table "gists", :force => true do |t|
     t.text     "description"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130117034235) do
     t.datetime "updated_at",                     :null => false
     t.boolean  "public"
     t.boolean  "starred",     :default => false
+    t.text     "title"
   end
 
   add_index "gists", ["gid"], :name => "index_gists_on_gid", :unique => true
