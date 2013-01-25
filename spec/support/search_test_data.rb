@@ -19,18 +19,22 @@ class SearchTestData
     @private_tag = FactoryGirl.create(:tag, name: private_tag_name)
     @generic_tag = FactoryGirl.create(:tag, name: generic_tag_name)
     @public_gist = FactoryGirl.create(:gist, :public, profile: profile,
+                                                      title: public_gist_title,
                                                       description: public_gist_description,
                                                       tags: [public_tag_name])
     @private_gist = FactoryGirl.create(:gist, :private, profile: profile,
+                                                        title: private_gist_title,
                                                         description: private_gist_description,
                                                         tags: [private_tag_name])
   end
 
   def generate_generic
     @generic_public_gist = FactoryGirl.create(:gist, :public, profile: profile,
+                                                              title: generic_gist_title,
                                                               description: generic_gist_description,
                                                               tags: [generic_tag_name])
     @generic_private_gist = FactoryGirl.create(:gist, :private, profile: profile,
+                                                                title: generic_gist_title,
                                                                 description: generic_gist_description,
                                                                 tags: [generic_tag_name])
   end
@@ -75,15 +79,27 @@ class SearchTestData
     generic_private_gist.decorate
   end
 
+  def public_gist_title
+    "Public Gist Title"
+  end
+
+  def private_gist_title
+    "Private Gist Title"
+  end
+
+  def generic_gist_title
+    "Generic Gist Title"
+  end
+
   def public_gist_description
-    "##{public_tag_name} Gist Title"
+    "##{public_tag_name} Gist Description"
   end
 
   def private_gist_description
-    "##{private_tag_name} Gist Title"
+    "##{private_tag_name} Gist Description"
   end
 
   def generic_gist_description
-    "##{generic_tag_name} Gist Title"
+    "##{generic_tag_name} Gist Description"
   end
 end

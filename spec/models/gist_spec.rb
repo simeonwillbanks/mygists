@@ -19,6 +19,16 @@ describe Gist do
     it { gist.public?.should be_false }
   end
 
+  describe ".default_title" do
+    subject(:gist) { Gist }
+    it { gist.default_title.should eq("gistfile1.txt") }
+  end
+
+  describe ".default_title_regex" do
+    subject(:gist) { Gist }
+    it { gist.default_title_regex.should eq(/\Agistfile1/) }
+  end
+
   context "scopes" do
     let(:profile) { FactoryGirl.create(:user).profile }
 

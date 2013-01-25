@@ -1,5 +1,27 @@
 namespace :upgrade do
 
+  desc "Upgrade gists by adding titles"
+  task gists_by_setting_titles: :environment do
+
+    default_title = "gistfile1.txt"
+
+    Gist.where(title: nil).each do |gist|
+
+      begin
+        fetched = Octokit.gist(gist.gid)
+
+        gist.title = fetched['files'].try(:first).try(:first) || default_title
+      rescue Octokit::NotFound => e
+
+        # Gist has probably been deleted, so lets give it a default title
+        gist.title = default_title
+      ensure
+        gist.save!
+      end
+    end
+  end
+
+
   desc "Upgrade profiles by setting gravatar id"
   task profiles_by_setting_gravatar_id: :environment do
 

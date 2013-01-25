@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :gist do
-    sequence(:description) { |n| "#Tag#{n} Gist Title" }
+    sequence(:title) { |n| "Gist #{n} Title" }
+    sequence(:description) { |n| "#Tag#{n} Gist Description" }
     sequence(:gid) { |n| n.to_s }
     public true
     starred true

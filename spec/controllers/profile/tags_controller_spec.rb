@@ -36,14 +36,16 @@ describe Profile::TagsController do
         get action, params
       end
 
-      it "list items" do
+      it "list gist with titles" do
         profile.source.gists.each do |li|
-          page.should have_content(li.description)
+          page.should have_content(li.title)
         end
       end
 
-      it "items are public" do
-        page.should have_selector("i.icon-ok-sign", count: 3)
+      it "and descriptions" do
+        profile.source.gists.each do |li|
+          page.should have_content(li.description)
+        end
       end
 
       it "and are starred" do
