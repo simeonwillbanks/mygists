@@ -57,19 +57,18 @@ class GistDecorator < ApplicationDecorator
   end
 
 
-  # Public: When a description is empty, an empty string is returned.
-  #         Otherwise, use the gist's description. Also, we linkify any tag
-  #         text.
+  # Public: When a description is empty, nil is returned. Otherwise, use the
+  #         gist's description. Also, we linkify any tag text.
   #
   # Examples
   #
   #   description
-  #   # => ""
+  #   # => nil
   #
   #   description
   #   # => "<p>A gist about <span class=\"tag\">#Rails</span></p>"
   #
-  # Returns the gist description String.
+  # Returns the gist description String or NilClass.
   def description
     h.content_tag(:p, linkify_tags(source.description).html_safe) if source.description?
   end
