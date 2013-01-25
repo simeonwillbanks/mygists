@@ -17,7 +17,7 @@
       - gists.each do |gist|
         %li
           %strong.username
-            = succeed ("&nbsp;/").html_safe do
+            = succeed "&nbsp;/".html_safe do
               = link_to gist.profile.username, profile_path(gist.profile)
           = gist.title
           = gist.icons
