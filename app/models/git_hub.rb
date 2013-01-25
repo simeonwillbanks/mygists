@@ -21,6 +21,9 @@ class GitHub
   # Public: String of My Gists application repository url.
   MY_GISTS_PAGE = "https://github.com/simeonwillbanks/mygists"
 
+  # Public: String of GitHub API page url.
+  API           = "http://developer.github.com"
+
   # Public: Reader for GitHub home page url.
   #
   # Examples
@@ -67,6 +70,18 @@ class GitHub
   # Returns a String of My Gists application repository url.
   def self.my_gists_page
     MY_GISTS_PAGE
+  end
+
+  # Public: Reader for GitHub API page url.
+  #
+  # Examples
+  #
+  #   GitHub.api
+  #   # => "http://developer.github.com"
+  #
+  # Returns a String of My Gists application repository url.
+  def self.api
+    API
   end
 
   # Public: Get any users profile page by their username.

@@ -19,15 +19,18 @@
       %hr/
       .footer
         .row-fluid
-          .span5
+          .span7
             %em My Gists
             = link_to "crafted", github.my_gists_page
             by
             = link_to "@simeonwillbanks", github.simeon_page
-          .span4.pull-right
+            using the
+            = succeed "." do
+              = link_to "GitHub API", github.api
+          .span5.pull-right
             Thank you
             = link_to "GitHub", github.home_page
             for
             = succeed "!" do
-              %strong gists
+              %strong= link_to "gists", github.gist_page
   = javascript_include_tag "application"

@@ -8,7 +8,15 @@ Tag the description of your gists. Use My Gists for viewing gists by tag.
 
 [https://www.mygists.info](https://www.mygists.info)
 
+## Legal
 
+My Gists is not associated with the [GitHub.com web site](https://github.com) or any services of [GitHub Inc.](https://github.com)
+
+My Gists sole purpose is adding value to the [GitHub Inc.](https://github.com) ecosystem.
+
+My Gists was built with :heart: for [GitHub](https://github.com).
+
+see [LICENSE](https://github.com/simeonwillbanks/mygists/blob/master/LICENSE.md)
 
 ## Contributing
 
@@ -25,10 +33,6 @@ If you add functionality to this application, create an alternative implementati
 
 * [@simeonwillbanks](https://github.com/simeonwillbanks)
 * [Contributors](https://github.com/simeonwillbanks/mygists/graphs/contributors)
-
-## License
-
-see [LICENSE](https://github.com/simeonwillbanks/mygists/blob/master/LICENSE.md)
 
 ## Thanks
 
