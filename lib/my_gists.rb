@@ -2,7 +2,7 @@
 #
 # Examples
 #
-#   MyGists::Fetch.for(username: 'foo', token: '7bfdda')
+#   MyGists::Fetch.for(username: "foo", token: "7bfdda")
 #
 #   MyGists::Tags.for(gist)
 module MyGists

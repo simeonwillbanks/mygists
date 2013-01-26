@@ -10,7 +10,7 @@ namespace :upgrade do
       begin
         fetched = Octokit.gist(gist.gid)
 
-        gist.title = fetched['files'].try(:first).try(:first) || default_title
+        gist.title = fetched["files"].try(:first).try(:first) || default_title
       rescue Octokit::NotFound => e
 
         # Gist has probably been deleted, so lets give it a default title
