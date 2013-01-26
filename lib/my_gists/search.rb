@@ -135,19 +135,10 @@ module MyGists
     #
     # Returns nothing.
     def tags
-      if profile.present? && tag_name.present?
-        scope = profile.owned_tags.by_name(tag_name)
-      elsif profile.present? && tag_name.blank?
-        scope = profile.owned_tags.ordered_by_slug
-      elsif profile.blank? && tag_name.present?
-        scope = ActsAsTaggableOn::Tag.by_name(tag_name)
-      else
-        scope = ActsAsTaggableOn::Tag.scoped.ordered_by_slug
-      end
+      @scope = MyGists::Search::Scope::Tags.by(profile: profile,
+                                               tag_name: tag_name)
 
-      scope = scope.only_public unless include_private
-
-      @scope = scope
+      @scope = @scope.only_public unless include_private
     end
 
     # Internal: Build a gists scope based on profile, tag_name and
@@ -155,21 +146,12 @@ module MyGists
     #
     # Returns nothing.
     def gists
-      if profile.present? && tag_name.present?
-        scope = profile.gists.tagged_with(tag_name)
-      elsif profile.present? && tag_name.blank?
-        scope = profile.gists
-      elsif profile.blank? && tag_name.present?
-        scope = Gist.tagged_with(tag_name).includes(:profile)
-      else
-        scope = Gist.scoped.includes(:profile)
-      end
+      @scope = MyGists::Search::Scope::Gists.by(profile: profile,
+                                                tag_name: tag_name)
 
-      scope = scope.only_public unless include_private
+      @scope = @scope.only_public unless include_private
 
-      scope = scope.page(page)
-
-      @scope = scope
+      @scope = @scope.page(page)
     end
   end
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ApplicationController do
   # Use the controller method to define an anonymous controller derived from ApplicationController

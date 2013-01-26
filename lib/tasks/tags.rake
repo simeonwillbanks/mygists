@@ -4,7 +4,7 @@ namespace :tags do
     ActsAsTaggableOn::Tag.find_by_name("Uncategorized").update_attribute(:name, "Without Tags")
   end
 
-  desc 'Generate slugs for existing tags'
+  desc "Generate slugs for existing tags"
   task generate_slugs: :environment do
     ActsAsTaggableOn::Tag.find_each(&:save)
   end
