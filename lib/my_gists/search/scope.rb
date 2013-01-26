@@ -110,7 +110,7 @@ module MyGists
     end
 
     # Public: The profile attribute exists, and the tag name does not exist.
-    #         The scope only includes the tag.
+    #         The scope only includes the profile.
     #
     # Returns a TrueClass or FalseClass.
     def has_only_profile?
