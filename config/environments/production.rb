@@ -41,7 +41,7 @@ MyGists::Application.configure do
 
   # Use a different cache store in production
   # See config/application.yml.example for instructions on setting Redis DSN
-  config.cache_store = :redis_store, ENV["REDIS"]
+  config.cache_store = :redis_store, ENV["REDIS_CACHE"]
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"

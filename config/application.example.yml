@@ -27,9 +27,12 @@ SECRET_TOKEN: fallback_token_for_development
 NEW_RELIC_APP_NAME: YourMyGists
 NEW_RELIC_LICENSE_KEY: new_relic_license_key
 
-# In production, Redis is used for caching
-# We set the environment variable key used to get Redis DSN
+# In production, Redis is used for caching and workers. We have different
+# environment variables for each, since the application might connect to
+# multiple Redis machines.
 # On Heroku with RedisToGo:
-# REDIS: redis://redistogo:86a1b907d54bf7010394bf316e183e67@subdomain.redistogo.com:9748/
-# Our own Redis server:
-REDIS: redis://localhost:6379/
+# REDIS_CACHE: redis://redistogo:86a1b907d54bf7010394bf316e183e67@subdomain.redistogo.com:9748/
+# Our own Redis cache server:
+REDIS_CACHE: redis://localhost:6379/
+# Our own Redis worker server:
+REDIS_WORKER: localhost:6380

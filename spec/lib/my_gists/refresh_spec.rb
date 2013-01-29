@@ -16,6 +16,8 @@ describe MyGists::Refresh do
     let(:profile) { FactoryGirl.create(:user).profile }
     let!(:gists) { GithubApiTestHelpers.gists }
 
+    before(:each) { Resque.stub(:enqueue).and_return(true) }
+
     context "profile has no gists" do
       before(:each) do
         described_class.any_instance.stub(:gists).and_return(gists)
@@ -31,12 +33,23 @@ describe MyGists::Refresh do
         profile.owned_tags.only_public.length.should eq(1)
         profile.owned_tags.first.name.should eq(tag)
       end
+
+      it "applies post processing by queuing a background job" do
+        Resque.should_receive(:enqueue).with(MyGists::Jobs::GistStarStatus, be_a(Integer)).exactly(gists.size).times
+        described_class.for(profile)
+      end
     end
 
     context "profile has gists" do
       let!(:gist) { gists.first }
       before(:each) do
         FactoryGirl.create(:gist, profile: profile, gid: gist["id"])
+
+        gists.collect! do |gist|
+          gist["starred"] = true
+          gist
+        end
+
         described_class.any_instance.stub(:gists).and_return(gists)
       end
 
@@ -49,6 +62,11 @@ describe MyGists::Refresh do
         profile.owned_tags.length.should eq(1)
         profile.owned_tags.only_public.length.should eq(1)
         profile.owned_tags.first.name.should eq(tag)
+      end
+
+      it "post processing not applied since gist star status is already set" do
+        Resque.should_not_receive(:enqueue)
+        described_class.for(profile)
       end
     end
   end
