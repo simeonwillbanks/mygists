@@ -58,6 +58,8 @@ module MyGists
         save_gist
 
         tag_gist
+
+        post_process_gist
       end
     end
 
@@ -117,7 +119,6 @@ module MyGists
         g.created_at = fetched_gist["created_at"]
         g.updated_at = fetched_gist["updated_at"]
         g.public = fetched_gist["public"]
-        g.starred = fetched_gist["starred"]
         g.save!
       end
     end
@@ -129,6 +130,15 @@ module MyGists
     # Returns nothing.
     def tag_gist
       profile.tag(gist, with: MyGists::Tags.for(gist), on: context)
+    end
+
+    # Internal: After a gist has been saved, perform any post processing. For
+    #           now, the gist is sent to a background job, and its star status
+    #           is fetched.
+    #
+    # Returns nothing.
+    def post_process_gist
+      Resque.enqueue(MyGists::Jobs::GistStarStatus, gist.id) if gist.starred.nil?
     end
 
     # Internal: Each tagging has a context. The context can either be public

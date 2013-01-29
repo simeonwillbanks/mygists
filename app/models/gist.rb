@@ -11,7 +11,7 @@ class Gist < ActiveRecord::Base
 
   validates_presence_of :gid
 
-  belongs_to :profile
+  belongs_to :profile, dependent: :destroy
 
   acts_as_taggable_on :descriptions
 

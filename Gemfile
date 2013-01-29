@@ -22,6 +22,7 @@ gem "google-analytics-rails", ">= 0.0.3"
 gem "newrelic_rpm"
 gem "redis-rails", "~> 3.2.3"
 gem "kaminari", "~> 0.14.1"
+gem "resque", "~> 1.23.0"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"

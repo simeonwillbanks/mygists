@@ -14,7 +14,7 @@ describe MyGists::Fetch do
   describe ".for" do
     let!(:options) { GithubApiTestHelpers.options }
     let!(:gists) { GithubApiTestHelpers.gists }
-    let!(:client) { double(gists: gists, gist_starred?: true) }
+    let!(:client) { double(gists: gists) }
 
     before(:each) do
       Octokit::Client.stub(:new).and_return(client)
@@ -28,11 +28,6 @@ describe MyGists::Fetch do
       options.merge!(since: GithubApiTestHelpers.timestamp)
       client.should_receive(:gists).with(options[:username], options)
       described_class.for(options).should eq(gists)
-    end
-
-    it "fetched gists are updated with star status" do
-      client.should_receive(:gist_starred?).once
-      described_class.for(options)
     end
   end
 end

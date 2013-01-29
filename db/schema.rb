@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125001701) do
+ActiveRecord::Schema.define(:version => 20130126221720) do
 
   create_table "gists", :force => true do |t|
     t.text     "description"
-    t.integer  "profile_id",                     :null => false
-    t.string   "gid",                            :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.integer  "profile_id",  :null => false
+    t.string   "gid",         :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.boolean  "public"
-    t.boolean  "starred",     :default => false
+    t.boolean  "starred"
     t.text     "title"
   end
 
