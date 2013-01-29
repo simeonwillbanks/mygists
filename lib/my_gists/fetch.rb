@@ -11,8 +11,6 @@ module MyGists
   #                      since: "2013-01-09T18:04:56Z")
   class Fetch
 
-    include MyGists::Fetch::Client
-
     class << self
       # Internal: Only Fetch.for can initialize a new Fetch.
       protected :new
@@ -70,6 +68,8 @@ module MyGists
     end
 
     private
+    include MyGists::Fetch::Client
+
     # Internal: Returns the Hash of the received options.
     attr_reader :options
 

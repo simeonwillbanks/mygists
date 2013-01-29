@@ -7,8 +7,6 @@ module MyGists
   #   MyGists::Fetch:StarStatus.for(gist_id)
   class Fetch::StarStatus
 
-    include MyGists::Fetch::Client
-
     class << self
       # Internal: Only Fetch::StarStatus.for can initialize a new
       #           Fetch::StarStatus.
@@ -52,6 +50,8 @@ module MyGists
     end
 
     private
+    include MyGists::Fetch::Client
+
     # Internal: Returns a Gist instance from the received gist ID.
     attr_reader :gist
 
