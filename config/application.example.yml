@@ -35,4 +35,4 @@ NEW_RELIC_LICENSE_KEY: new_relic_license_key
 # Our own Redis cache server:
 REDIS_CACHE: redis://localhost:6379/
 # Our own Redis worker server:
-REDIS_WORKER: localhost:6380
+REDIS_WORKER: redis://localhost:6380/

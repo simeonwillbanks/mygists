@@ -1,1 +1,1 @@
-Resque.redis = ENV["REDIS_WORKER"]
+Resque.redis = REDIS_WORKER

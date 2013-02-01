@@ -29,7 +29,7 @@ after_fork do |server, worker|
 
   # If you are using Redis but not Resque, change this
   if defined?(Resque)
-    Resque.redis = ENV["REDIS_URI"]
+    Resque.redis = REDIS_WORKER
     Rails.logger.info("Connected to Redis")
   end
 end
