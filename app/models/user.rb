@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   devise :omniauthable
 
-  has_one :profile, dependent: :destroy
+  has_one :profile
 
   # Public: A method called by Users::OmniauthCallbacksController#github which
   #         tires to find an existing user by GitHub uid or create one. Once
