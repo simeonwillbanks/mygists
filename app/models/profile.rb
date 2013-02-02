@@ -15,7 +15,7 @@ class Profile < ActiveRecord::Base
   #
   # Returns an Array of profile usernames.
   def self.usernames
-    pluck(:username)
+    pluck(:username).sort
   end
 
   # Public: Overloads the token reader, so the token can be decrypted before
