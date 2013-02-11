@@ -30,11 +30,11 @@ class GistDecorator < ApplicationDecorator
   # Examples
   #
   #   url
-  #   # => "https://gist.github.com/3183191"
+  #   # => "https://gist.github.com/simeonwillbanks/3183191"
   #
   # Returns the gist url String.
   def url
-    "#{GitHub.gist_page}/#{source.gid}"
+    "#{GitHub.gist_page}/#{source.profile.username}/#{source.gid}"
   end
 
   # Public: The view needs a title to provide text for an anchor

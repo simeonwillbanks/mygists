@@ -28,35 +28,40 @@ describe GistDecorator do
     end
   end
 
-  describe "#url" do
+  context "#url and #title" do
     let(:gid) { "68c29f86f75b343953ef" }
-    let(:options) { { gid: gid } }
-    it { decorator.url.should eq("https://gist.github.com/#{gid}") }
-  end
+    let(:username) { "simeonwillbanks" }
+    let(:profile) { FactoryGirl.build(:profile, username: username) }
 
-  describe "#title" do
-    context "gist has a title" do
-      let(:title) { "settings.yml" }
-      let(:options) { { title: title } }
-      let(:html) do
-        "<a href=\"https://gist.github.com/#{decorator.source.gid}\" target=\"_blank\">" \
-        "#{title}" \
-        "</a>"
-      end
-
-      it { decorator.title.should eq(html) }
+    describe "#url" do
+      let(:options) { { gid: gid, profile: profile} }
+      it { decorator.url.should eq("https://gist.github.com/#{username}/#{gid}") }
     end
 
-    context "gist does not have a title" do
-      let(:title) { "gistfile1.txt" }
-      let(:options) { { title: title } }
-      let(:html) do
-        "<a href=\"https://gist.github.com/#{decorator.source.gid}\" target=\"_blank\">" \
-        "gist:#{decorator.source.gid}" \
-        "</a>"
+    describe "#title" do
+      context "gist has a title" do
+        let(:title) { "settings.yml" }
+        let(:options) { { gid: gid, title: title } }
+        let(:html) do
+          "<a href=\"https://gist.github.com/#{username}/#{gid}\" target=\"_blank\">" \
+          "#{title}" \
+          "</a>"
+        end
+
+        it { decorator.title.should eq(html) }
       end
 
-      it { decorator.title.should eq(html) }
+      context "gist does not have a title" do
+        let(:title) { "gistfile1.txt" }
+        let(:options) { { gid: gid, title: title } }
+        let(:html) do
+          "<a href=\"https://gist.github.com/#{username}/#{gid}\" target=\"_blank\">" \
+          "gist:#{decorator.source.gid}" \
+          "</a>"
+        end
+
+        it { decorator.title.should eq(html) }
+      end
     end
   end
 
