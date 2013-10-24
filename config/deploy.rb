@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-require 'sidekiq/capistrano'
 require 'capistrano/ext/multistage'
 
 set :stages, %w(production staging)
