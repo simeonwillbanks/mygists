@@ -28,10 +28,6 @@ set :default_environment, {
   'PATH' => '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH'
 }
 
-after 'deploy:setup' do
-  sudo "chown -R #{user} #{deploy_to} && chmod -R g+s #{deploy_to}"
-end
-
 before 'deploy:create_symlink', 'deploy:assets:precompile'
 
 namespace :deploy do
