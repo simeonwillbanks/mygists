@@ -30,6 +30,7 @@ set :default_environment, {
 
 before 'deploy:create_symlink', 'deploy:assets:precompile'
 after 'deploy:update_code', 'deploy:symlink_shared'
+after 'deploy:finalize_update', 'deploy:restart'
 
 namespace :deploy do
   desc <<-DESC
