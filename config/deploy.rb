@@ -1,11 +1,11 @@
 require 'bundler/capistrano'
-require 'capistrano/ext/multistage'
 
 set :stages, %w(production staging)
 set :default_stage, 'staging'
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+ssh_options[:keys] = [File.join(ENV['HOME'], '.ssh', 'id_rsa')]
 
 set :application, 'mygists'
 set :repository, 'git@github.com:simeonwillbanks/mygists.git'
@@ -29,6 +29,7 @@ set :default_environment, {
 }
 
 before 'deploy:create_symlink', 'deploy:assets:precompile'
+after 'deploy:update_code', 'deploy:symlink_shared'
 
 namespace :deploy do
   desc <<-DESC
@@ -37,5 +38,10 @@ namespace :deploy do
   DESC
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "sv 2 /home/#{user}/service/#{application}"
+  end
+
+  desc "Symlink shared configs and folders on each release."
+  task :symlink_shared do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 end
