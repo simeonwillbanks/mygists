@@ -20,7 +20,7 @@ set :use_sudo, true
 set :keep_releases, 3
 set :user, 'deployer'
 
-set :bundle_without, [:development, :test]
+set :bundle_without, [:development, :test, :debug]
 
 set :rake, "#{rake} --trace"
 
