@@ -22,6 +22,8 @@
           %li
             = gist.title
             = gist.icons
+            - if can? :edit_gist, gist
+              = gist.edit
             = gist.description
       .pagination.pagination-mini
         = paginate gists
