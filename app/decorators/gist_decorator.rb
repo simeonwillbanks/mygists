@@ -1,7 +1,7 @@
 class GistDecorator < ApplicationDecorator
 
   # Public: Delegate certain methods from the decorator to the source model.
-  delegate :profile
+  delegate :profile, :profile_id
 
   # Public: Builds the icon HTML (starred or private) from the gist
   #         state.
@@ -23,6 +23,21 @@ class GistDecorator < ApplicationDecorator
     icons << h.content_tag(:i, nil, class: "icon-lock") unless source.public?
 
     icons.join("").html_safe
+  end
+
+  # Public: Build a link back to edit the gist on GitHub.
+  #
+  # Examples
+  #
+  #   edit
+  #   # => "<a href=\"https://gist.github.com/leesei/7247098/edit\" target=\"_blank\"><i class=\"icon-pencil\"></i></a>"
+  #
+  # Returns the gist edit HTML String.
+  def edit
+    h.link_to("#{url}/edit", target: "_blank") do
+
+      h.content_tag(:i, nil, class: "icon-pencil")
+    end
   end
 
   # Public: Build a link back to the gist on GitHub.
