@@ -28,10 +28,15 @@ describe GistDecorator do
     end
   end
 
-  context "#url and #title" do
+  context "#edit, #url, and #title" do
     let(:gid) { "68c29f86f75b343953ef" }
     let(:username) { "simeonwillbanks" }
     let(:profile) { FactoryGirl.build(:profile, username: username) }
+
+    describe "#edit" do
+      let(:options) { { gid: gid, profile: profile} }
+      it { decorator.edit.should eq("<a href=\"https://gist.github.com/simeonwillbanks/68c29f86f75b343953ef/edit\" target=\"_blank\"><i class=\"icon-pencil\"></i></a>") }
+    end
 
     describe "#url" do
       let(:options) { { gid: gid, profile: profile} }

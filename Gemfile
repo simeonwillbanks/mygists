@@ -34,21 +34,24 @@ end
 group :development do
   gem "haml-rails", ">= 0.3.5"
   gem "hpricot", ">= 0.8.6"
-  gem "ruby_parser", ">= 3.1.0"
   gem "quiet_assets", ">= 1.0.1"
   gem "better_errors", ">= 0.2.0"
-  gem "binding_of_caller", ">= 0.6.8"
 end
 
 group :development, :test do
   gem "rspec-rails", ">= 2.11.4"
   gem "factory_girl_rails", ">= 4.1.0"
-  gem "pry", ">= 0.9.10"
-  gem "pry-rails", ">= 0.2.2"
-  gem "pry-debugger", ">= 0.2.0"
   gem "konacha", ">= 2.1.0"
   gem "sinon-rails", ">= 1.4.2.1"
   gem "sinon-chai-rails", ">= 1.0.2"
+end
+
+group :debug do
+  gem "pry", ">= 0.9.10"
+  gem "pry-rails", ">= 0.2.2"
+  gem "pry-debugger", ">= 0.2.0"
+  gem "binding_of_caller", ">= 0.6.8"
+  gem "ruby_parser", ">= 3.1.0"
 end
 
 group :test do
