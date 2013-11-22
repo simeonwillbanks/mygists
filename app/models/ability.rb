@@ -8,6 +8,7 @@ class Ability
       can :read_private_tags, Profile, user_id: user.id
       can :read_private_gists, Profile, user_id: user.id
       can :refresh_gists, Profile, user_id: user.id
+      can :edit_gist, Gist, profile_id: user.profile.id
     end
 
     # Define abilities for the passed in user here. For example:
