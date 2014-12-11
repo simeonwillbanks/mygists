@@ -6,7 +6,7 @@ MyGists
 ## Organize Your Gists!
 Tag the description of your gists. Use My Gists for viewing gists by tag.
 
-[https://www.mygists.info](https://www.mygists.info)
+~~[https://www.mygists.info](https://www.mygists.info)~~ **The web site has been shutdown.**  If you're interested in running the app, please let [me](https://twitter.com/simeonwillbanks) know!
 
 ## Legal
 
